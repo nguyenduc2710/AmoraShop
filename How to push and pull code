@@ -36,3 +36,10 @@ B7: Dùng lệnh git push -u origin master để đưa code lên github.
   
 **PULL CODE**
 UPDATE LATER...
+
+
+Learn git on youtube: https://www.youtube.com/watch?v=RGOj5yH7evk
+
+How to setup ssh key on github:
+  *Ssh-keygen: https://www.youtube.com/watch?v=RGOj5yH7evk (20:30)
+	Hướng dẫn đầy đủ về set up ssh key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh
