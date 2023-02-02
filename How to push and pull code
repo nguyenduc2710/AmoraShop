@@ -10,9 +10,9 @@ B1: Setup username & gihub gmail
   git config --global user.email "<your@email.com>"
  
 B2: Trỏ đến project
-  cd <your project directory - VD: C:\Spring 2023\SWP391>
+  cd <your project directory - VD: C:\Spring 2023\SWP391\AmoraShop>
   
-B3: Dùng lệnh git init để tạo 1 file log
+B3: Dùng lệnh git init để tạo 1 file git log
   git init
   
 B4: Sau khi hoàn thành thêm mới, chỉnh sửa code, dùng lệnh git status. 
@@ -35,7 +35,8 @@ B7: Dùng lệnh git push -u origin master để đưa code lên github.
   
   
 **PULL CODE**
-UPDATE LATER...
+Sau khi có những thay đổi trên master branch, ta cần 1 lần nữa pull (kéo) project về máy local
+  git pull origin master
 
 
 Learn git on youtube: https://www.youtube.com/watch?v=RGOj5yH7evk
