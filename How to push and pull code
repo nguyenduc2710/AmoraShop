@@ -4,6 +4,7 @@ Xem những command cơ bản tại đây: https://www.notion.so/zarkom/Introduc
 Những dòng chứa ký tự <> không được bao gồm trong câu lệnh, chỉ chứa ý nghĩa ví dụ cụ thể.
 
 **Push code**
+LƯU Ý: SAU MỖI FUNCTION HOÀN THÀNH
 
 B1: Setup username & gihub gmail
   git config --global user.name "<Your Name>"
@@ -39,7 +40,14 @@ Sau khi có những thay đổi trên master branch, ta cần 1 lần nữa pull
   git pull origin master
 
 
+
+------------------------------------------------------------------------------------ More info source below
+
 Learn git on youtube: https://www.youtube.com/watch?v=RGOj5yH7evk
+
+Merge conflict (Xảy ra xung đột khi merge sub-branch với master branch):
+  https://www.youtube.com/watch?v=RGOj5yH7evk (49:15)
+  ==> Pull request, team up, discuss, fix, repush.
 
 How to setup ssh key on github:
   *Ssh-keygen: https://www.youtube.com/watch?v=RGOj5yH7evk (20:30)
