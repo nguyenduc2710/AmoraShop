@@ -10,17 +10,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import utils.DBUtils;
 
+
 /**
  *
  * @author thaiq
  */
 public class UserDAO {
-    //query get information from datase
+
     private static final String LOGIN = "SELECT * FROM Users WHERE email = ? AND [password] = ?";
-    private static final String CHECK_DUPLICATE = "SELECT email, status FROM tblUsers email = ? ";
+
+    private static final String CHECK_DUPLICATE = "SELECT * FROM Users WHERE email = ? ";
     
+    private static final String INSERT="INSERT INTO Users(full_name,password,email, status,role_id) VALUES(?,?,?,?,?)";
     
-    //Check Login funtions
+    private static final String REGISTER ="insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
+
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -64,30 +68,25 @@ public class UserDAO {
         return user;
     }
 
-    public UserDTO checkDuplicate(int userID) throws SQLException {
+    public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        UserDTO userDTO = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {
+            if(conn != null){
                 ptm = conn.prepareStatement(CHECK_DUPLICATE);
-                ptm.setInt(1, userID);
+                ptm.setString(1, email);
                 rs = ptm.executeQuery();
-                if (rs.next()) {
-                    String status = rs.getString("status");
-                    userDTO = new UserDTO();
-                    userDTO.setUserID(userID);
-                    userDTO.setStatus(status);
-                    return userDTO;
+                if(rs.next()){
+                    check = true;
                 }
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }finally{
             if (rs != null) {
                 rs.close();
             }
@@ -98,6 +97,56 @@ public class UserDAO {
                 conn.close();
             }
         }
-        return userDTO;
+        return check;
     }
+    
+    
+
+    public void register(String fullName, String password, String gender, String email, String phoneNumber, String address) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement("insert into Users values(?,?,?,?,?,?,?,?)");
+                ptm.setString(1, fullName);
+                ptm.setString(2, password);
+                ptm.setString(3, gender);
+                ptm.setString(4, email);
+                ptm.setString(5, phoneNumber);          
+                ptm.setString(6, address);
+                ptm.setString(7, "ACTIVE");
+                ptm.setInt(8, 2);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+        } finally{
+            if(ptm != null)ptm.close();
+            if(conn != null)conn.close();
+        }
+    }
+   public boolean insert(UserDTO user) throws SQLException {
+        boolean checkInsert = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement(INSERT);
+                ptm.setString(1, user.getFullName());
+                ptm.setString(2, user.getPassword());
+                ptm.setString(3, user.getEmail());
+                ptm.setString(4, "ACTIVE");
+                ptm.setInt(5, 2);
+                checkInsert = ptm.executeUpdate()>0?true:false;
+            }
+        } catch (Exception e) {
+        } finally{
+            if(ptm != null)ptm.close();
+            if(conn != null)conn.close();
+        }
+        return checkInsert;
+    }
+    
 }
+
