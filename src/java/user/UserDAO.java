@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
-
 
 /**
  *
@@ -20,10 +22,21 @@ public class UserDAO {
     private static final String LOGIN = "SELECT * FROM Users WHERE email = ? AND [password] = ?";
 
     private static final String CHECK_DUPLICATE = "SELECT * FROM Users WHERE email = ? ";
-    
-    private static final String INSERT="INSERT INTO Users(full_name,password,email, status,role_id) VALUES(?,?,?,?,?)";
-    
-    private static final String REGISTER ="insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
+
+    private static final String INSERT = "INSERT INTO Users(full_name,password,email, status,role_id) VALUES(?,?,?,?,?)";
+
+    private static final String REGISTER = "insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
+
+    private static final String GET_ALL_USERS = "SELECT [user_id]\n"
+            + "      ,[full_name]\n"
+            + "      ,[password]\n"
+            + "      ,[gender]\n"
+            + "      ,[email]\n"
+            + "      ,[phone_number]\n"
+            + "      ,[address]\n"
+            + "      ,[status]\n"
+            + "      ,[role_id]\n"
+            + "  FROM [dbo].[Users]";
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -44,6 +57,7 @@ public class UserDAO {
                     password = rs.getString("password");
                     String gender = rs.getString("gender");
                     email = rs.getString("email");
+
                     String phoneNumber = rs.getString("phone_number");
                     String address = rs.getString("address");
                     String status = rs.getString("status");
@@ -75,18 +89,18 @@ public class UserDAO {
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
+            if (conn != null) {
                 ptm = conn.prepareStatement(CHECK_DUPLICATE);
                 ptm.setString(1, email);
                 rs = ptm.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     check = true;
                 }
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -99,54 +113,105 @@ public class UserDAO {
         }
         return check;
     }
-    
-    
 
     public void register(String fullName, String password, String gender, String email, String phoneNumber, String address) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
+            if (conn != null) {
                 ptm = conn.prepareStatement("insert into Users values(?,?,?,?,?,?,?,?)");
                 ptm.setString(1, fullName);
                 ptm.setString(2, password);
                 ptm.setString(3, gender);
                 ptm.setString(4, email);
-                ptm.setString(5, phoneNumber);          
+                ptm.setString(5, phoneNumber);
                 ptm.setString(6, address);
                 ptm.setString(7, "ACTIVE");
                 ptm.setInt(8, 2);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
-        } finally{
-            if(ptm != null)ptm.close();
-            if(conn != null)conn.close();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
-   public boolean insert(UserDTO user) throws SQLException {
+
+    public boolean insert(UserDTO user) throws SQLException {
         boolean checkInsert = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
+            if (conn != null) {
                 ptm = conn.prepareStatement(INSERT);
                 ptm.setString(1, user.getFullName());
                 ptm.setString(2, user.getPassword());
                 ptm.setString(3, user.getEmail());
                 ptm.setString(4, "ACTIVE");
                 ptm.setInt(5, 2);
-                checkInsert = ptm.executeUpdate()>0?true:false;
+                checkInsert = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
-        } finally{
-            if(ptm != null)ptm.close();
-            if(conn != null)conn.close();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return checkInsert;
     }
-    
-}
 
+    public List<UserDTO> getAllUser() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Statement stm = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                stm = conn.createStatement();
+                rs = stm.executeQuery(GET_ALL_USERS);
+                while (rs.next()) {
+                    int userID = rs.getInt("user_id");
+                    String fullName = rs.getString("full_name");
+                    String password = rs.getString("password");
+                    String gender = rs.getString("gender");
+                    String email = rs.getString("email");
+                    String phoneNumber = rs.getString("phone_number");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    int roleID = rs.getInt("role_id");
+                    UserDTO user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
+                    list.add(user);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error when closing connection: " + e.getMessage());
+            }
+        }
+        return list;
+    }
+
+
+}
