@@ -11,52 +11,32 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import user.UserDAO;
-import user.UserDTO;
+import java.util.List;
+import product.ProductDAO;
+import product.ProductDTO;
 
 /**
  *
  * @author thaiq
  */
-public class LoginController extends HttpServlet {
+public class ShowProductController extends HttpServlet {
    
     private static final String ERROR = "login.jsp";
-    private static final String ADMIN_PAGE = "admin.jsp";
-    private static final String USER_PAGE = "user.jsp";
+    private static final String SUCCESS = "product-list.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");      
-            String url = ERROR;
+        response.setContentType("text/html;charset=UTF-8");
+         String url = ERROR;
         try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO loginUser = dao.checkLogin(email, password);
-            //validate user in here
-            if (loginUser != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginUser);
-                int roleID = loginUser.getRoleID();
-                String status = loginUser.getStatus();
-                if (status.equalsIgnoreCase("ACTIVE")) {
-                    if (roleID == 1) {
-                        url = ADMIN_PAGE;
-                    } else if (roleID == 2) {
-                        url = USER_PAGE;
-                    } else {
-                        request.setAttribute("ERROR", "Your role is not support:");
-                    }
-                }else{
-                    request.setAttribute("ERROR", "Your account does not have access to system!!!");
-                }
-
-            } else {
-                request.setAttribute("ERROR", "Incorrect Email or Password, Please try again.");
+            ProductDAO dao = new ProductDAO();
+            List<ProductDTO> listProduct = dao.getAllProducts();
+            if (!listProduct.isEmpty()) {
+                request.setAttribute("products", listProduct);
+                url = SUCCESS;
             }
-        } catch (SQLException e) {
-            log("Error at LoginController: " + e.toString());
+
+        } catch (Exception e) {
+            log("ERROR at ShowProductsController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

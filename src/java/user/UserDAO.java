@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 
 
@@ -24,6 +26,8 @@ public class UserDAO {
     private static final String INSERT="INSERT INTO Users(full_name,password,email, status,role_id) VALUES(?,?,?,?,?)";
     
     private static final String REGISTER ="insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
+    
+    private static final String GET_ALL_USERS = "SELECT * FROM Users";
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -147,6 +151,47 @@ public class UserDAO {
         }
         return checkInsert;
     }
-    
+     public List<UserDTO> getAllUsers() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("SELECT * FROM Users");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = rs.getInt("user_id");
+                    String fullName = rs.getString("full_name");
+                    String password = rs.getString("password");
+                    String gender = rs.getString("gender");
+                    String email = rs.getString("email");
+                    String phoneNumber = rs.getString("phone_number");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    int roleID = rs.getInt("role_id");
+                    list.add(new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ptm != null) {
+                    ptm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error when closing connection: " + e.getMessage());
+            }
+        }
+        return list;
+    }
 }
 
