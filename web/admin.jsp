@@ -15,7 +15,7 @@
         <table border="1">
            
             <tbody>
-            <c:forEach items="${sessionScope.userList}" var="U"> 
+            <c:forEach items="${userList}" var="U"> 
                 <tr>
                     <td>${U.userID}</td>                    
                     <td>${U.fullName}</td>
