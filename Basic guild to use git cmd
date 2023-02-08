@@ -37,8 +37,18 @@ B7: Dùng lệnh git push -u origin master để đưa code lên github.
   
 **PULL CODE**
 Sau khi có những thay đổi trên master branch, ta cần 1 lần nữa pull (kéo) project về máy local
-  git pull origin master
+  git pull origin <specific-branch-name>
 
+
+
+**Git trong local không hiện tất cả các branch trên github**
+B1: Cập nhật thông tin mới nhất trên github
+  git fetch origin
+  git remote update
+B2: Show tất cả branch hiện có trên github
+  git branch -r
+B3: Thay đổi branch muốn sử dụng
+  git checkout <specific-branch-name>
 
 
 ------------------------------------------------------------------------------------ More info source below
