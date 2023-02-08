@@ -1,36 +1,29 @@
 <%-- 
     Document   : admin
-    Created on : Feb 1, 2023, 5:06:30 PM
+    Created on : Feb 6, 2023, 2:43:19 PM
     Author     : thaiq
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ADMIN PAGE</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <table border="1">
-           
-            <tbody>
-            <c:forEach items="${userList}" var="U"> 
-                <tr>
-                    <td>${U.userID}</td>                    
-                    <td>${U.fullName}</td>
-                    <td>${U.password}</td>
-                    <td>${U.gender}</td>
-                    <td>${U.email}</td>
-                    <td>${U.phoneNumber}</td>
-                    <td>${U.address}</td>
-                    <td>${U.status}</td>
-                    <td>${U.roleID}</td>
-                </tr>
-                </c:forEach>
-                
-            </tbody>
-        </table>
+        <h1>Admin Page Here</h1>
 
-</body>
+        <form action="ShowUserController" method="POST">
+            <input type="submit" value="Show List User">
+        </form>
+
+        <form action="ShowProductController" method="POST">
+            <input type="submit" value="Show Product">
+        </form>
+
+        <form action="LogoutController" method="POST">
+            <input type="submit" value="Logout">
+        </form>
 </html>

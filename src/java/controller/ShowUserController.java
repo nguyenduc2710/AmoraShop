@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
+import java.util.List;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -20,48 +20,30 @@ import user.UserDTO;
  *
  * @author thaiq
  */
-public class LoginController extends HttpServlet {
+public class ShowUserController extends HttpServlet {
    
-    private static final String ERROR = "login.jsp";
-    private static final String ADMIN_PAGE = "admin.jsp";
-    private static final String USER_PAGE = "user.jsp";
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");      
-            String url = ERROR;
+        response.setContentType("text/html;charset=UTF-8");
+        String url ="user-list.jsp";
         try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO loginUser = dao.checkLogin(email, password);
-            //validate user in here
-            if (loginUser != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginUser);
-                int roleID = loginUser.getRoleID();
-                String status = loginUser.getStatus();
-                if (status.equalsIgnoreCase("ACTIVE")) {
-                    if (roleID == 1) {
-                        url = ADMIN_PAGE;
-                    } else if (roleID == 2) {
-                        url = USER_PAGE;
-                    } else {
-                        request.setAttribute("ERROR", "Your role is not support:");
-                    }
-                }else{
-                    request.setAttribute("ERROR", "Your account does not have access to system!!!");
-                }
 
-            } else {
-                request.setAttribute("ERROR", "Incorrect Email or Password, Please try again.");
-            }
-        } catch (SQLException e) {
-            log("Error at LoginController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+ List<UserDTO> list = new UserDAO().getAllUsers();
+                 HttpSession session = request.getSession();
+                 session.setAttribute("list", list);
+                 request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception e) {
+            log("ERROR at ShowProductsController: " + e.toString());
+        } 
         }
-        }
-    
+     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

@@ -12,56 +12,33 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import user.UserDAO;
-import user.UserDTO;
 
 /**
  *
  * @author thaiq
  */
-public class LoginController extends HttpServlet {
+public class LogoutController extends HttpServlet {
    
-    private static final String ERROR = "login.jsp";
-    private static final String ADMIN_PAGE = "admin.jsp";
-    private static final String USER_PAGE = "user.jsp";
+    private static final String ERROR="index.html";
+    private static final String SUCCESS="index.html";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");      
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
             String url = ERROR;
-        try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO loginUser = dao.checkLogin(email, password);
-            //validate user in here
-            if (loginUser != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginUser);
-                int roleID = loginUser.getRoleID();
-                String status = loginUser.getStatus();
-                if (status.equalsIgnoreCase("ACTIVE")) {
-                    if (roleID == 1) {
-                        url = ADMIN_PAGE;
-                    } else if (roleID == 2) {
-                        url = USER_PAGE;
-                    } else {
-                        request.setAttribute("ERROR", "Your role is not support:");
-                    }
-                }else{
-                    request.setAttribute("ERROR", "Your account does not have access to system!!!");
-                }
-
-            } else {
-                request.setAttribute("ERROR", "Incorrect Email or Password, Please try again.");
+            try {
+                HttpSession session = request.getSession(false);
+                if(session != null){
+                    session.invalidate();
+                    url = SUCCESS;
+                } 
+            } catch (Exception e) {
+                log("Error at LogoutController: " + e.toString());
+            }finally{
+                response.sendRedirect(url);
             }
-        } catch (SQLException e) {
-            log("Error at LoginController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
-        }
-    
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

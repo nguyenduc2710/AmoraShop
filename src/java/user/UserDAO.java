@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DBUtils;
@@ -27,16 +26,20 @@ public class UserDAO {
 
     private static final String REGISTER = "insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
 
-    private static final String GET_ALL_USERS = "SELECT [user_id]\n"
-            + "      ,[full_name]\n"
-            + "      ,[password]\n"
-            + "      ,[gender]\n"
-            + "      ,[email]\n"
-            + "      ,[phone_number]\n"
-            + "      ,[address]\n"
-            + "      ,[status]\n"
-            + "      ,[role_id]\n"
-            + "  FROM [dbo].[Users]";
+    private static final String GET_ALL_USERS = "SELECT * FROM Users";
+
+    private static final String GET_USERS_BY_ID = "SELECT * FROM Users where user_id = ?";
+
+    private static final String UPDATE_USER_BY_ID = "UPDATE [dbo].[Users]\n"
+            + "   SET [full_name] = ?\n"
+            + "      ,[password] = ?\n"
+            + "      ,[gender] = ?\n"
+            + "      ,[email] = ?\n"
+            + "      ,[phone_number] = ?\n"
+            + "      ,[address] = ?\n"
+            + "      ,[status] = ?\n"
+            + "      ,[role_id] = ?\n"
+            + " WHERE [user_id] = ?";
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -57,7 +60,6 @@ public class UserDAO {
                     password = rs.getString("password");
                     String gender = rs.getString("gender");
                     email = rs.getString("email");
-
                     String phoneNumber = rs.getString("phone_number");
                     String address = rs.getString("address");
                     String status = rs.getString("status");
@@ -169,16 +171,16 @@ public class UserDAO {
         return checkInsert;
     }
 
-    public List<UserDTO> getAllUser() throws SQLException {
+    public List<UserDTO> getAllUsers() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
-        Statement stm = null;
+        PreparedStatement ptm = null;
         ResultSet rs = null;
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                stm = conn.createStatement();
-                rs = stm.executeQuery(GET_ALL_USERS);
+                ptm = conn.prepareStatement("SELECT * FROM Users");
+                rs = ptm.executeQuery();
                 while (rs.next()) {
                     int userID = rs.getInt("user_id");
                     String fullName = rs.getString("full_name");
@@ -189,6 +191,7 @@ public class UserDAO {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     int roleID = rs.getInt("role_id");
+                    // list.add(new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID));
                     UserDTO user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
                     list.add(user);
                 }
@@ -200,8 +203,8 @@ public class UserDAO {
                 if (rs != null) {
                     rs.close();
                 }
-                if (stm != null) {
-                    stm.close();
+                if (ptm != null) {
+                    ptm.close();
                 }
                 if (conn != null) {
                     conn.close();
@@ -213,5 +216,80 @@ public class UserDAO {
         return list;
     }
 
+    public UserDTO getUserById(int userID) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_USERS_BY_ID);
+                ptm.setInt(1, userID);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    userID = rs.getInt("user_id");
+                    String fullName = rs.getString("full_name");
+                    String password = rs.getString("password");
+                    String gender = rs.getString("gender");
+                    String email = rs.getString("email");
+                    String phoneNumber = rs.getString("phone_number");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    int roleID = rs.getInt("role_id");
+
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return user;
+    }
+
+    public boolean updateUserById(UserDTO updateUser) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = new DBUtils().getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_USER_BY_ID);
+                ptm.setString(1, updateUser.getFullName());
+                ptm.setString(2, updateUser.getPassword());
+                ptm.setString(3, updateUser.getGender());
+                ptm.setString(4, updateUser.getEmail());
+                ptm.setString(5, updateUser.getPhoneNumber());
+                ptm.setString(6, updateUser.getAddress());
+                ptm.setString(7, updateUser.getStatus());
+                ptm.setInt(8, updateUser.getRoleID());
+                ptm.setInt(9, updateUser.getUserID());
+
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
 }

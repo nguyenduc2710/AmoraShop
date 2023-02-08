@@ -5,20 +5,51 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewAllUserController</servlet-name>
-        <servlet-class>adminController.ViewAllUserController</servlet-class>
+        <servlet-name>ShowUser</servlet-name>
+        <servlet-class>controller.ShowUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowUserController</servlet-name>
+        <servlet-class>controller.ShowUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductController</servlet-name>
+        <servlet-class>controller.ShowProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserController</servlet-name>
+        <servlet-class>controller.UpdateUserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewAllUserController</servlet-name>
-        <url-pattern>/ViewAllUserController</url-pattern>
+        <servlet-name>ShowUserController</servlet-name>
+        <url-pattern>/ShowUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductController</servlet-name>
+        <url-pattern>/ShowProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserController</servlet-name>
+        <url-pattern>/UpdateUserController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>
