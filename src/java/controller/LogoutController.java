@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpSession;
  */
 public class LogoutController extends HttpServlet {
    
-    private static final String ERROR="index.html";
-    private static final String SUCCESS="index.html";
+    private static final String ERROR="login.html";
+    private static final String SUCCESS="login.html";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

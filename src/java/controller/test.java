@@ -35,14 +35,13 @@ public class test {
 
         //Test getAllProduct() function in product DAO
         
-        ProductDAO dao = new ProductDAO();
-        List<ProductDTO> list = dao.getAllProducts();
-        if(list.size() > 1){
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).toString());
-            }
-        } else if(list.size() < 0){
-            System.out.println("NULL");
+//        
+    UserDAO dao = new UserDAO();
+    
+//    UserDTO user = new UserDTO();
+//    dao.updateUserByEmail("Qshu", "123", "man", "123", "SG","quctran@email.com");
+    
+
     }
-    }
+    
 }

@@ -28,6 +28,15 @@ public class UserDAO {
     private static final String REGISTER ="insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
     
     private static final String GET_ALL_USERS = "SELECT * FROM Users";
+    
+    private static final String GET_USER_BY_ID ="SELECT * FROM USERS WHERE email = ?";
+    private static final String UPDATE_USER_BY_EMAIL = "UPDATE [dbo].[Users]\n"
+            + "   SET full_name = ?\n"
+            + "      ,[password] = ?\n"
+            + "      ,gender = ?\n"
+            + "      ,phone_number = ?\n"
+            + "      ,address = ?\n"
+            + " WHERE email = ?";
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -159,7 +168,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT * FROM Users");
+                ptm = conn.prepareStatement(GET_ALL_USERS);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int userID = rs.getInt("user_id");
@@ -192,6 +201,40 @@ public class UserDAO {
             }
         }
         return list;
+    }
+     
+     public UserDTO getUserByID(){
+         UserDTO user = null;
+         
+         return user;
+     }
+     
+     
+     public void updateUserByEmail(String fullName, String password, String gender, String phoneNumber,String address,String email) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn =  DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_USER_BY_EMAIL);
+                ptm.setString(1, fullName);
+                ptm.setString(2, password);
+                ptm.setString(3, gender);
+                ptm.setString(4, phoneNumber);          
+                ptm.setString(5, address);
+                ptm.setString(6, email);
+                ptm.executeUpdate();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 }
 

@@ -25,7 +25,7 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String url ="register2.jsp";
+            String url = "register.jsp";
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
 
@@ -41,14 +41,16 @@ public class RegisterController extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
             } else {
                 UserDAO dao = new UserDAO();
-                 boolean user = dao.checkDuplicate(email);
+                boolean user = dao.checkDuplicate(email);
                 if (mobile.isEmpty()) {
                     request.setAttribute("erorrMobile", "Your Mobile Invalid");
                     request.getRequestDispatcher(url).forward(request, response);
-                } else if (password.length() <= 8 || password.length() > 32) {
+                } 
+                if (password.length() <= 8 || password.length() > 32) {
                     request.setAttribute("erorrPassword", "Your New Password less than 8 character or long than 32 characters");
                     request.getRequestDispatcher(url).forward(request, response);
-                } else if (user == false) {
+                }
+                if (user == false) {
                     //dang ky thanh cong
                     dao.register(fullName, password, gender, email, mobile, address);
                     request.setAttribute("successfully", "Register Sucessfully");
@@ -58,7 +60,7 @@ public class RegisterController extends HttpServlet {
                     request.getRequestDispatcher(url).forward(request, response);
                 }
             }
-            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
