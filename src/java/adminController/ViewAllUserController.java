@@ -41,7 +41,7 @@ public class ViewAllUserController extends HttpServlet {
             String url = ADMIN_PAGE;
             try {
                 HttpSession session = request.getSession();
-                List<UserDTO> userList = new UserDAO().getAllUser();
+                List<UserDTO> userList = new UserDAO().getAllUsers();
                 
                 request.setAttribute("userList", userList);
                 request.getRequestDispatcher(url).forward(request, response);

@@ -24,6 +24,14 @@
         <servlet-name>UpdateUserController</servlet-name>
         <servlet-class>controller.UpdateUserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserDetailController</servlet-name>
+        <servlet-class>adminController.UserDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterProductController</servlet-name>
+        <servlet-class>controller.FilterProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -43,6 +51,14 @@
     <servlet-mapping>
         <servlet-name>UpdateUserController</servlet-name>
         <url-pattern>/UpdateUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailController</servlet-name>
+        <url-pattern>/UserDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterProductController</servlet-name>
+        <url-pattern>/FilterProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

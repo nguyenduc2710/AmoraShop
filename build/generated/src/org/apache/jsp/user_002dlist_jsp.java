@@ -70,7 +70,10 @@ public final class user_002dlist_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("\r\n");
+      out.write("    <form action=\"SearchUserController\" method=\"POST\">\r\n");
+      out.write("        <input type=\"text\" name=\"name\" value=\"\" />\r\n");
+      out.write("        <input type=\"submit\" value=\"search\" />\r\n");
+      out.write("    </form>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        <div id=\"layoutSidenav_content\">\r\n");
@@ -195,22 +198,10 @@ public final class user_002dlist_jsp extends org.apache.jasper.runtime.HttpJspBa
           out.write("\r\n");
           out.write("                                        <td><a href=\"UpdateUserController?userID=");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${user.userID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\">Update</a> |  <td style=\"width: 125px\">\r\n");
-          out.write("                                            <a class=\"btn btn-danger\" href=\"customer-detail?cid=");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.customer_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\" role=\"button\" style='font-size:10px'>\r\n");
-          out.write("                                                <i style='font-size:10px' class='fas'>&#xf044;</i>\r\n");
-          out.write("                                            </a>\r\n");
-          out.write("                                            ");
-          if (_jspx_meth_c_if_2((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
-            return true;
+          out.write("\">Update</a>           \r\n");
+          out.write("                                        </td>    \r\n");
           out.write("\r\n");
-          out.write("                                            ");
-          if (_jspx_meth_c_if_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
-            return true;
           out.write("\r\n");
-          out.write("                                        </td>\r\n");
-          out.write("                                        </td>\r\n");
           out.write("                                    </tr>\r\n");
           out.write("                                ");
           int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
@@ -438,70 +429,6 @@ public final class user_002dlist_jsp extends org.apache.jasper.runtime.HttpJspBa
       return true;
     }
     _jspx_tagPool_c_otherwise.reuse(_jspx_th_c_otherwise_0);
-    return false;
-  }
-
-  private boolean _jspx_meth_c_if_2(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_0)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:if
-    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_2 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
-    _jspx_th_c_if_2.setPageContext(_jspx_page_context);
-    _jspx_th_c_if_2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_0);
-    _jspx_th_c_if_2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.status == true}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
-    int _jspx_eval_c_if_2 = _jspx_th_c_if_2.doStartTag();
-    if (_jspx_eval_c_if_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
-      do {
-        out.write("\r\n");
-        out.write("                                                <a class=\"btn btn-dark\" href=\"change-status-customer?status=0&customerId=");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.customer_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("\" role=\"button\" style='font-size:10px'>\r\n");
-        out.write("                                                    <i style='font-size:10px' class='fas far fa-eye-slash'>&#xf070;</i>\r\n");
-        out.write("                                                </a>\r\n");
-        out.write("                                            ");
-        int evalDoAfterBody = _jspx_th_c_if_2.doAfterBody();
-        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
-          break;
-      } while (true);
-    }
-    if (_jspx_th_c_if_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
-      return true;
-    }
-    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
-    return false;
-  }
-
-  private boolean _jspx_meth_c_if_3(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_0)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:if
-    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_3 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
-    _jspx_th_c_if_3.setPageContext(_jspx_page_context);
-    _jspx_th_c_if_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_0);
-    _jspx_th_c_if_3.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.status != true}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
-    int _jspx_eval_c_if_3 = _jspx_th_c_if_3.doStartTag();
-    if (_jspx_eval_c_if_3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
-      do {
-        out.write("\r\n");
-        out.write("                                                <a class=\"btn btn-dark\" href=\"change-status-customer?status=1&customerId=");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${c.customer_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-        out.write("\" role=\"button\" style='font-size:10px'>\r\n");
-        out.write("                                                    <i style='font-size:10px' class='fas'>&#xf06e;</i>\r\n");
-        out.write("                                                </a>\r\n");
-        out.write("                                            ");
-        int evalDoAfterBody = _jspx_th_c_if_3.doAfterBody();
-        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
-          break;
-      } while (true);
-    }
-    if (_jspx_th_c_if_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_3);
-      return true;
-    }
-    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_3);
     return false;
   }
 }

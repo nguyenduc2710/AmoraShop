@@ -40,6 +40,8 @@ public class UserDAO {
             + "      ,[status] = ?\n"
             + "      ,[role_id] = ?\n"
             + " WHERE [user_id] = ?";
+    
+      private static final String GET_USERS_BY_NAME = "select * from Users where full_name like ?";
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -290,6 +292,51 @@ public class UserDAO {
             }
         }
         return check;
+    }
+
+    public List<UserDTO> getUserByName(String name) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+       UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_USERS_BY_NAME);
+                ptm.setString(1, "%" + name + "%");
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = rs.getInt("user_id");
+                    String fullName = rs.getString("full_name");
+                    String password = rs.getString("password");
+                    String gender = rs.getString("gender");
+                    String email = rs.getString("email");
+                    String phoneNumber = rs.getString("phone_number");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    int roleID = rs.getInt("role_id");
+
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
+                    list.add(user);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 
 }
