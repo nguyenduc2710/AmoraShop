@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import java.io.IOException;
@@ -11,52 +10,65 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
  * @author thaiq
  */
 public class ShowUserController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url ="user-list.jsp";
+        String url = "user-list.jsp";
         try {
-            user.UserDAO dao = new UserDAO();
-            List<user.UserDTO> list = dao.getAllUsers();
-            if (list.size() > 0) {
-                request.setAttribute("users", list);
+            //search
+            List<UserDTO> list = null;
+            String name = request.getParameter("name");
+
+            if (name != null) {
+                list = new UserDAO().getUserByName(name);
+                HttpSession session = request.getSession();
+                request.setAttribute("userList", list);
                 request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                //show list user
+                list = new UserDAO().getAllUsers();
+                HttpSession session = request.getSession();
+                request.setAttribute("userList", list);
+                request.getRequestDispatcher(url).forward(request, response);
+
             }
-
         } catch (Exception e) {
-            log("ERROR at ShowProductsController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            log("ERROR at ShowUserController: " + e.toString());
         }
-        }
-     
+    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
@@ -69,7 +81,7 @@ public class ShowUserController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -79,7 +91,7 @@ public class ShowUserController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

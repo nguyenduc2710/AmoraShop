@@ -21,15 +21,16 @@ import product.ProductDTO;
  */
 public class ShowProductController extends HttpServlet {
    
-    private static final String ERROR = "login.jsp";
+     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "product-list.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
          String url = ERROR;
         try {
+            String search = request.getParameter("search");
             ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.getAllProducts();
+            List<ProductDTO> listProduct = dao.getListProducts(search);
             if (!listProduct.isEmpty()) {
                 request.setAttribute("products", listProduct);
                 url = SUCCESS;

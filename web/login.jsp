@@ -64,6 +64,7 @@
                             Login
                             <div class="slash-decor"></div>
                         </div>
+                        <h3 class="check-error-pass">${requestScope.status}</h3>
                         <h3 class="check-error-pass">${requestScope.ERROR}</h3>
                         <input type="email" name="email" id="user-email" class="user-login-signup-input" placeholder="Email"/>
                         <input type="password" name="password" id="user-email-password" class="user-login-signup-input" placeholder="Password"/>
@@ -76,7 +77,7 @@
                             </button>
 
                             <div class="action-other-box col-4">
-                                <a href="forgot.html" class="forgot-password-link">Forgot password?</a>
+                                <a href="forgot-password.jsp" class="forgot-password-link">Forgot password?</a>
                                 <div class="divider d-flex align-items-center"></div>
                                 <a href="register.jsp">Sign Up!</a>
                             </div>

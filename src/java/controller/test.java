@@ -40,7 +40,7 @@ public class test {
     
 //    UserDTO user = new UserDTO();
 //    dao.updateUserByEmail("Qshu", "123", "man", "123", "SG","quctran@email.com");
-    
+    dao.updatePassword("1", "admin@email.com");
 
     }
     
