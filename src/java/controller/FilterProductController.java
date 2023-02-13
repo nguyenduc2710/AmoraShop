@@ -41,16 +41,15 @@ public class FilterProductController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-            List<ProductDTO> listProduct = new ProductDAO().getAllProductByCategoryId(categoryID);
-
+            ProductDAO productDAO = new ProductDAO();
+            List<ProductDTO> listProducts = productDAO.getAllProductByCategoryId(categoryID);
             List<CategoryDTO> ListCategory = new CategoryDAO().getAllCategory();
             request.setAttribute("ListCategory", ListCategory);
-            request.setAttribute("products", listProduct);
-
+            request.setAttribute("products", listProducts);
             request.getRequestDispatcher("product-list.jsp").forward(request, response);
-
         } catch (SQLException ex) {
             Logger.getLogger(FilterProductController.class.getName()).log(Level.SEVERE, null, ex);
         }

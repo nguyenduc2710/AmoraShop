@@ -7,12 +7,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Product List</title>
+    <head>           
+
+
     </head>
     <body>
+
+
+        <nav aria-label="..." class="pagination">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a <c:if test="${page!=1}">
+                            href="ShowProductController?page=${page-1}"
+                        </c:if> class="page-link" aria-label="Next">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+
+                <c:forEach begin="1" end="${totalPage}" var="i">
+                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductController?page=${i}">${i}</a></li>
+                    </c:forEach>    
+
+                <li class="page-item">
+                    <a <c:if test="${page!=totalPage}">
+                            href="ShowProductController?page=${page+1}"
+                        </c:if> class="page-link" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
         <table width="100px" border="1">
             <tr>
                 <th>ID</th>
@@ -21,13 +48,13 @@
                 <th style="padding-left: 20px">Status</th>
 
                 <%-- kh de description vao day --%>
-
+                <th>img</th>
                 <th>Capacity</th>
                 <th>Brand</th>
                 <th>Price</th>
                 <th>Category ID</th>
             </tr>
-            <c:forEach items="${requestScope.products}" var="product">
+            <c:forEach items="${products}" var="product">
                 <tr>
                     <td>${product.productID}</td>
                     <td>${product.name}</td>
@@ -35,7 +62,7 @@
                     <td style="padding-left: 20px">${product.status}</td>
 
                     <%-- kh de description vao day --%>
-
+                    <td><img src="${product.image}" width="60px" alt=""></td>
                     <td>${product.capacity}</td>
                     <td>${product.brand}</td>
                     <td style="padding-left: 20px">${product.price}</td>
@@ -43,7 +70,6 @@
                 </tr>
             </c:forEach>
         </table>
-
 
         <form action="FilterProductController">
             category <select name="categoryID" onchange="this.form.submit()">
@@ -54,8 +80,11 @@
             </select>
 
         </form>
+
         <a href="ShowProductController" class="logo12">
-            <input type="submit" value="Back Product List" />
+            <input type="submit" value="Back to list product"/>
         </a> 
-    </body>
+    </form
+
+</body>
 </html>

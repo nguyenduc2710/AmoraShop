@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,15 +33,30 @@ public class ShowProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.getAllProducts();
-            if (!listProduct.isEmpty()) {
-                request.setAttribute("products", listProduct);
-                url = SUCCESS;
 
+        try {
+            final int PAGE_SIZE = 5;
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
             }
-            List<CategoryDTO> ListCategory = new CategoryDAO().getAllCategory();
+            ProductDAO productDAO = new ProductDAO();
+            List<ProductDTO> listProducts = productDAO.getProductsWithPagging(page, PAGE_SIZE);
+            //tinh tong so san pham trongdatabase r tra ve so trang 
+            //de hien len man hinh jsp 
+            int totalProducts = productDAO.getTotalProducts();
+            int totalPage = totalProducts / PAGE_SIZE;
+            //chia lay du totalProducts neu co du thi + 1 page cho totalPage
+            if (totalProducts % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            
+                request.setAttribute("page", page);
+                request.setAttribute("totalPage", totalPage);
+                request.setAttribute("products", listProducts);
+                url = SUCCESS;
+   List<CategoryDTO> ListCategory = new CategoryDAO().getAllCategory();
             request.setAttribute("ListCategory", ListCategory);
 
         } catch (SQLException ex) {

@@ -91,65 +91,6 @@ public class UpdateUserController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         try {
-//            response.setContentType("text/html;charset=UTF-8");
-//            PrintWriter out = response.getWriter();
-//
-//            String fullName = request.getParameter("fullName");
-//
-//            String gender = request.getParameter("gender");
-//            String address = request.getParameter("address");
-//            String password = request.getParameter("password");
-//
-//            String email = request.getParameter("email");
-//            String phoneNumber = request.getParameter("phoneNumber");
-//            String status = request.getParameter("status");
-//
-//            int roleID = Integer.parseInt(request.getParameter("roleID"));
-//
-//            int userID = Integer.parseInt(request.getParameter("userID"));
-//
-//            String messagefullName = null;
-//
-//            String messageaddress = null;
-//            String messageroleID = null;
-//
-//            UserDAO dao = new UserDAO();
-//
-//            if (!(fullName.length() >= 6 && fullName.length() <= 20)) {
-//                messagefullName = "Course name phai tu 6 den 20 ki tu";
-//            }
-//
-//            if (!(address.length() > 5 && address.length() <= 30)) {
-//                messageaddress = "address tu 5 - 30 ki tu";
-//
-//            }
-//
-//            if (messagefullName == null && messageaddress == null) {
-//
-//                UserDTO updateUser = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
-//
-//                boolean check = dao.updateUserById(updateUser);
-//                if (check) {
-//                    UserDTO us = new UserDAO().getUserById(userID);
-//                    request.setAttribute("MSG_SUCCESS", "Update user success!");
-//                    request.setAttribute("us", us);
-//                    request.getRequestDispatcher("update-user.jsp").forward(request, response);
-//
-//                }
-//
-//            } else {
-//                request.setAttribute("messagefullName", messagefullName);
-//
-//                request.setAttribute("messageaddress", messageaddress);
-//                
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/update-user.jsp");
-//                dispatcher.forward(request, response);
-//
-//            }
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UpdateUserController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
             HttpSession session = request.getSession();
 
