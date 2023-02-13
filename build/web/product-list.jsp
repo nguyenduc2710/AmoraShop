@@ -12,82 +12,74 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Product List</title>
     </head>
-    <body>
-        <form action="MainController">
-            Search<input type = "text" name="search" value="${param.valueSearch}">
-            <input type="submit" name="action" value="Search"/>
-        </form>
-        <c:if test="${requestScope.products != null}">   
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th style="padding-left: 20px">Status</th><!-- comment -->
-                    <th>Description</th><!-- comment -->
-                    <th>Capacity</th><!-- comment -->
-                    <th>Brand</th><!-- comment -->
-                    <th>Price</th>
-                    <th>Category ID</th>
-                    <th>Delete</th>
-                    <th>Update</th>
-                </tr>
-                <c:forEach items="${requestScope.products}" var="product">
-                    <form action="MainController">
-                        <tr>
-                            <td>${product.productID}</td>
-                            <input type="hidden" name="productID" value="${product.productID}"/>
-                            <input type="hidden" name="Search" value="${param.Search}"/>
-                            <td>
-                                <input type="text" name="pName" value="${product.name}" required=""/>
-                            </td>
-                            <td>
-                                <input type="text" name="pQuantity" value="${product.quantity}" required=""/>
-                            </td>
-                            <td 
-                                style="padding-left: 20px">
-                                <input type="text" name="pStatus" value="${product.status}" required=""/>
-                            </td>
-                            <td 
-                                style="padding-left: 20px">
-                                <input type="text" name="pDescrip" value="${product.description}" required=""/> 
-                            </td>
-                            <td> 
-                                <input type="text" name="pCapacity" value="${product.capacity}" required=""/> 
-                            </td>
-                            <td>
-                                <input type="text" name="pBrand" value="${product.brand}" required=""/> 
-                            </td>
-                            <td 
-                                style="padding-left: 20px">
-                                <input type="text" name="pPrice" value="${product.price}" required=""/>
-                            </td>
-                            <td 
-                                style="padding-left: 20px">
-                                <input type="text" name="pCategory" value="${product.categoryID}" required=""/>
-                            </td>
-                            <td>
-                                <!--delete-->
-                                
-                                <c:url var="delete" value="MainController">
-                                    <c:param name="action" value="Delete"></c:param>
-                                    <c:param name="productID" value="${product.productID}"></c:param>
-                                    <c:param name="Search" value="${param.Search}"></c:param>
-                                </c:url>
-                                <a href="${delete}">Delete</a>
-                            </td>
+    <nav aria-label="..." class="pagination">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a <c:if test="${page!=1}">
+                            href="ShowProductController?page=${page-1}"
+                        </c:if> class="page-link" aria-label="Next">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
 
-                            <td>
-                                <!--update-->
-                                <input type="submit" name="action" value="Update"/>
-                                
-                            </td>                
-                        </tr>
-                    </form>
+                <c:forEach begin="1" end="${totalPage}" var="i">
+                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductController?page=${i}">${i}</a></li>
+                    </c:forEach>    
+
+                <li class="page-item">
+                    <a <c:if test="${page!=totalPage}">
+                            href="ShowProductController?page=${page+1}"
+                        </c:if> class="page-link" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <table width="100px" border="1">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th style="padding-left: 20px">Status</th>
+
+                <%-- kh de description vao day --%>
+                <th>img</th>
+                <th>Capacity</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Category ID</th>
+            </tr>
+            <c:forEach items="${products}" var="product">
+                <tr>
+                    <td>${product.productID}</td>
+                    <td>${product.name}</td>
+                    <td>${product.quantity}</td>
+                    <td style="padding-left: 20px">${product.status}</td>
+
+                    <%-- kh de description vao day --%>
+                    <td><img src="${product.image}" width="60px" alt=""></td>
+                    <td>${product.capacity}</td>
+                    <td>${product.brand}</td>
+                    <td style="padding-left: 20px">${product.price}</td>
+                    <td style="padding-left: 20px">${product.categoryID}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+                <form action="FilterProductController">
+            category <select name="categoryID" onchange="this.form.submit()">
+                <option value="-1">-------------------</option>
+                <c:forEach items="${ListCategory}" var="D">
+                    <option value="${D.categoryID}">${D.categoryName}</option>
                 </c:forEach>
-            </table>
-        </c:if> 
-        <a href="create-product.jsp">Insert New Product</a>
-        <h1>${requestScope.MSG}</h1>
+            </select>
+
+        </form>
+
+        <a href="ShowProductController" class="logo12">
+            <input type="submit" value="Back to list product"/>
+        </a> 
+    </form
     </body>
 </html>

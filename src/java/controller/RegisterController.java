@@ -54,7 +54,7 @@ public class RegisterController extends HttpServlet {
                     //dang ky thanh cong
                     dao.register(fullName, password, gender, email, mobile, address);
                     request.setAttribute("successfully", "Register Sucessfully");
-                    request.getRequestDispatcher("login.html").forward(request, response);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erorr", "Email was existed");
                     request.getRequestDispatcher(url).forward(request, response);

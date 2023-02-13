@@ -26,21 +26,21 @@ public class SearchProductController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            String search = request.getParameter("search");
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.searchProducts(search);
-            if (!listProduct.isEmpty()) {
-                request.setAttribute("products", listProduct);
-                url = SUCCESS;
-            }
-
-        } catch (Exception e) {
-            log("ERROR at ShowProductsController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+//        String url = ERROR;
+//        try {
+//            String search = request.getParameter("search");
+//            ProductDAO dao = new ProductDAO();
+//            List<ProductDTO> listProduct = dao.searchProducts(search);
+//            if (!listProduct.isEmpty()) {
+//                request.setAttribute("products", listProduct);
+//                url = SUCCESS;
+//            }
+//
+//        } catch (Exception e) {
+//            log("ERROR at ShowProductsController: " + e.toString());
+//        } finally {
+//            request.getRequestDispatcher(url).forward(request, response);
+//        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,7 +4,10 @@
  */
 package controller;
 
+import controller.category.CategoryDAO;
+import controller.category.CategoryDTO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,13 +38,12 @@ public class test {
 
         //Test getAllProduct() function in product DAO
         
-//        
-    UserDAO dao = new UserDAO();
-    
-//    UserDTO user = new UserDTO();
-//    dao.updateUserByEmail("Qshu", "123", "man", "123", "SG","quctran@email.com");
-    dao.updatePassword("1", "admin@email.com");
-
+        ProductDAO cdao = new ProductDAO();
+        List<ProductDTO> c = new ArrayList<>();
+        c = cdao.getAllProductByCategoryId(1);
+        for (int i = 0; i < c.size(); i++) {
+            System.out.println(c.get(i).toString());
+        }
     }
     
 }

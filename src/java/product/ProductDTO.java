@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package product;
 
 /**
@@ -18,11 +14,12 @@ public class ProductDTO {
     private String brand;
     private float price;
     private int categoryID;
+    private String image;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int productID, String name, int quantity, String status, String description, String capacity, String brand, float price, int categoryID) {
+    public ProductDTO(int productID, String name, int quantity, String status, String description, String capacity, String brand, float price, int categoryID, String image) {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
@@ -32,6 +29,7 @@ public class ProductDTO {
         this.brand = brand;
         this.price = price;
         this.categoryID = categoryID;
+        this.image = image;
     }
 
     public int getProductID() {
@@ -106,10 +104,14 @@ public class ProductDTO {
         this.categoryID = categoryID;
     }
 
-    @Override
-    public String toString() {
-        return "ProductDTO{" + "productID=" + productID + ", name=" + name + ", quantity=" + quantity + ", status=" + status + ", description=" + description + ", capacity=" + capacity + ", brand=" + brand + ", price=" + price + ", categoryID=" + categoryID + '}';
+    public String getImage() {
+        return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    
     
 }
