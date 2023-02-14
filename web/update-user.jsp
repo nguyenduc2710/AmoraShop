@@ -13,7 +13,7 @@
 
     </head>
     <body>
-        <form action="UpdateUserController" method="POST">
+        <form action="UpdateUserController" method="POST" enctype="multipart/form-data">
 
             <table>
                 <tr>
@@ -67,6 +67,15 @@
                     </c:forEach>
                 </select>
                  </tr>
+                 
+                 <tr>
+                      <div class="col-md-12">Hình thu nhỏ
+                          Choose a file: <input type="file" name="image" class="form-control" placeholder="image" value="">
+                      </div>
+                                            
+                 <img  width="60px" class="mt-5"  src="${us.image}"/>
+                 </tr>
+                
 
                 <h3 class="text-danger">${requestScope.MSG_SUCCESS}</h3>
                 <h3 class="text-danger">${msg}</h3>

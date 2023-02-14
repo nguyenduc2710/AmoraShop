@@ -19,7 +19,10 @@ import utils.DBUtils;
  */
 public class RoleDAO {
 
-    private static final String GET_ALL_ROLE = "SELECT * FROM Role";
+    private static final String GET_ALL_ROLE = "SELECT TOP (1000) [role_id]\n"
+            + "      ,[role_name]\n"
+            + "  FROM [ShopNuocHoa].[dbo].[Role]\n"
+            + "  WHERE role_id != 1;";
 
     public List<RoleDTO> getAllRole() throws SQLException {
         List<RoleDTO> list = new ArrayList<>();

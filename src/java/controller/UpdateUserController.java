@@ -5,23 +5,27 @@
  */
 package controller;
 
-import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import product.ProductDAO;
-import product.ProductDTO;
-import role.RoleDAO;
-import role.RoleDTO;
-import sun.rmi.server.Dispatcher;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+
 import user.UserDAO;
 import user.UserDTO;
 
@@ -29,6 +33,9 @@ import user.UserDTO;
  *
  * @author long
  */
+@MultipartConfig (fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 1000,
+        maxRequestSize = 1024 * 1024 * 1000)
 public class UpdateUserController extends HttpServlet {
 
     /**
@@ -90,7 +97,8 @@ public class UpdateUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        try {
+ try{
+     
 
             HttpSession session = request.getSession();
 
@@ -106,11 +114,26 @@ public class UpdateUserController extends HttpServlet {
             String email = request.getParameter("email");
             String phoneNumber = request.getParameter("phoneNumber");
             String status = request.getParameter("status");
-
+      
             int roleID = Integer.parseInt(request.getParameter("roleID"));
 
             int userID = Integer.parseInt(request.getParameter("userID"));
 
+            String folderName = "images";
+            
+            String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+            
+            File dir = new File(uploadPath);
+            if(!dir.exists()){
+                dir.mkdirs();
+            }
+            Part filePart = request.getPart("image");
+            String fileName = filePart.getSubmittedFileName();
+            String path = folderName + File.separator + fileName;
+            Timestamp added_date = new Timestamp(System.currentTimeMillis());
+            InputStream is = filePart.getInputStream();
+            Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+            
             if (fullName.trim().length() < 3 || fullName.trim().length() > 20) {
                 message = "Username must be between 6-20 characters ";
             } else if (!fullName.trim().matches("[A-Za-z0-9._]+")) {
@@ -120,34 +143,24 @@ public class UpdateUserController extends HttpServlet {
             } else if (!address.trim().matches("^[A-Za-z0-9._ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\ ]+$")) {
                 message = "Please enter your Address";
             }
-            if (message != null) {
-                String url = "update-user.jsp";
-                request.setAttribute("username", fullName);
-                request.setAttribute("password", address);
-
-                request.setAttribute("message", message);
-                //  request.getRequestDispatcher("update-user.jsp").forward(request, response);
-
+            if (message != null) {             
                 response.sendRedirect("UserDetailController?userID=" + userID);
             } else {
-                UserDTO updateUser = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
-//
-                boolean check = dao.updateUserById(updateUser);
-                if (check) {
-                    //UserDTO us = new UserDAO().getUserById(userID);
-                    request.setAttribute("MSG_SUCCESS", "Update user success!");
-                    // request.setAttribute("us", us);
-                    // request.getRequestDispatcher("update-user.jsp").forward(request, response);
+                UserDTO updateUser = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, path);
 
-                }
-                response.sendRedirect("UserDetailController?userID=" + userID);
+                 dao.updateUserById(updateUser);
+
+
+                response.sendRedirect("ShowUserController");
             }
+
 
         } catch (Exception ex) {
             log("Error at RegistrationController: " + ex.toString());
         }
-
     }
+    
+  
 
     /**
      * Returns a short description of the servlet.

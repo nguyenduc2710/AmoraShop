@@ -3,15 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/long/Desktop/SWP391/web/user-list.jsp</file>
             <file>file:/C:/Users/long/Desktop/SWP391/web/product-list.jsp</file>
-            <file>file:/C:/Users/long/Desktop/SWP391/src/java/user/UserDAO.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/controller/LoginController.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/controller/UpdateUserController.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/adminController/ViewAllUserController.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/product/ProductDTO.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/product/ProductDAO.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/role/RoleDAO.java</file>
+            <file>file:/C:/Users/long/Desktop/SWP391/web/user-list.jsp</file>
+            <file>file:/C:/Users/long/Desktop/SWP391/src/java/user/UserDTO.java</file>
+            <file>file:/C:/Users/long/Desktop/SWP391/src/java/user/UserDAO.java</file>
+            <file>file:/C:/Users/long/Desktop/SWP391/web/update-user.jsp</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/controller/ShowUserController.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/controller/FilterProductController.java</file>
             <file>file:/C:/Users/long/Desktop/SWP391/src/java/controller/ShowProductController.java</file>
