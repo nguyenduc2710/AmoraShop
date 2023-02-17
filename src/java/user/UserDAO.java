@@ -22,17 +22,15 @@ public class UserDAO {
 
     private static final String CHECK_DUPLICATE = "SELECT * FROM Users WHERE email = ? ";
 
-    private static final String INSERT = "INSERT INTO Users(full_name,password,email, status,role_id) VALUES(?,?,?,?,?)";
+    private static final String INSERT = "INSERT INTO Users(full_name,password,email, status,role_id,image) VALUES(?,?,?,?,?,?)";
 
     private static final String REGISTER = "insert into Users(full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)";
-
-    private static final String GET_ALL_USERS = "SELECT * FROM Users";
 
     private static final String GET_USERS_BY_ID = "SELECT * FROM Users where user_id = ?";
     
     private static final String GET_USERS_BY_NAME = "select * from Users where full_name like ?";
 
-    private static final String UPDATE_USER_BY_ID = "UPDATE [dbo].[Users]\n"
+   private static final String UPDATE_USER_BY_ID = "UPDATE [dbo].[Users]\n"
             + "   SET [full_name] = ?\n"
             + "      ,[password] = ?\n"
             + "      ,[gender] = ?\n"
@@ -41,15 +39,30 @@ public class UserDAO {
             + "      ,[address] = ?\n"
             + "      ,[status] = ?\n"
             + "      ,[role_id] = ?\n"
+            + "      ,[image] = ?\n"
             + " WHERE [user_id] = ?";
-    private static final String UPDATE_USER_BY_EMAIL = "UPDATE [dbo].[Users]\n"
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   private static final String UPDATE_USER_BY_EMAIL = "UPDATE [dbo].[Users]\n"
             + "   SET full_name = ?\n"
             + "      ,[password] = ?\n"
             + "      ,gender = ?\n"
             + "      ,phone_number = ?\n"
             + "      ,address = ?\n"
+            + "      ,[image] = ?\n"
             + " WHERE email = ?";
     private static final String CHANGE_PASSWORD = "UPDATE [dbo].[Users] SET [password] = ? WHERE email = ?";
+    private static final String GET_IMAGE_BY_USERID = "SELECT image FROM [Users] where user_id = ?";
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -74,8 +87,9 @@ public class UserDAO {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     int roleID = rs.getInt("role_id");
+                    String image = rs.getString("image");
 
-                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, image);
                 }
             }
         } catch (Exception e) {
@@ -132,7 +146,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("insert into Users values(?,?,?,?,?,?,?,?)");
+                ptm = conn.prepareStatement("INSERT INTO dbo.Users( full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)");
                 ptm.setString(1, fullName);
                 ptm.setString(2, password);
                 ptm.setString(3, gender);
@@ -183,13 +197,14 @@ public class UserDAO {
 
     public List<UserDTO> getAllUsers() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
+        UserDTO user = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(GET_ALL_USERS);
+                ptm = conn.prepareStatement("SELECT * FROM Users");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int userID = rs.getInt("user_id");
@@ -201,7 +216,11 @@ public class UserDAO {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     int roleID = rs.getInt("role_id");
-                    list.add(new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID));
+                    // list.add(new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID));
+                    String image = rs.getString("image");
+
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, image);
+                    list.add(user);
                 }
             }
         } catch (Exception e) {
@@ -230,7 +249,7 @@ public class UserDAO {
         return user;
     }
 
-    public void updateUserByEmail(String fullName, String password, String gender, String phoneNumber, String address, String email) throws SQLException {
+    public void updateUserByEmail(String fullName, String password, String gender, String phoneNumber, String address, String email,String image) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -243,6 +262,7 @@ public class UserDAO {
                 ptm.setString(4, phoneNumber);
                 ptm.setString(5, address);
                 ptm.setString(6, email);
+                ptm.setString(7, image);
                 ptm.executeUpdate();
             }
         } catch (Exception ex) {
@@ -279,7 +299,7 @@ public class UserDAO {
             }
         }
     }
-    public UserDTO getUserById(int userID) throws SQLException {
+     public UserDTO getUserById(int userID) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -302,8 +322,9 @@ public class UserDAO {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     int roleID = rs.getInt("role_id");
+                    String image = rs.getString("image");
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, image);
 
-                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
                 }
             }
         } catch (Exception e) {
@@ -322,28 +343,27 @@ public class UserDAO {
         return user;
     }
 
-    public boolean updateUserById(String fullName, String password, String gender, String email, String phoneNumber, String address, String status, int roleID, int userID) throws SQLException {
-        boolean check = false;
+    public void updateUserById(UserDTO updateUser) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
-            conn = new DBUtils().getConnection();
+            conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(UPDATE_USER_BY_ID);
-                ptm.setString(1, fullName);
-                ptm.setString(2, password);
-                ptm.setString(3, gender);
-                ptm.setString(4, email);
-                ptm.setString(5, phoneNumber);
-                ptm.setString(6, address);
-                ptm.setString(7, status);
-                ptm.setInt(8, roleID);
-                ptm.setInt(9, userID);
+                 ptm = conn.prepareStatement(UPDATE_USER_BY_ID);
+                ptm.setString(1, updateUser.getFullName());
+                ptm.setString(2, updateUser.getPassword());
+                ptm.setString(3, updateUser.getGender());
+                ptm.setString(4, updateUser.getEmail());
+                ptm.setString(5, updateUser.getPhoneNumber());
+                ptm.setString(6, updateUser.getAddress());
+                ptm.setString(7, updateUser.getStatus());
+                ptm.setInt(8, updateUser.getRoleID());
+                ptm.setString(9, updateUser.getImage());
+                ptm.setInt(10, updateUser.getUserID());
 
-                check = ptm.executeUpdate() > 0 ? true : false;
+                ptm.executeUpdate();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
         } finally {
             if (ptm != null) {
                 ptm.close();
@@ -352,12 +372,12 @@ public class UserDAO {
                 conn.close();
             }
         }
-        return check;
     }
 
-    public List<UserDTO> getUserByName(String name) throws SQLException {
+
+     public List<UserDTO> getUserByName(String name) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
-       UserDTO user = null;
+        UserDTO user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -379,8 +399,8 @@ public class UserDAO {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     int roleID = rs.getInt("role_id");
-
-                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID);
+                    String image = rs.getString("image");
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, image);
                     list.add(user);
                 }
             }
@@ -399,4 +419,38 @@ public class UserDAO {
         }
         return list;
     }
+      public String getUrlImageById(int userID) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_IMAGE_BY_USERID);
+                ptm.setInt(1, userID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return null;
+
+    }
+
 }

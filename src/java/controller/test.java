@@ -38,11 +38,12 @@ public class test {
 
         //Test getAllProduct() function in product DAO
         
-        ProductDAO cdao = new ProductDAO();
-        List<ProductDTO> c = new ArrayList<>();
-        c = cdao.getAllProductByCategoryId(1);
-        for (int i = 0; i < c.size(); i++) {
-            System.out.println(c.get(i).toString());
+       UserDAO dao = new UserDAO();
+       dao.register("QSHU", "123456789", "NAM", "Quoc@eamail.com", "123456789", "TPHCM");
+       
+       List<UserDTO> list = dao.getAllUsers();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).toString());
         }
     }
     

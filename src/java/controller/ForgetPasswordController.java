@@ -82,7 +82,7 @@ public class ForgetPasswordController extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("enter-otp.jsp");
 			request.setAttribute("message","OTP is sent to your email id");
 			//request.setAttribute("connection", con);
-			mySession.setAttribute("otp",otpvalue); 
+			mySession.setAttribute("otp",otpvalue);     
 			mySession.setAttribute("email",email); 
 			dispatcher.forward(request, response);
 			//request.setAttribute("status", "success");

@@ -37,8 +37,10 @@
                                 <th>Phone number</th>  
                                 <th>Address</th>  
                                 <th>Status</th>
+                                <th>image</th>
                                 <th>Role</th>
                                 <th>Setting</th>
+
                             </tr>
                         </thead>
                         <tfoot>
@@ -51,12 +53,14 @@
                                 <th>Phone number</th>  
                                 <th>Address</th>  
                                 <th>Status</th>
+                                <th>image</th>
                                 <th>Role</th>
                                 <th>Setting</th>
+
                             </tr>
                         </tfoot>
                         <tbody>
-                            <c:forEach items="${requestScope.userList}" var="user">
+                            <c:forEach items="${sessionScope.list}" var="user">
                                 <tr>
                                     <td>${user.userID}</td>
                                     <td>${user.fullName}</td>
@@ -72,6 +76,7 @@
                                         <c:if test="${user.status != 'ACTIVE'}">
                                         <td><img class="circle" src="images/inactive.png" style="width:10px;"></td>
                                         </c:if>
+                                    <td><img src="${user.image}" width="60px" alt=""></td>
 
                                     <c:choose>
                                         <c:when test="${user.roleID == 1}">
@@ -87,10 +92,16 @@
                                             <td>User</td>
                                         </c:otherwise>
                                     </c:choose>
-                                    <td><a href="UserDetailController?userID=${user.userID}">Update</a>           
-                                    </td>    
 
 
+                                    <c:choose>
+                                        <c:when test="${user.roleID == 1}">
+                                            <td readonly></td> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td><a href="UserDetailController?userID=${user.userID}">Update</a></td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
                             </c:forEach>
                         </tbody>

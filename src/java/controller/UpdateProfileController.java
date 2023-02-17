@@ -7,27 +7,40 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import user.UserDAO;
 import user.UserDTO;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
  * @author thaiq
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 1000,
+        maxRequestSize = 1024 * 1024 * 1000)
 public class UpdateProfileController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
         response.setContentType("text/html;charset=UTF-8");
-        String email =request.getParameter("email");
+        String email = request.getParameter("email");
         String url = "update-information.jsp";
         String newFullName = request.getParameter("newName");
         String newPassword = request.getParameter("newPassword");
@@ -36,22 +49,33 @@ public class UpdateProfileController extends HttpServlet {
         String newPhone = request.getParameter("newPhone");
         String newAddress = request.getParameter("newAddress");
 
-        if (!newPassword.equals(confirmPassword)) {
-            request.setAttribute("errorConfirm", "incorrect confirm password");
-            request.getRequestDispatcher(url).forward(request, response);
+        String folderName = "images";
+
+        String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+
+        File dir = new File(uploadPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
+        Part filePart = request.getPart("image");
+        String fileName = filePart.getSubmittedFileName();
+        String path = folderName + File.separator + fileName;
+        Timestamp added_date = new Timestamp(System.currentTimeMillis());
+        InputStream is = filePart.getInputStream();
+        Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+
         HttpSession session = request.getSession();
         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         UserDAO dao = new UserDAO();
 
-        if(email.equals(loginUser.getEmail())){
+        if (email.equals(loginUser.getEmail())) {
             loginUser.setFullName(newFullName);
             loginUser.setPassword(newPassword);
             loginUser.setGender(newGender);
-            loginUser.setPhoneNumber(newGender);
-            loginUser.setAddress(newAddress);
-            dao.updateUserByEmail(newFullName, newPassword, newGender, newPhone, newAddress,email);
-            session.setAttribute("LOGIN_USER", loginUser); 
+            loginUser.setPhoneNumber(newPhone);
+            loginUser.setImage(path);
+            dao.updateUserByEmail(newFullName, newPassword, newGender, newPhone, newAddress, path, email);
+            session.setAttribute("LOGIN_USER", loginUser);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         }
     }

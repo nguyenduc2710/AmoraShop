@@ -33,7 +33,7 @@
                 </div>
                 <ul class="utility-list">
                     <li class="utility-item">
-                        <a href="login.jsp" class="header-icon"><img src="assets/font/account_circle_black_24dp.svg" alt=""></a>
+                        <a href="user.jsp" class="header-icon"><img src="assets/font/account_circle_black_24dp.svg" alt=""></a>
                     </li>
                     <li class="utility-item">
                         <a class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
@@ -57,82 +57,97 @@
                 </ul>
             </div>
         </header>
-        <div class="container bootstrap snippet">
-            <div class="row">
-                <div class="col-sm-10"><h1>Hello ${sessionScope.LOGIN_USER.fullName} </h1></div>
+        <section style="background-color: #eee; font-size: 30px">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col" style="font-size: 20px">
+                        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="homePage.jsp">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
 
-            </div>
-            <div class="row">
-                <div class="col-sm-3"><!--left col-->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <div class="card-body text-center">
+                                <img src="${sessionScope.LOGIN_USER.image}" alt="avatar"
+                                     class="rounded-circle img-fluid" style="width: 150px;">
 
+                            </div>
+                        </div>
+                        <div class="card mb-4 mb-lg-0">
+                            <div class="card-body p-0">
 
-                    <div class="text-center">
-                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-
-                    </div></hr><br>
-
-                </div><!--/col-3-->
-                <div class="col-sm-9">
-
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home">
-                            <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <h2 for="first_name"><h4>Full Name:</h4></h2>
-                                        <h1>${sessionScope.LOGIN_USER.fullName}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Full Name:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">${sessionScope.LOGIN_USER.fullName}</p>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone:</h4></label>
-                                        <h1>${sessionScope.LOGIN_USER.phoneNumber}</h1>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Email:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">${sessionScope.LOGIN_USER.email}</p>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Gender:</h4></label>
-                                        <h1>${sessionScope.LOGIN_USER.gender}</h1>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Phone:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">${sessionScope.LOGIN_USER.phoneNumber}</p>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Email:</h4></label>
-                                        <h1>${sessionScope.LOGIN_USER.email}</h1>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Gender:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">${sessionScope.LOGIN_USER.gender}</p>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Address:</h4></label>
-                                        <h1>${sessionScope.LOGIN_USER.address}</h1>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Address:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">${sessionScope.LOGIN_USER.address}</p>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                            </div>
+                        </div>
 
-                                    <div class="col-xs-6">
-                                        <label for="password"><h4>Password:</h4></label>
-                                        <h1>${sessionScope.LOGIN_USER.password}</h1>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+        </section>
 
-                            </form>
+        <h2>
 
-                            <h2>
+            <a href="update-informaton.jsp">Update</a>
 
-                                <a href="update-informaton.jsp">Update</a>
-
-                            </h2>
-                            <h2>
-                                <form action="LogoutController" method="POST">
-                                    <input type="submit" name="action" value="Logout">
-                                </form>
-                            </h2>
-                            </body>
-                            </html>
+        </h2>
+        <h2>
+            <form action="LogoutController" method="POST">
+                <input type="submit" name="action" value="Logout">
+            </form>
+        </h2>
+    </body>
+</html>

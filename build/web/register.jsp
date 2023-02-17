@@ -37,34 +37,7 @@
     <body>
         <div class="wrapper">
 
-            <header class="header">
-                <div class="header-nav-up">
-                    <div class="ivisible-bar"></div>
-                    <div class="wrap-logo">
-                        <img class="header-logo" src="assets/images/HomeLogo.png" alt="AmoraShop">
-                    </div>
-                    <ul class="utility-list">
-                        <li class="utility-item">
-                            <a class="header-icon"><img src="assets/font/account_circle_black_24dp.svg" alt=""></a>
-                        </li>
-                        <li class="utility-item">
-                            <a class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
-                        </li>
-                        <li class="utility-item">
-                            <a class="header-icon"><img src="assets/font/shopping_bag_black_24dp.svg" alt=""></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="header-nav-down">
-                    <ul class="main-menu-list">
-                        <li class="main-menu-item">Home</li>
-                        <li class="main-menu-item">Shop</li>
-                        <li class="main-menu-item">Brand</li>
-                        <li class="main-menu-item">New Arrivals</li>
-                        <li class="main-menu-item">Sale</li>
-                    </ul>
-                </div>
-            </header>
+            <jsp:include page="components/header.jsp" /> 
 
             <div class="login-signup-container row">
                 <div class="login-signup-block col-6 ">
@@ -93,7 +66,7 @@
                         <div class="error" id="errorMessage3" style="color: red">Password must have  9 to 30 characters and at least one number</div>
                         <input type="password" name="repassword" id="user-email-passwords" class="user-login-signup-input" placeholder="Repeat password" onchange="validatePassword()" required=""/><h2 style="color: red">${requestScope.errorRepeat}</h2>
                         <div class="error" id="errorMessage2" style="color: red">Confirm password does not match password</div>
-                        
+
                         <input type="text" name="address" id="user-address" class="user-login-signup-input" placeholder="Address" required=""/>
                         <input type="text" name="mobile" id="user-phone-num" class="user-login-signup-input" placeholder="Phone number" onchange="checkPhone()" required=""/>
                         <div class="error" id="errorMessage4" style="color: red">Phone number must be 10 digits</div>
@@ -112,16 +85,22 @@
                                 </a>
                             </div>
                         </div>
-                        
-                        
+
+
 
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
 
-                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
+                        <!--                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #4585f4" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
+                                                   role="button">
+                                                    <i class="fab fa-facebook-f me-2"></i>Continue with Google
+                                                </a>-->
+                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #4285f4" 
+                           href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
                            role="button">
-                            <i class="fab fa-facebook-f me-2"></i>Continue with Google
+                            Continue with Google
+                            <img class="action-login-google-icon" src="assets/font/Google__G__Logo.svg" alt="Google logo">
                         </a>
                     </form>
                     ${requestScope.successfully}
@@ -129,47 +108,10 @@
                 </div>
             </div>
 
-            <footer class="footer">
-                <div class="footer-top row">
+                              <jsp:include page="components/footer.jsp" />
 
-                    <div class="footer-inner-block col-4">
-                        <h4 class="footer-inner-title">Introduction</h4>
-                        <div class="footer-container">
-                            <div class="inner-footer-text">
-                                <!-- Một cửa hàng nước hoa giúp bạn sống lại cùng những kí ức đã bị lãng quên bằng hương thơm -->
-                                Amora Shop, a perfume store that will bring to life again a forgotten memory by fragrance!
-                            </div>
-                            <div class="footer-shop-logo-container">
-                                <img class="footer-shop-logo" src="assets/images/LogoDoneEdited.png" alt="AmoraShop logo">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="footer-inner-block col-8">
-                        <h4 class="footer-inner-title">Information</h4>
-                        <div class="footer-container">
-                            <div class="inner-footer-text">
-                                <i class="ti-headphone-alt"></i>
-                                Phone: 0902 Ngày mai nói tiếp
-                            </div>
-                            <div class="inner-footer-text">
-                                Gmail: hongducnguyenho0@gmail.com
-                            </div>
-                            <div class="inner-footer-text">
-                                Address: FPT University
-                                Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh 700000,
-                                Việt Nam
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="copyright">
-                    Copyright © 2023 Amora Shop. Powered by SWP391 FPT University
-                </div>
-            </footer>
         </div>
-                <script src="assets/js/validation.js"></script>
+        <script src="assets/js/validation.js"></script>
     </body>
 
 </html>

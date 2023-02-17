@@ -42,14 +42,7 @@ public class RegisterController extends HttpServlet {
             } else {
                 UserDAO dao = new UserDAO();
                 boolean user = dao.checkDuplicate(email);
-                if (mobile.isEmpty()) {
-                    request.setAttribute("erorrMobile", "Your Mobile Invalid");
-                    request.getRequestDispatcher(url).forward(request, response);
-                } 
-                if (password.length() <= 8 || password.length() > 32) {
-                    request.setAttribute("erorrPassword", "Your New Password less than 8 character or long than 32 characters");
-                    request.getRequestDispatcher(url).forward(request, response);
-                }
+                
                 if (user == false) {
                     //dang ky thanh cong
                     dao.register(fullName, password, gender, email, mobile, address);

@@ -15,7 +15,6 @@ body {
 
 .header {
     width: 100%;
-    border-bottom: 1px solid rgba(1, 1, 1, 0.4);
 }
 
 /* --------------HEADER-------------- */
@@ -62,14 +61,63 @@ body {
     justify-content: center;
 }
 
+.header-nav-link{
+    text-decoration: none;
+    color: black;
+    cursor: default;
+}
+
+.header-nav-link:hover{
+    color: black !important;
+}
+
 .main-menu-item {
     font-size: 1.6rem;
     margin: 0 1.2rem;
+    border: none;
+    background-color: white;
+    padding: 0;
 }
 
-.main-menu-item:hover {
-    border-bottom: 1px solid;
+ .main-menu-item:hover {
+    color: var(--main-page-color);
     cursor: pointer;
+    font-weight: 600;
+} 
+/* BANNER */
+#banner{
+    position: relative;
+}
+
+.home-banner{
+    width: 100%;
+    height: 65rem;
+    object-fit: cover;
+    margin: auto;
+    animation: fadeIn ease 1s;
+}
+
+.button-navigation-banner {
+    font-size: 21px;
+    border: 1px solid #ededed;
+    background-color: white;
+    border-radius: 12rem;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+
+.prev-banner-button {
+    top: 50%;
+}
+
+.next-banner-button {
+    right: 0;
+    top: 50%;
+}
+
+.button-navigation-banner{
+
 }
 
 /* -------NEW-PRODUCT_SECTION------- */
@@ -97,7 +145,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 0.5px solid rgba(0,0,0,0.3);
 }
 
 .product-name {
@@ -280,6 +328,7 @@ body {
 
 .login-signup-container.row {
     min-height: 66.7rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 
@@ -315,12 +364,6 @@ body {
     height: 100%;
 }
 
-.check-error-pass{
-    font-size: 1.4rem;
-    color: #B33951;
-    margin-bottom: 5px;
-}
-
 .user-login-signup-input {
     height: 55px;
     background: #ededed;
@@ -336,6 +379,12 @@ body {
     outline: none;
     border-color: #ededed;
     background: #fff;
+}
+
+.action-login-google-icon{
+    background: white;
+    border-radius: 4px;
+    margin-left: 8px;
 }
 
 /* adjust radio button */
@@ -444,4 +493,28 @@ label {
     color: var(--main-page-color);
 }
 
+
+
+
+
+
+/* Key frame */
+@keyframes FadeIn{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+    
+}
+
+@keyframes slide-animation {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
 

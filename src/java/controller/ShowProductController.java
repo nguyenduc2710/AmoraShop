@@ -27,14 +27,15 @@ public class ShowProductController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "product-list.jsp";
-
+    private static final String SUCCESS_USER = "products-user-page.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
 
         try {
-            final int PAGE_SIZE = 5;
+            final int PAGE_SIZE = 20;
             int page = 1;
             String pageStr = request.getParameter("page");
             if (pageStr != null) {
@@ -54,7 +55,7 @@ public class ShowProductController extends HttpServlet {
             request.setAttribute("page", page);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("products", listProducts);
-            url = SUCCESS;
+            url = SUCCESS_USER;
             List<CategoryDTO> ListCategory = new CategoryDAO().getAllCategory();
             request.setAttribute("ListCategory", ListCategory);
 

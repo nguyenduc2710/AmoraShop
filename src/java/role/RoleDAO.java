@@ -17,7 +17,7 @@ import utils.DBUtils;
  * @author thaiq
  */
 public class RoleDAO {
-    private static final String GET_ALL_ROLE = "SELECT * FROM Role";
+    private static final String GET_ALL_ROLE = "SELECT * FROM Role WHere role_id != 1";
 
     public List<RoleDTO> getAllRole() throws SQLException {
         List<RoleDTO> list = new ArrayList<>();

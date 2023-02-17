@@ -1,0 +1,261 @@
+/* This will hide the updown arrow of input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ----------------- */
+
+.body-container{
+    
+}
+
+.products-banner{
+    height: 32rem;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    margin: auto;
+}
+
+.bread-crumb-container {
+    display: block;
+    padding: 0 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid rgba(1, 1, 1, 0.4);
+    border-bottom: 1px solid rgba(1, 1, 1, 0.4);
+}
+
+.bread-crumbs {
+    display: flex;
+    font-size: 1.35rem;
+    padding: 10px 0;
+}
+
+.bread-crumbs a {
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+
+.bread-crumbs a:hover{
+    color: var(--main-page-color);
+}
+
+.slash {
+    margin: 0 6px;
+}
+
+.products-body{
+    position: relative;
+    margin-top: 5rem;
+}
+
+.left-nav-filter {
+    position: sticky;
+    padding: 0 20px;
+    top: 0;
+}
+
+/*Tree node css*/
+#tree {
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#tree ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#tree input[type="checkbox"] {
+    display: none;
+}
+
+#tree label {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+#tree label:hover {
+    color: var(--main-page-color);
+}
+
+#tree li>ul {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+}
+
+#tree input[type="checkbox"]:checked~ul {
+    display: block;
+    max-height: 500px;
+}
+
+
+.main-filter-container{
+    text-decoration: none;
+    color: black;
+    line-height: 1.8;
+}
+
+.main-filter-container span{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.main-filter-container ul{
+    list-style: none;
+}
+
+.category-item {
+    font-size: 1.2rem;
+    line-height: 26px;
+    color: rgba(0,0,0,0.8);
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.category-item:hover {
+    color: black;
+    font-weight: 600;
+}
+
+.product-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 0 0;
+}
+
+.category-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--main-page-color);
+}
+
+.category-sort-options {
+    font-size: 1.4rem;
+}
+
+.product-list-container {
+    padding-right: 15px;
+}
+
+.product-img-wrap{
+    height: 23.5rem;
+    width: 23.5rem;
+}
+
+.product-items {
+    margin-bottom: 20px;
+}
+
+.pagination {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #648DE5;
+    border-color: #648DE5;
+}
+
+.page-item{
+    color: #648DE5;
+    font-size: 1.6rem;
+    min-width: 3rem;
+}
+
+
+/* -----------Product Detail Css----------- */
+.product-detail-container {
+    padding: 35px 15px 0 0;
+    margin-bottom: 40px;
+}
+
+.product-detail-wrap{
+    padding: 0;
+    width: 46.5rem;
+}
+
+.product-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-detail-name {
+    color: var(--main-page-color);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.product-detail-price {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: rgba(255,0,0);
+    margin: 20px 0;
+    padding: 10px 0;
+    border-top: 1px dotted #dfe0e1;
+    border-bottom: 1px dotted #dfe0e1;
+}
+
+.buy-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.select-quantity-area .quantity-btn {
+    float: left;
+    height: 32px;
+    width: 32px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid #f5f5f5;
+    background: #f5f5f5;
+}
+
+.select-quantity-area .quantity-selector {
+    float: left;
+    height: 32px;
+    width: 12rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    border: 1px solid #f5f5f5;
+    outline: none;
+}
+
+.add-to-cart-btn {
+    margin: 15px 0;
+    width: 23rem;
+}
+
+.button-57 span:last-child{
+    width: 10rem;
+}
+
+.product-detail-des-title {
+    color: var(--main-page-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    border-bottom: 1px solid;
+    margin-bottom: 14px;
+}
+
+.product-detail-des p {
+    font-size: 1.6rem;
+}

@@ -42,13 +42,13 @@ public class ShowUserController extends HttpServlet {
             if (name != null) {
                 list = new UserDAO().getUserByName(name);
                 HttpSession session = request.getSession();
-                request.setAttribute("userList", list);
+                session.setAttribute("list", list);
                 request.getRequestDispatcher(url).forward(request, response);
             } else {
                 //show list user
                 list = new UserDAO().getAllUsers();
                 HttpSession session = request.getSession();
-                request.setAttribute("userList", list);
+                session.setAttribute("list", list);
                 request.getRequestDispatcher(url).forward(request, response);
 
             }
