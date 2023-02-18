@@ -5,6 +5,8 @@
 
 package controller;
 
+import controller.category.CategoryDAO;
+import controller.category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,45 +16,37 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
-import user.UserDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import product.ProductDAO;
+import product.ProductDTO;
 import user.UserDTO;
 
 /**
  *
  * @author thaiq
  */
-public class ViewAllUserController extends HttpServlet {
-   private static final String ADMIN_PAGE = "user-list.jsp";
+public class ShowProductAdminController extends HttpServlet {
+   
+    private static final String ERROR = "login.jsp";
+    private static final String SUCCESS = "product-list.jsp";
+    private static final String SUCCESS_USER = "products-user-page.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String url = ADMIN_PAGE;
-            try {
-                HttpSession session = request.getSession();
-                List<UserDTO> userList = new UserDAO().getAllUsers();
-                
-                request.setAttribute("userList", userList);
-                request.getRequestDispatcher(url).forward(request, response);
-            } catch (SQLException e) {
-                log("Error at ViewAllUserController: " + e.toString());
-            } finally {
-                request.getRequestDispatcher(url).forward(request, response);
-            }
+        String url = SUCCESS;
+        try{
+            ProductDAO dao = new ProductDAO();
+            List<ProductDTO> listProducts = dao.getAllProducts();
+            HttpSession session = request.getSession();
+                session.setAttribute("PRODUCT", listProducts);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
-
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

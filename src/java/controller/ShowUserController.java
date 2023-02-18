@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
 import user.UserDAO;
 import user.UserDTO;
@@ -56,6 +57,7 @@ public class ShowUserController extends HttpServlet {
             log("ERROR at ShowUserController: " + e.toString());
         }
     }
+    
 
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

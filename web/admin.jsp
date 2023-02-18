@@ -15,7 +15,7 @@
     <body>
         <h1>Admin Page Here</h1>
 
-        <form action="ViewAllUserController" method="POST">
+        <form action="ShowUserController" method="POST">
             <input type="submit" value="Show List User">
         </form>
 

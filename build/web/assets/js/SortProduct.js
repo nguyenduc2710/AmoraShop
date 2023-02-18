@@ -55,7 +55,7 @@ sortSelect.addEventListener('change', (event) => {
 sortSelect.addEventListener('change', (event) => {
     const selectedSortOption = event.target.value;
     sessionStorage.setItem('selectedSortOption', selectedSortOption);
-    // rest of the sorting code here...
+    
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sortSelect.dispatchEvent(new Event('change'));
     }
 });
+
 
 
     

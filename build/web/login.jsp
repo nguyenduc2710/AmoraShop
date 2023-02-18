@@ -38,7 +38,7 @@
                             <div class="slash-decor"></div>
                         </div>
                         <h3 class="check-error-pass">${requestScope.status}</h3>
-                        <h3 class="check-error-pass">${requestScope.ERROR}</h3>
+                        <h3 class="check-error-pass" style="color: red">${requestScope.ERROR}</h3>
                         <h3 class="check-error-pass" style="color: green">${requestScope.successfully}</h3>
                         <input type="email" name="email" id="user-email" class="user-login-signup-input" placeholder="Email"/>
                         <input type="password" name="password" id="user-email-password" class="user-login-signup-input" placeholder="Password"/>

@@ -112,6 +112,11 @@ public class ProductDTO {
         this.image = image;
     }
 
+    @Override
+    public String toString() {
+        return "ProductDTO{" + "productID=" + productID + ", name=" + name + ", quantity=" + quantity + ", status=" + status + ", description=" + description + ", capacity=" + capacity + ", brand=" + brand + ", price=" + price + ", categoryID=" + categoryID + ", image=" + image + '}';
+    }
+
     
     
 }

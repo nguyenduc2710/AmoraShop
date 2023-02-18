@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
                 String status = loginUser.getStatus();
                 if (status.equalsIgnoreCase("ACTIVE")) {
                     if (roleID == 1) {
-                        url = ADMIN_PAGE;
+                        url = "/ShowUserController";
                     } else if (roleID == 2) {
                         url = USER_PAGE;
                     } else {

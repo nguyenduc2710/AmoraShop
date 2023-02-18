@@ -45,10 +45,6 @@
         <servlet-class>controller.NewPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewAllUserController</servlet-name>
-        <servlet-class>controller.ViewAllUserController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserDetailController</servlet-name>
         <servlet-class>controller.UserDetailController</servlet-class>
     </servlet>
@@ -87,6 +83,10 @@
     <servlet>
         <servlet-name>FilterProductController</servlet-name>
         <servlet-class>controller.FilterProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductAdminController</servlet-name>
+        <servlet-class>controller.ShowProductAdminController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -133,10 +133,6 @@
         <url-pattern>/NewPasswordController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewAllUserController</servlet-name>
-        <url-pattern>/ViewAllUserController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>UserDetailController</servlet-name>
         <url-pattern>/UserDetailController</url-pattern>
     </servlet-mapping>
@@ -175,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>FilterProductController</servlet-name>
         <url-pattern>/FilterProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductAdminController</servlet-name>
+        <url-pattern>/ShowProductAdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

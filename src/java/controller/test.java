@@ -38,13 +38,10 @@ public class test {
 
         //Test getAllProduct() function in product DAO
         
-       UserDAO dao = new UserDAO();
-       dao.register("QSHU", "123456789", "NAM", "Quoc@eamail.com", "123456789", "TPHCM");
-       
-       List<UserDTO> list = dao.getAllUsers();
+      ProductDAO dao = new ProductDAO();
+      List<ProductDTO> list = dao.getAllProducts();
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).toString());
         }
     }
-    
 }

@@ -12,12 +12,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import product.ProductDAO;
 import product.ProductDTO;
+import user.UserDTO;
 
 /**
  *
@@ -28,11 +30,13 @@ public class ShowProductController extends HttpServlet {
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "product-list.jsp";
     private static final String SUCCESS_USER = "products-user-page.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = SUCCESS_USER;
+        
+        
 
         try {
             final int PAGE_SIZE = 20;
@@ -51,11 +55,13 @@ public class ShowProductController extends HttpServlet {
             if (totalProducts % PAGE_SIZE != 0) {
                 totalPage += 1;
             }
-
+            HttpSession session = request.getSession();
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        
             request.setAttribute("page", page);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("products", listProducts);
-            url = SUCCESS_USER;
+
             List<CategoryDTO> ListCategory = new CategoryDAO().getAllCategory();
             request.setAttribute("ListCategory", ListCategory);
 
