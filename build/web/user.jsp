@@ -4,6 +4,7 @@
     Author     : thaiq
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,50 +26,20 @@
         <link rel="icon" type="image/png" href="assets/images/LogoDoneEdited.png"/>
     </head>
     <body>
-        <header class="header">
-            <div class="header-nav-up">
-                <div class="ivisible-bar"></div>
-                <div class="wrap-logo">
-                    <img class="header-logo" src="assets/images/HomeLogo.png" alt="AmoraShop">
-                </div>
-                <ul class="utility-list">
-                    <li class="utility-item">
-                        <a href="user.jsp" class="header-icon"><img src="assets/font/account_circle_black_24dp.svg" alt=""></a>
-                    </li>
-                    <li class="utility-item">
-                        <a class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
-                    </li>
-                    <li class="utility-item">
-                        <a class="header-icon"><img src="assets/font/shopping_bag_black_24dp.svg" alt=""></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="header-nav-down">
-                <ul class="main-menu-list">
-                    <li class="main-menu-item">Home</li>
-                    <form action="ShowProductController" method="POST">
-                        <!--<a class="main-menu-item">Shop</a>-->
-                        <input class="main-menu-item" type="submit" value="Shop" style="background-color: white; border:none; font-size: 1.6rem">
-                    </form>
-
-                    <li class="main-menu-item">Brand</li>
-                    <li class="main-menu-item">New Arrivals</li>
-                    <li class="main-menu-item">Sale</li>
-                </ul>
-            </div>
-        </header>
+        <jsp:include page="components/header.jsp"/>
         <section style="background-color: #eee; font-size: 30px">
             <div class="container py-5">
                 <div class="row">
                     <div class="col" style="font-size: 20px">
                         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="homePage.jsp">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/AmoraShop/homePage.jsp">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
+               
 
                 <div class="row">
                     <div class="col-lg-4">
@@ -149,5 +120,7 @@
                 <input type="submit" name="action" value="Logout">
             </form>
         </h2>
+
+
     </body>
 </html>

@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Tables - Amora Admin</title>
+        <title>Product Manager</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="hien-css/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -28,18 +28,18 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-<!--            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="ShowUserController" method="GET">
-                <div class="input-group">
-                    <input class="form-control" name="name" type="text" placeholder="Search..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit" value="search"><i class="fas fa-search"></i></button>
-                </div>
-            </form>-->
+            <!--            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="ShowUserController" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" name="name" type="text" placeholder="Search..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                                <button class="btn btn-primary" id="btnNavbarSearch" type="submit" value="search"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>-->
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                         <li><a class="dropdown-item" href="http://localhost:8080/AmoraShop/LogoutController">Logout</a></li>
+                        <li><a class="dropdown-item" href="http://localhost:8080/AmoraShop/LogoutController">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -62,7 +62,7 @@
                                 </nav>
                             </div>
 
-                            
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -89,7 +89,7 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-<!--                                            <th>ID</th>-->
+                                            <!--                                            <th>ID</th>-->
                                             <th>Name</th>
                                             <th>Quantity</th>
                                             <th>Status</th>
@@ -111,18 +111,21 @@
                                                 <td>${product.quantity}</td>
                                                 <td>${product.status}</td>
                                                 <td>${product.description}</td>
-                                                <td>${product.capacity}</td>
+                                                <td>${product.capacity} ml</td>
                                                 <td>${product.brand}</td>
                                                 <td>${product.price}</td>
                                                 <td>
                                                     <c:if test="${product.categoryID == 1}">MAN</c:if>
                                                     <c:if test="${product.categoryID == 2}">WOMAN</c:if>
+                                                    </td>
+                                                    <td>
+                                                        <img style="width: 30px; height: 30px;" src="${product.image}" />
                                                 </td>
+
                                                 <td>
-                                                    <img style="width: 30px; height: 30px;" src="${product.image}" />
+                                                    <a href="#">Update</a>
+                                                    <a href="#">Delete</a>
                                                 </td>
-                                           
-                                                <td><a href="#">Update</a></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -131,7 +134,7 @@
                         </div>
                     </div>
                 </main>
-                
+
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -249,7 +249,7 @@ public class UserDAO {
         return user;
     }
 
-    public void updateUserByEmail(String fullName, String password, String gender, String phoneNumber, String address, String email,String image) throws SQLException {
+    public void updateUserByEmail(String fullName, String gender, String phoneNumber, String address, String email,String image) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -257,12 +257,11 @@ public class UserDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE_USER_BY_EMAIL);
                 ptm.setString(1, fullName);
-                ptm.setString(2, password);
-                ptm.setString(3, gender);
-                ptm.setString(4, phoneNumber);
-                ptm.setString(5, address);
-                ptm.setString(6, email);
-                ptm.setString(7, image);
+                ptm.setString(2, gender);
+                ptm.setString(3, phoneNumber);
+                ptm.setString(4, address);
+                ptm.setString(5, email);
+                ptm.setString(6, image);
                 ptm.executeUpdate();
             }
         } catch (Exception ex) {

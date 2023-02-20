@@ -51,7 +51,54 @@ public class ProductDAO {
             + "Inner Join [dbo].[ProductImage] As i\n"
             + "On Product.product_id = i.product_id\n"
             + "Where product_name like ?";
+    private static final String SEARCH_PRODUCT_BY_ID_USER = "SELECT [Product].*,[Category].category_name, [ProductImage].image\n"
+            + "FROM [Product]\n"
+            + "INNER JOIN [ProductImage] ON [Product].product_id = [ProductImage].product_id\n"
+            + "INNER JOIN [Category] ON [Product].category_id = [Category].category_id\n"
+            + "WHERE [Product].product_id = ?;";
 
+    public List<ProductDTO> getProductDetailByID(String product_id) throws SQLException, ClassNotFoundException {
+
+        List<ProductDTO> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        
+        try{  
+            con = DBUtils.getConnection();
+            if(con != null){
+                stm = con.prepareStatement(SEARCH_PRODUCT_BY_ID_USER);
+                stm.setString(1, product_id);
+                rs = stm.executeQuery();
+                while(rs.next()){
+                    int productID = rs.getInt("product_id");
+                    String name = rs.getString("product_name");
+                    int quantity = rs.getInt("quantity");
+                    String status = rs.getString("status");
+                    String description = rs.getString("description");
+                    String capacity = rs.getString("capacity");
+                    String brand = rs.getString("brand");
+                    float price = rs.getFloat("price");
+                    int categoryID = rs.getInt("category_id");
+                    String image = rs.getString("image"); 
+                    list.add(new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image));
+                }
+            }
+        } finally{
+            if(con != null){
+                con.close();
+            }
+            if(stm != null){
+                stm.close();
+            }
+            if(rs != null){
+                rs.close();
+            }
+        }
+        return list;
+    }
+
+    
     public List<ProductDTO> getAllProducts() throws SQLException {
         List<ProductDTO> list = new ArrayList<>();
         Connection conn = null;

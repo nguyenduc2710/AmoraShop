@@ -103,33 +103,22 @@
                                     </div>
 
 
-                                    <div class="form-group">
-
-                                        <div class="col-xs-6">
-                                            <label for="paswword"><h4>Password:</h4></label>
-                                            <input type="password" class="form-control" name="newPassword" id="user-email-password" placeholder="enter new password" onchange="validatePassword()" />
-                                            <div class="error" id="errorMessage3" style="color: red">Password must have  9 to 30 characters and at least one number</div>
-                                        </div>
-                                    </div>
+                                    
 
                                     <div class="form-group">
                                         <div class="col-xs-6">
                                             <label for="gender"><h4>Gender:</h4></label>
-                                            <input type="text" class="form-control" name="newGender" id="mobile" placeholder="enter new gender" required="" />
+                                            <input type="text" class="form-control" name="newGender"  placeholder="enter new gender"  value="${sessionScope.LOGIN_USER.gender}" required="" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <label for="copassword"><h4>Confirm Password:</h4></label>
-                                        <input type="password" class="form-control" name="confirmPassword" id="user-email-passwords" placeholder="confirm password" onchange="validatePassword()"  required=""/>
-                                        <div class="error" id="errorMessage2" style="color: red">Confirm password does not match password</div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="phone"><h4>Phone:</h4></label>
-                                        <input type="text" class="form-control" name="newPhone" id="user-phone-num" placeholder="enter new phone" onchange="checkPhone()" required=""/>
+                                        <input type="text" class="form-control" name="newPhone" id="user-phone-num" placeholder="enter new phone"  onchange="checkPhone()" required=""/>
                                         <div class="error" id="errorMessage4" style="color: red">Phone number must be 10 digits</div>
                                     </div>
                                 </div>
@@ -138,7 +127,7 @@
 
                                     <div class="col-xs-6">
                                         <label for="address"><h4>Address:</h4></label>
-                                        <input type="text" class="form-control" name="newAddress" id="user-address" placeholder="enter new address" required=""/>
+                                        <input type="text" class="form-control" name="newAddress" id="user-address" value="${sessionScope.LOGIN_USER.address}" placeholder="enter new address" required=""/>
                                     </div>
                                 </div>
 

@@ -42,7 +42,7 @@
             </div>
 
             <div class="products-body row">
-                <div class="left-nav-container col-3">
+                <div class="left-nav-container col-2">
                     <div id="tree" class="left-nav-filter">
                         <ul>
                             <li>
@@ -114,11 +114,11 @@
                     </div>
                 </div>
 
-                <div class="right-product-list col-9">
+                <div class="right-product-list col-10">
                     <div class="product-list-header">
                         <h2 class="category-title">All products</h2>
                         <div class="category-sort-cotainer">
-                            <select id="sort-by" class="category-sort-options">                               
+                            <select id="sort-by" class="category-sort-options">
                                 <option value="price-asc">Ascending Price</option>
                                 <option value="price-des">Descending Price</option>
                                 <option value="name-a-z">Name: A - Z</option>
@@ -133,10 +133,12 @@
 
                         <c:forEach items="${products}" var="product">
 
-                            <div id="product-list" class="product-items col-3">
-                                <div class="product-img-wrap">
-                                    <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
-                                </div>
+                            <div class="product-items col-3">
+                                <a href="ShowProductDetailUserController?product_id=${product.productID}">
+                                    <div class="product-img-wrap">
+                                        <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
+                                    </div>
+                                </a>
                                 <div class="product-name">
                                     ${product.name}
                                 </div>
@@ -146,15 +148,9 @@
                             </div>
 
                         </c:forEach>
-
-
-
-                        <!--Finish Testing area-->
-
-
-                        <!-- Move to next page -->
-
+                        
                     </div>
+
                     <nav aria-label="..." class="pagination-container">
                         <ul class="pagination">
                             <li class="page-item">
@@ -178,12 +174,13 @@
                             </li>
                         </ul>
                     </nav>
+
                 </div>
             </div>
         </div>
 
         <jsp:include page="components/footer.jsp" />
-
         <script src="assets/js/SortProduct.js"></script>
+
     </body>
 </html>

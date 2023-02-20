@@ -15,7 +15,7 @@
             <li class="utility-item">
                 <a href="login.jsp" class="header-icon"><img src="assets/font/account_circle_black_24dp.svg" alt=""></a>
             </li>
-            <li class="utility-item">
+            <li class="utility-item js-search-btn">
                 <a class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
             </li>
             <li class="utility-item">
@@ -43,7 +43,49 @@
             <a class="header-nav-link" href="#">
                 <li class="main-menu-item">Sale</li>
             </a>
-
         </ul>
     </div>
+    <div class="search-box-container js-modal">
+        <div class="search-box js-modal-container">
+            <div class="search-box-header">
+                <div class="search-title">
+                    SEARCH PRODUCT
+                </div>
+
+                <div class="search-box-exit js-modal-close">
+                    <img src="assets/font/close_black_24dp.svg" style="width: 100%;" alt="Close">
+                </div>
+            </div>
+            <div class="search-wrapper">
+                <input class="search-input-real-time" type="text" placeholder="Search..."/>
+                <img class="search-submit-button" src="assets/font/search_black_24dp.svg" alt="Search">
+            </div>
+        </div>
+    </div>
+    <!-- Hiện Search Modal -->
+    <script>
+        const searchBtns = document.querySelectorAll('.js-search-btn');
+        const modal = document.querySelector('.js-modal');
+        const modalContainer = document.querySelector('.js-modal-container');
+        const modalClose = document.querySelector('.js-modal-close');
+
+        function showSearchModal() {
+            modal.classList.add('open');
+        }
+        function hideSearchModal() {
+            modal.classList.remove('open');
+        }
+
+        for (const buyBtn of searchBtns) {
+            buyBtn.addEventListener('click', showSearchModal);
+        }
+
+        modalClose.addEventListener('click', hideSearchModal);
+
+        modal.addEventListener('click', hideSearchModal);
+
+        modalContainer.addEventListener('click', function (event) {
+            event.stopPropagation();
+        });
+    </script>
 </header>

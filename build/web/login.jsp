@@ -4,6 +4,7 @@
     Author     : thaiq
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,9 +24,14 @@
     <body>
         <div class="wrapper">
 
-            <jsp:include page="components/header.jsp" />          
-
-            <div class="login-signup-container row">
+            <jsp:include page="components/header.jsp" />  
+            <c:if test="${sessionScope.LOGIN_USER.roleID == 1}">
+                <c:redirect url="http://localhost:8080/AmoraShop/ShowUserController"></c:redirect>
+            </c:if>
+            <c:if test="${sessionScope.LOGIN_USER != null}">
+                <c:redirect url="user.jsp"></c:redirect>
+            </c:if>
+     <div class="login-signup-container row">
                 <div class="login-signup-block col-6 ">
                     <div class="img-container">
                         <img src="assets/images/LogoDoneEdited.png" alt="" class="login-page-logo">
@@ -61,11 +67,11 @@
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
 
-<!--                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #4585f4"
-                           href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
-                           role="button">
-                            <i class="fab fa-facebook-f me-2"></i>Continue with Google
-                        </a>-->
+                        <!--                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #4585f4"
+                                                   href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
+                                                   role="button">
+                                                    <i class="fab fa-facebook-f me-2"></i>Continue with Google
+                                                </a>-->
                         <a class="btn btn-primary btn-lg btn-block" style="background-color: #4285f4" 
                            href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
                            role="button">
@@ -75,11 +81,11 @@
                     </form>
                 </div>
             </div>
-                        
+
             <jsp:include page="components/footer.jsp" />
 
-            
+
         </div>
     </body>
-    
+
 </html>
