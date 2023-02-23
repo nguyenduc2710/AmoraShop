@@ -15,20 +15,11 @@ input[type=number] {
     
 }
 
-.products-banner{
-    height: 32rem;
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    margin: auto;
-}
 
 .bread-crumb-container {
     display: block;
     padding: 0 15px;
     background-color: #f5f5f5;
-    border-top: 1px solid rgba(1, 1, 1, 0.4);
-    border-bottom: 1px solid rgba(1, 1, 1, 0.4);
 }
 
 .bread-crumbs {
@@ -51,6 +42,14 @@ input[type=number] {
     margin: 0 6px;
 }
 
+.products-banner{
+    height: 32rem;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    margin: auto;
+}
+
 .products-body{
     position: relative;
     margin-top: 5rem;
@@ -62,7 +61,7 @@ input[type=number] {
     top: 0;
 }
 
-Tree node css
+ Tree node css 
 #tree {
     font-family: sans-serif;
     font-size: 14px;
@@ -100,7 +99,7 @@ Tree node css
     max-height: 500px;
 }
 
-
+ End of tree node 
 .main-filter-container{
     text-decoration: none;
     color: black;
@@ -119,14 +118,15 @@ Tree node css
 .category-item {
     font-size: 1.2rem;
     line-height: 26px;
-    color: rgba(0,0,0,0.8);
+    margin-left: 20px;
     text-decoration: none;
+    color: rgba(0,0,0,0.8);
     margin-left: 20px;
 }
 
 .category-item:hover {
-    color: black;
     font-weight: 600;
+    color: black;
 }
 
 .product-list-header {
@@ -134,16 +134,19 @@ Tree node css
     justify-content: space-between;
     align-items: center;
     padding: 0 15px 0 0;
+    margin-bottom: 14px;
 }
 
 .category-title {
     font-size: 3rem;
+
     font-weight: 700;
     color: var(--main-page-color);
 }
 
 .category-sort-options {
     font-size: 1.4rem;
+
 }
 
 .product-list-container {
@@ -159,13 +162,18 @@ Tree node css
     margin-bottom: 20px;
 }
 
+.product-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 .pagination {
     text-align: center;
     align-items: center;
     justify-content: center;
     height: 5rem;
 }
-
+ netbean pagination css 
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
@@ -179,6 +187,20 @@ Tree node css
     min-width: 3rem;
 }
 
+ VS css 
+.page-node {
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: black;
+    margin: 5px 5px 0;
+}
+
+.next-page-node img {
+    width: 20px;
+    padding-top: 2px;
+    margin-left: 2rem;
+}
 
  -----------Product Detail Css----------- 
 .product-detail-container {
@@ -186,9 +208,10 @@ Tree node css
     margin-bottom: 40px;
 }
 
-.product-detail-wrap{
+.product-detail-wrap {
     padding: 0;
-    width: 46.5rem;
+    width: 42.5rem;
+    height: 42.5rem !important;
 }
 
 .product-wrap {
@@ -258,9 +281,81 @@ Tree node css
 
 .product-detail-des p {
     font-size: 1.6rem;
+}
+
+ Search product by name page css 
+
+
+.search-product-container {
+    padding: 30px 0 0;
+}
+
+.search-heading-page {
+    text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+}
+
+.header-text-container::after {
+    content: "";
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid black;
+    width: 8rem;
+}
+
+.search-product-title {
+    color: var(--main-page-color);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 2;
+}
+
+.search-quantity-result{
+    font-size: 14px;
+}
+
+.search-form-container {
+    position: absolute;
+    top: 58%;
+    right: 5%;
+}
+
+.search-by-name-wrapper {
+    position: relative;
+}
+
+.search-product-name {
+    outline: none;
+    font-size: 16px;
+    padding: 6px 26px 6px 10px;
+}
+
+.search-submit-btn {
+    position: absolute;
+    left: 84%;
+    bottom: 14%;
+    width: 30px;
+    height: 30px;
+}
+.search-submit-btn:hover {
+    rotate: -10deg;
+}
+
+.searched-content {
+    font-size: 1.4rem;
+    margin: 30px 16px 30px;
+}
+
+.product-items {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }*/
 
-/* This will hide the updown arrow of input type number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -569,7 +664,7 @@ input[type=number] {
     width: 8rem;
 }
 
-.search-product-title {
+.header-page-title {
     color: var(--main-page-color);
     font-size: 32px;
     font-weight: 700;
@@ -577,6 +672,10 @@ input[type=number] {
 }
 
 .search-quantity-result{
+    font-size: 14px;
+}
+
+.header-quantity-result{
     font-size: 14px;
 }
 
@@ -616,4 +715,40 @@ input[type=number] {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+/* Search product page with no value css */
+
+.search-by-name-wrapper-noval {
+    margin: 30px 0 27px 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.search-by-name-wrapper-noval .search-product-name {
+    width: 55%;
+    height: 55px;
+    display: flex;
+    background-color: #ededed;
+    border: none;
+}
+
+.search-by-name-wrapper-noval .search-submit-btn {
+    top: 0%;
+    left: 73.5%;
+    height: 55px;
+    width: 55px;
+    padding: 11px;
+    background-color: rgb(37, 42, 43);
+    rotate: none;
+}
+
+.search-error-note {
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0 20px;
+    line-height: 1.8;
+    color: rgb(202 29 29);
 }

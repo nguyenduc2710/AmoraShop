@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import product.ProductDAO;
 import product.ProductDTO;
+import product.ProductImageDTO;
 
 /**
  *
@@ -21,32 +22,37 @@ import product.ProductDTO;
 public class UpdateProductController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "admin.jsp";
+    private static final String SUCCESS = "/ShowProductAdminController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-//        try {
-//            int productID = Integer.parseInt(request.getParameter("productID"));
-//            String pName = request.getParameter("pName");
-//            int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
-//            String pStatus = request.getParameter("pStatus");
-//            String pDescrip = request.getParameter("pDescrip");
-//            String pCapacity = request.getParameter("pCapacity");
-//            String pBrand = request.getParameter("pBrand");
-//            float pPrice = Float.parseFloat(request.getParameter("pPrice"));
-//            int pCategory = Integer.parseInt(request.getParameter("pCategory"));
-//            
-//            ProductDAO dao = new ProductDAO();
-//            boolean checkUpdate = dao.update(pName, pQuantity, pStatus, pDescrip, pCapacity, pBrand, pPrice, pCategory, productID);
-//            url = SUCCESS;
-//
-//        } catch (Exception e) {
-//            log("Error at Update Controller: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+         String url = ERROR;
+        try {
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            String pName = request.getParameter("pName");
+            int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
+            String pStatus = request.getParameter("pStatus");
+            String pDescrip = request.getParameter("pDescrip");
+            String pCapacity = request.getParameter("pCapacity");
+            String pBrand = request.getParameter("pBrand");
+            float pPrice = Float.parseFloat(request.getParameter("pPrice"));
+            int pCategory = Integer.parseInt(request.getParameter("pCategory"));
+            String pImage = request.getParameter("pImage");
+            ProductDAO dao = new ProductDAO();
+            ProductDTO product = new ProductDTO(productID, pName, pQuantity, pStatus, pDescrip, pCapacity, pBrand, pPrice, pCategory, pImage);
+            ProductImageDTO productImage = new ProductImageDTO(productID, pImage, productID);
+            boolean checkUpdate = dao.update(product, productImage);
+            if (checkUpdate) {
+                url = SUCCESS;
+            }
+        } catch (Exception e) {
+            log("Error at Update Controller: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

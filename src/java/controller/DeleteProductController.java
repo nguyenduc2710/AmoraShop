@@ -19,30 +19,30 @@ import product.ProductDAO;
  */
 public class DeleteProductController extends HttpServlet {
    
-    private static final String ERROR = "admin.jsp";
-    private static final String SUCCESS = "admin.jsp";
+   private static final String ERROR = "admin.jsp";
+    private static final String SUCCESS = "ShowProductAdminController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
          String url = ERROR;
-//        try {
-//            String productID = request.getParameter("productID");
-////            System.out.println("product id la: "+productID);
-//            ProductDAO dao = new ProductDAO();
-//            boolean checkDelete = dao.delete(productID);
-////            System.out.println("ket qua"+checkDelete);
-//            if (checkDelete) {
-//                url = SUCCESS;
-////                System.out.println("Delete Success");
-//            } else {
-//                request.setAttribute("ERROR", "Delete Fail!");
-//            }
-//
-//        } catch (Exception e) {
-//            log("Error at DeleteController: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+        try {
+            String productID = request.getParameter("productID");
+//            System.out.println("product id la: "+productID);
+            ProductDAO dao = new ProductDAO();
+            boolean checkDelete = dao.delete(productID);
+//            System.out.println("ket qua"+checkDelete);
+            if (checkDelete) {
+                url = SUCCESS;
+//                System.out.println("Delete Success");
+            } else {
+                request.setAttribute("ERROR", "Delete Fail!");
+            }
+
+        } catch (Exception e) {
+            log("Error at DeleteController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

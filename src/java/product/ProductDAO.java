@@ -15,6 +15,12 @@ import utils.DBUtils;
  */
 public class ProductDAO {
 
+    public List<ProductDTO> items;
+
+    public List<ProductDTO> getItems() {
+        return items;
+    }
+    
     private static final String GET_ALL_PRODUCT = "SELECT [Product].*, [ProductImage].image\n"
             + "FROM [Product]\n"
             + "INNER JOIN [ProductImage] ON [Product].product_id = [ProductImage].product_id;";
@@ -56,6 +62,215 @@ public class ProductDAO {
             + "INNER JOIN [ProductImage] ON [Product].product_id = [ProductImage].product_id\n"
             + "INNER JOIN [Category] ON [Product].category_id = [Category].category_id\n"
             + "WHERE [Product].product_id = ?;";
+    
+    //play ground 
+    private static final String SEARCH_NAME_PRODUCT_BY_PAGGINGSIZE = "SELECT [Product].*, [ProductImage].image\n"
+            + "FROM [Product]\n"
+            + "INNER JOIN [ProductImage] ON [Product].product_id = [ProductImage].product_id\n"
+            + "WHERE [Product].product_name LIKE ?\n"
+            + "order by price offset (?-1)*? row fetch next ? rows only";
+    private static final String GET_PRODUCT_BY_ID = "SELECT [Product].*, [ProductImage].image FROM [Product] INNER JOIN [ProductImage] ON [Product].product_id = [ProductImage].product_id where [Product].product_id = ?";
+    
+    private static final String COUNT_PRODUCT_SEARCH_BY_NAME = "select count(product_id) from Product WHERE product_name LIKE ?";
+    
+    public int getProductPage(String prdName) throws SQLException {
+
+        ProductDTO product = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_PRODUCT_SEARCH_BY_NAME);
+                ptm.setString(1, "%" + prdName + "%");
+                
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
+    
+    
+     public boolean updateQuantity(String id, int quantity, int userQuans) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        boolean result = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE [dbo].[Product]\n"
+                        + "   SET [quantity] = ?\n"
+                        + "     WHERE product_id = ?";
+                st = conn.prepareStatement(sql);
+                st.setInt(1, quantity - userQuans);
+                st.setString(2, id);
+                int effectedRow = st.executeUpdate();
+                if (effectedRow > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        }
+        return result;
+    }
+    
+    public void showAllProducts() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                st = con.prepareStatement(GET_ALL_PRODUCT);
+                rs = st.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("product_id");
+                    String name = rs.getString("product_name");
+                    int quantity = rs.getInt("quantity");
+                    String status = rs.getString("status");
+                    String description = rs.getString("description");
+                    String capacity = rs.getString("capacity");
+                    String brand = rs.getString("brand");
+                    float price = rs.getFloat("price");
+                    int categoryID = rs.getInt("category_id");
+                    String image = rs.getString("image");
+                    ProductDTO dto = new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image);
+                    if (this.items == null) {
+                        this.items = new ArrayList<>();
+                    }
+                    this.items.add(dto);
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        }
+
+    }
+    
+    
+    public ProductDTO getProductByIdTypeString(String product_id) throws SQLException {
+        ProductDTO product = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_PRODUCT_BY_ID);
+                ptm.setString(1, product_id);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("product_id");
+                    String name = rs.getString("product_name");
+                    int quantity = rs.getInt("quantity");
+                    String status = rs.getString("status");
+                    String description = rs.getString("description");
+                    String capacity = rs.getString("capacity");
+                    String brand = rs.getString("brand");
+                    float price = rs.getFloat("price");             
+                    int categoryID = rs.getInt("category_id");
+                    String image = rs.getString("image");
+                   product = new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return product;
+    }
+    
+    public List<ProductDTO> SearchNameProductsWithPagging(String prdName, int page, int PAGE_SIZE) throws SQLException {
+        List<ProductDTO> list = new ArrayList<>();
+        ProductDTO product = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_NAME_PRODUCT_BY_PAGGINGSIZE);
+                ptm.setString(1, "%" + prdName + "%");
+                ptm.setInt(2, page);
+                ptm.setInt(3, PAGE_SIZE);
+                ptm.setInt(4, PAGE_SIZE);
+                
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("product_id");
+                    String name = rs.getString("product_name");
+                    int quantity = rs.getInt("quantity");
+                    String status = rs.getString("status");
+                    String description = rs.getString("description");
+                    String capacity = rs.getString("capacity");
+                    String brand = rs.getString("brand");
+                    float price = rs.getFloat("price");
+                    int categoryID = rs.getInt("category_id");
+                    String image = rs.getString("image");
+                    list.add(new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    //End of playground
 
     public List<ProductDTO> getProductDetailByID(String product_id) throws SQLException, ClassNotFoundException {
 
@@ -246,8 +461,7 @@ public class ProductDAO {
                     return rs.getInt(1);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
         } finally {
             if (rs != null) {
                 rs.close();
@@ -287,7 +501,7 @@ public class ProductDAO {
                     float price = rs.getFloat("price");
                     String image = rs.getString("image");
                     int categoryID = rs.getInt("category_id");
-//                    product = new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, name, image, categoryID);
+                    product = new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image);
                 }
             }
         } catch (Exception e) {

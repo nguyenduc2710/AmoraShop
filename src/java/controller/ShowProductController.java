@@ -4,8 +4,8 @@
  */
 package controller;
 
-import controller.category.CategoryDAO;
-import controller.category.CategoryDTO;
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

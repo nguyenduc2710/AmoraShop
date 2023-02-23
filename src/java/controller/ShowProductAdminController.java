@@ -5,8 +5,8 @@
 
 package controller;
 
-import controller.category.CategoryDAO;
-import controller.category.CategoryDTO;
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -40,7 +40,7 @@ public class ShowProductAdminController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             List<ProductDTO> listProducts = dao.getAllProducts();
             HttpSession session = request.getSession();
-                session.setAttribute("PRODUCT", listProducts);
+                request.setAttribute("PRODUCT", listProducts);
         } catch (SQLException ex) {
             Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

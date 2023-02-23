@@ -55,11 +55,12 @@
                             ${productDto.price}$
                         </div>
 
-                        <form class="buy-area" action="">
+                        <form class="buy-area" action="AddToCartServlet">
                             <div class="select-quantity-area">
                                 <input type="button" value="-" class="quantity-btn">
                                 <input type="text" id="quantity" name="quantity" value="1" class="quantity-selector">
                                 <input type="button" value="+" class="quantity-btn">
+                                <input type="hidden" value="${productDto.productID}" name="productID"/>
                             </div>
                             <button type="submit" class="add-to-cart-btn button-57">
                                 <span>ADD TO CART</span>   

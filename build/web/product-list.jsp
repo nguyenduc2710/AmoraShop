@@ -89,7 +89,6 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <!--                                            <th>ID</th>-->
                                             <th>Name</th>
                                             <th>Quantity</th>
                                             <th>Status</th>
@@ -104,9 +103,8 @@
                                     </thead>
 
                                     <tbody>
-                                        <c:forEach items="${sessionScope.PRODUCT}" var="product">
+                                        <c:forEach items="${requestScope.PRODUCT}" var="product">
                                             <tr>
-<!--                                                <td>${product.productID}</td>-->
                                                 <td>${product.name}</td>
                                                 <td>${product.quantity}</td>
                                                 <td>${product.status}</td>
@@ -123,9 +121,24 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="#">Update</a>
-                                                    <a href="#">Delete</a>
+                                                    <!--update-->
+                                                    <c:url var="update" value="MainController">
+                                                        <c:param name="action" value="Detail"></c:param>
+                                                        <c:param name="productID" value="${product.productID}"></c:param>
+
+                                                    </c:url>
+                                                    <a href="${update}">Update</a> 
+                                                    
+                                                    <!--delete-->
+                                                    <c:url var="delete" value="MainController">
+                                                        <c:param name="action" value="Delete"></c:param>
+                                                        <c:param name="productID" value="${product.productID}"></c:param>
+
+                                                    </c:url>
+                                                    <a href="${delete}">Delete</a>
                                                 </td>
+
+                                               
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -133,6 +146,7 @@
                             </div>
                         </div>
                     </div>
+                    <a href="create-product.jsp">Add new product</a>
                 </main>
 
             </div>

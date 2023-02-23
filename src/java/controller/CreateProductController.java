@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import product.ProductDAO;
 import product.ProductDTO;
+import product.ProductImageDTO;
 
 /**
  *
@@ -21,31 +22,31 @@ import product.ProductDTO;
 public class CreateProductController extends HttpServlet {
    
      private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "admin.jsp";
+    private static final String SUCCESS = "/ShowProductAdminController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-//        try {
-//            ProductDAO dao = new ProductDAO();
-//            String productName = request.getParameter("newproductname");
-//            int quantity = Integer.parseInt(request.getParameter("newquantity"));
-//            String status = request.getParameter("newstatus");
-//            String description = request.getParameter("newdescription");
-//            String capacity = request.getParameter("newcapacity");
-//            String brand = request.getParameter("newbrand");
-//            float price = Float.parseFloat(request.getParameter("newprice"));
-//            int categoryID = Integer.parseInt(request.getParameter("newcategoryid"));
-//            ProductDTO product = new ProductDTO(0, productName, quantity, status, description, capacity, brand, price, categoryID);
-//            boolean checkInsert = dao.insert(product);
-//            if (checkInsert) {
-//                url = SUCCESS;
-//            }
-//        } catch (Exception e) {
-//            log("Error at CreateController: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+        try {
+            ProductDAO dao = new ProductDAO();
+            String productName = request.getParameter("newproductname");
+            int quantity = Integer.parseInt(request.getParameter("newquantity"));
+            String status = request.getParameter("newstatus");
+            String description = request.getParameter("newdescription");
+            String capacity = request.getParameter("newcapacity");
+            String brand = request.getParameter("newbrand");
+            float price = Float.parseFloat(request.getParameter("newprice"));
+            int categoryID = Integer.parseInt(request.getParameter("newcategoryid"));
+            String image = request.getParameter("newimage");
+            ProductImageDTO productImage = new ProductImageDTO(categoryID, brand, categoryID);
+            ProductDTO product = new ProductDTO(0, productName, quantity, status, description, capacity, brand, price, categoryID, image);
+            dao.insert(product, productImage);
+            url = SUCCESS;
+        } catch (Exception e) {
+            log("Error at CreateController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

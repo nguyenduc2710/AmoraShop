@@ -5,15 +5,23 @@
 
 package controller;
 
+import category.CategoryDTO;
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import product.ProductDAO;
 import product.ProductDTO;
+import user.UserDTO;
 
 /**
  *
@@ -22,26 +30,52 @@ import product.ProductDTO;
 public class SearchProductController extends HttpServlet {
    
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "product-list.jsp";
+    private static final String SUCCESS = "user-search-prd-page.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        String url = ERROR;
-//        try {
-//            String search = request.getParameter("search");
-//            ProductDAO dao = new ProductDAO();
-//            List<ProductDTO> listProduct = dao.searchProducts(search);
-//            if (!listProduct.isEmpty()) {
-//                request.setAttribute("products", listProduct);
-//                url = SUCCESS;
-//            }
-//
-//        } catch (Exception e) {
-//            log("ERROR at ShowProductsController: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
-    } 
+        String url = SUCCESS;
+//        String prdName = request.getParameter("prdName");
+        try {
+            final int PAGE_SIZE = 12;
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            String prdName = request.getParameter("prdName");
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
+            ProductDAO productDAO = new ProductDAO();
+            List<ProductDTO> listProductByName = productDAO.SearchNameProductsWithPagging(prdName, page, PAGE_SIZE);
+            //tinh tong so san pham trongdatabase r tra ve so trang 
+            //de hien len man hinh jsp 
+            int totalProducts = productDAO.getProductPage(prdName);
+            int totalPage = totalProducts / PAGE_SIZE;
+            //chia lay du totalProducts neu co du thi + 1 page cho totalPage
+            if (totalProducts % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        
+            request.setAttribute("page", page);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("totalProducts", totalProducts);
+            request.setAttribute("productListByName", listProductByName);
+
+            List<CategoryDTO> ProductSearchResult = new CategoryDAO().getAllCategory();
+            request.setAttribute("PRODUCT_NAME_RESULT", ProductSearchResult);
+
+            if(listProductByName.isEmpty()){
+                request.setAttribute("SearchErrorNote", "No result!!!");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

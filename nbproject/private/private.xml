@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/SearchProductController.java</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/components/header.jsp</file>
-            <file>file:/D:/JavaWeb/AmoraShop/web/product-detail-user-page.jsp</file>
-            <file>file:/D:/JavaWeb/AmoraShop/web/homePage.jsp</file>
+            <file>file:/D:/JavaWeb/AmoraShop/web/components/footer.jsp</file>
             <file>file:/D:/JavaWeb/AmoraShop/src/java/product/ProductDAO.java</file>
-            <file>file:/D:/JavaWeb/AmoraShop/web/assets/js/SortProduct.js</file>
-            <file>file:/D:/JavaWeb/AmoraShop/web/products-user-page.jsp</file>
-            <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/ShowProductDetailUserController.java</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/assets/css/products.css</file>
-            <file>file:/D:/JavaWeb/AmoraShop/web/assets/css/home.css</file>
+            <file>file:/D:/JavaWeb/AmoraShop/web/user-search-prd-page.jsp</file>
         </group>
     </open-files>
 </project-private>

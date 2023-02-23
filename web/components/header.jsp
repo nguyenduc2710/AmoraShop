@@ -16,10 +16,13 @@
                 <a href="login.jsp" class="header-icon"><img src="assets/font/account_circle_black_24dp.svg" alt=""></a>
             </li>
             <li class="utility-item js-search-btn">
-                <a class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
+                <a href="user-search-prd-page.jsp" class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
             </li>
             <li class="utility-item">
                 <a class="header-icon"><img src="assets/font/shopping_bag_black_24dp.svg" alt=""></a>
+                <a class="btn btn-outline-dark" href="ViewCartController">
+                ${sessionScope.CART.items.size()}    
+                </a>
             </li>
         </ul>
     </div>
@@ -45,7 +48,7 @@
             </a>
         </ul>
     </div>
-    <div class="search-box-container js-modal">
+<!--    <div class="search-box-container js-modal">
         <div class="search-box js-modal-container">
             <div class="search-box-header">
                 <div class="search-title">
@@ -62,7 +65,7 @@
             </div>
         </div>
     </div>
-    <!-- Hiện Search Modal -->
+     Hiện Search Modal 
     <script>
         const searchBtns = document.querySelectorAll('.js-search-btn');
         const modal = document.querySelector('.js-modal');
@@ -87,5 +90,5 @@
         modalContainer.addEventListener('click', function (event) {
             event.stopPropagation();
         });
-    </script>
+    </script>-->
 </header>

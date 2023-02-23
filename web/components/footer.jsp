@@ -8,7 +8,7 @@
 <footer class="footer">
     <div class="footer-top row">
 
-        <div class="footer-inner-block col-4">
+        <div class="footer-inner-block col-3">
             <h4 class="footer-inner-title">Introduction</h4>
             <div class="footer-container">
                 <div class="inner-footer-text">
@@ -21,12 +21,12 @@
             </div>
         </div>
 
-        <div class="footer-inner-block col-8">
+        <div class="footer-inner-block col-5">
             <h4 class="footer-inner-title">Information</h4>
             <div class="footer-container">
                 <div class="inner-footer-text">
                     <i class="ti-headphone-alt"></i>
-                    Phone: 0902 Ngày mai nói tiếp
+                    Phone: 08369xxxxx
                 </div>
                 <div class="inner-footer-text">
                     Gmail: hongducnguyenho0@gmail.com
@@ -38,6 +38,11 @@
             </div>
 
         </div>
+        
+        <div style="background-color: rgba(0,0,0,0.2)" class="col-4">
+            Google map here
+        </div>
+        
     </div>
     <div class="copyright">
         Copyright © 2023 Amora Shop. Powered by SWP391 FPT University

@@ -25,9 +25,11 @@ public class MainController extends HttpServlet {
     private static final String DELETE_CONTROLLER = "DeleteProductController";
     private static final String UPDATE = "Update";
     private static final String UPDATE_CONTROLLER = "UpdateProductController";
+    private static final String DETAIL = "Detail";
+    private static final String DETAIL_PRODUCT_CONTROLLER = "DetailProductController";
     private static final String CREATE = "Create";
     private static final String CREATE_CONTROLLER = "CreateProductController";
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,13 +45,14 @@ public class MainController extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-
             if (SEARCH.equals(action)) {
                 url = SEARCH_CONTROLLER;
             } else if (DELETE.equals(action)) {
                 url = DELETE_CONTROLLER;
             } else if (UPDATE.equals(action)) {
                 url = UPDATE_CONTROLLER;
+            }else if (DETAIL.equals(action)) {
+                url = DETAIL_PRODUCT_CONTROLLER;
             } else if (CREATE.equals(action)) {
                 url = CREATE_CONTROLLER;
             } else {

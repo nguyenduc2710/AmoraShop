@@ -47,20 +47,20 @@ public class UpdateProfileController extends HttpServlet {
         String newPhone = request.getParameter("newPhone");
         String newAddress = request.getParameter("newAddress");
 
-        String folderName = "images";
-
-        String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
-
-        File dir = new File(uploadPath);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        Part filePart = request.getPart("image");
-        String fileName = filePart.getSubmittedFileName();
-        String path = folderName + File.separator + fileName;
-        Timestamp added_date = new Timestamp(System.currentTimeMillis());
-        InputStream is = filePart.getInputStream();
-        Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+//        String folderName = "images";
+//
+//        String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+//
+//        File dir = new File(uploadPath);
+//        if (!dir.exists()) {
+//            dir.mkdirs();
+//        }
+//        Part filePart = request.getPart("image");
+//        String fileName = filePart.getSubmittedFileName();
+//        String path = folderName + File.separator + fileName;
+//        Timestamp added_date = new Timestamp(System.currentTimeMillis());
+//        InputStream is = filePart.getInputStream();
+//        Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
 
         HttpSession session = request.getSession();
         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -70,8 +70,8 @@ public class UpdateProfileController extends HttpServlet {
             loginUser.setFullName(newFullName);
             loginUser.setGender(newGender);
             loginUser.setPhoneNumber(newPhone);
-            loginUser.setImage(path);
-            dao.updateUserByEmail(newFullName,newGender, newPhone, newAddress, path, email);
+//            loginUser.setImage(path);
+            dao.updateUserByEmail(newFullName,newGender, newPhone, newAddress,"https://i.pinimg.com/236x/e4/21/92/e42192b0682ede9d80d92260fb5e17cd.jpg", email);
             session.setAttribute("LOGIN_USER", loginUser);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         }
