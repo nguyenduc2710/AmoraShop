@@ -27,12 +27,12 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-<!--            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="ShowUserController" method="GET">
-                <div class="input-group">
-                    <input class="form-control" name="name" type="text" placeholder="Search..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit" value="search"><i class="fas fa-search"></i></button>
-                </div>
-            </form>-->
+            <!--            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="ShowUserController" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" name="name" type="text" placeholder="Search..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                                <button class="btn btn-primary" id="btnNavbarSearch" type="submit" value="search"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>-->
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -58,11 +58,11 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
                                     <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
-                                    
+
                                 </nav>
                             </div>
 
-                            
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -133,8 +133,14 @@
 
 
                                                 <td>
-                                                    <a href="#">Update</a><br>
-                                                    <a href="#">Delete</a>
+                                                    <c:choose>
+                                                        <c:when test="${user.roleID == 1}">
+
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="UserDetailController?userID=${user.userID}">Update</a>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -144,7 +150,7 @@
                         </div>
                     </div>
                 </main>
-                
+
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -1,62 +1,50 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package paypal;
 
-import category.CategoryDAO;
-import category.CategoryDTO;
+import Cart.CartObj;
+import com.paypal.base.rest.PayPalRESTException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import product.ProductDAO;
+import java.util.Map;
 import product.ProductDTO;
 
 /**
  *
- * @author Admin
+ * @author thaiq
  */
-@WebServlet(name = "ShowProductDetailUserController", urlPatterns = {"/ShowProductDetailUserController"})
-public class ShowProductDetailUserController extends HttpServlet {
+public class AuthorizePayment extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS_USER_PRODUCT_DETAIL_PAGE = "product-detail-user-page.jsp";
+    private static final long serialVersionUID = 1L;
 
+    public AuthorizePayment() {
+    }
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        String product_id = request.getParameter("product_id");
-        
+        String name = request.getParameter("name");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        float total = Float.parseFloat(request.getParameter("total"));
+
+        OrderDetail orderDetail = new OrderDetail(name, quantity, total);
         try {
-            ProductDAO dao = new ProductDAO();
-            HttpSession session = request.getSession();
-            List<ProductDTO> result = dao.getProductDetailByID(product_id);
-            if(result.isEmpty()){
-                log("No data have been retrieved!!!");
-            }else{
-                session.setAttribute("PRODUCT_DETAIL", result);
-                url = SUCCESS_USER_PRODUCT_DETAIL_PAGE;
-            }   
-        } catch(ClassNotFoundException ex){
-            log("ShowProductDetailUserController _ Naming " + ex.getMessage());
-        } catch(SQLException ex){
-            log("ShowProductDetailUserController _ SQL" + ex.getMessage());
-        }
-        finally{
-            request.getRequestDispatcher(url).forward(request, response);
+            PaymentServices paymentServices = new PaymentServices();
+            String approvalLink = paymentServices.authorizePayment(orderDetail);
+            response.sendRedirect(approvalLink);
+        
+
+        } catch (PayPalRESTException ex) {
+            request.setAttribute("errorMessage", ex.getMessage());
+            ex.printStackTrace();
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

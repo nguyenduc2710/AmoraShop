@@ -5,7 +5,6 @@
  */
 package Cart;
 
-import Cart.CartError;
 import Cart.CartObj;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 
 /**
  *

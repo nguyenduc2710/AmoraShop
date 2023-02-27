@@ -38,13 +38,36 @@
             </div>
 
         </div>
-        
+
         <div style="background-color: rgba(0,0,0,0.2)" class="col-4">
-            Google map here
+            <div id="map"></div>
         </div>
-        
+
     </div>
     <div class="copyright">
         Copyright © 2023 Amora Shop. Powered by SWP391 FPT University
     </div>
+    <style>
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function initMap() {
+            var myLatLng = {lat: 10.84142, lng: 106.81004};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'My Location'
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDc7PnOq3Hxzq6dxeUVaY8WGLHIePl0swY&callback=initMap"></script>
 </footer>

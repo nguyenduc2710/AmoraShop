@@ -23,13 +23,14 @@
     </head>
     <body>
         <div class="wrapper">
-
-            <jsp:include page="components/header.jsp" />  
+            
+            <jsp:include page="components/header.jsp" /> 
             <c:if test="${sessionScope.LOGIN_USER.roleID == 1}">
                 <c:redirect url="http://localhost:8080/AmoraShop/ShowUserController"></c:redirect>
             </c:if>
             <c:if test="${sessionScope.LOGIN_USER != null}">
                 <c:redirect url="user.jsp"></c:redirect>
+                
             </c:if>
      <div class="login-signup-container row">
                 <div class="login-signup-block col-6 ">

@@ -20,7 +20,6 @@ import java.sql.Timestamp;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
 import user.UserDAO;
 import user.UserDTO;
 
@@ -28,7 +27,7 @@ import user.UserDTO;
  *
  * @author long
  */
-@MultipartConfig (fileSizeThreshold = 1024 * 1024 * 10,
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,
         maxFileSize = 1024 * 1024 * 1000,
         maxRequestSize = 1024 * 1024 * 1000)
 public class UpdateUserController extends HttpServlet {
@@ -62,7 +61,7 @@ public class UpdateUserController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             response.setContentType("text/html;charset=UTF-8");
 //            try {
 //                HttpSession session = request.getSession();
@@ -92,8 +91,7 @@ public class UpdateUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
- try{
-     
+        try {
 
             HttpSession session = request.getSession();
 
@@ -109,48 +107,42 @@ public class UpdateUserController extends HttpServlet {
             String email = request.getParameter("email");
             String phoneNumber = request.getParameter("phoneNumber");
             String status = request.getParameter("status");
-      
+
             int roleID = Integer.parseInt(request.getParameter("roleID"));
 
             int userID = Integer.parseInt(request.getParameter("userID"));
 
             String folderName = "images";
-            
-            String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
-            
-            File dir = new File(uploadPath);
-            if(!dir.exists()){
-                dir.mkdirs();
-            }
+
             Part filePart = request.getPart("image");
             String fileName = filePart.getSubmittedFileName();
-            String path = folderName + File.separator + fileName;
-            Timestamp added_date = new Timestamp(System.currentTimeMillis());
-            InputStream is = filePart.getInputStream();
-            Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
-            
-//           
-             if (!address.trim().matches("^[A-Za-z0-9._ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\ ]+$")) {
-                message = "Please enter your Address";
-            }
-            if (message != null) {             
-                response.sendRedirect("UserDetailController?userID=" + userID);
+            String path = "";
+            String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+
+            if (fileName != null && !fileName.isEmpty()) {
+                File dir = new File(uploadPath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+
+                path = folderName + File.separator + fileName;
+
+                InputStream is = filePart.getInputStream();
+                Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
             } else {
-                UserDTO updateUser = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, path);
-
-                 dao.updateUserById(updateUser);
-
-
-                response.sendRedirect("ShowUserController");
+                // Use existing image if file is null
+                UserDTO user = (UserDTO) session.getAttribute("us");
+                path = user.getImage();
             }
 
+            UserDTO updateUser = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, path);
+            dao.updateUserById(updateUser);
 
+            response.sendRedirect("http://localhost:8080/AmoraShop/ShowUserController");
         } catch (Exception ex) {
             log("Error at RegistrationController: " + ex.toString());
         }
     }
-    
-  
 
     /**
      * Returns a short description of the servlet.
