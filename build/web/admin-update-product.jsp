@@ -15,7 +15,7 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
     <body>
-        <form class="form-horizontal" action="MainController" method="POST">
+        <form class="form-horizontal" action="UpdateProductController" enctype="multipart/form-data" method="POST">
             <fieldset>
 
                 <!-- Form Name -->
@@ -40,7 +40,7 @@
 
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="available_quantity">STATUS</label>  
                     <div class="col-md-4">
@@ -71,7 +71,14 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="percentage_discount">BRAND</label>  
                     <div class="col-md-4">
-                        <input id="percentage_discount" name="pBrand" value="${products.brand}"  class="form-control input-md" required="" type="text">
+                        <select name="pBrand" id="pBrand">
+                            <option>${products.brand}</option>
+                            <option value="Gucci">Gucci</option>
+                            <option value="Dior">Dior</option>
+                            <option value="YSL">YSL</option>
+                            <option value="Hermes">Hermes</option>
+                            <option value="Burberry">Burberry</option>
+                        </select>
 
                     </div>
                 </div>
@@ -96,11 +103,10 @@
 
 
                 <!-- File Button --> 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="filebutton">main_image</label>
-                    <div class="col-md-4">
-                        <input id="filebutton" name="pImage" class="input-file" type="text" value="${products.image}" required=""/>
-                    </div>
+                <img src="${sessionScope.products.image}" class="avatar img-circle img-thumbnail"
+                        alt="avatar">
+                <div class="col-md-12"> Image
+                    Choose a file: <input type="file" name="pImage" class="form-control" placeholder="image" value="">
                 </div>
 
 

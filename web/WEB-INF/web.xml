@@ -109,8 +109,20 @@
         <servlet-class>controller.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AuthorizePayment</servlet-name>
-        <servlet-class>paypal.AuthorizePayment</servlet-class>
+        <servlet-name>CreateUserByAdminController</servlet-name>
+        <servlet-class>controller.CreateUserByAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AuthorizePaymentServlet</servlet-name>
+        <servlet-class>paypal.AuthorizePaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckEmailController</servlet-name>
+        <servlet-class>controller.CheckEmailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewPaymentServlet</servlet-name>
+        <servlet-class>paypal.ReviewPaymentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -221,8 +233,20 @@
         <url-pattern>/ViewCartController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AuthorizePayment</servlet-name>
-        <url-pattern>/AuthorizePayment</url-pattern>
+        <servlet-name>CreateUserByAdminController</servlet-name>
+        <url-pattern>/CreateUserByAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthorizePaymentServlet</servlet-name>
+        <url-pattern>/AuthorizePaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckEmailController</servlet-name>
+        <url-pattern>/CheckEmailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewPaymentServlet</servlet-name>
+        <url-pattern>/review_payment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

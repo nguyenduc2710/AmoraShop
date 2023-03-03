@@ -46,15 +46,9 @@ public class PaymentServices {
  
         Payment approvedPayment = requestPayment.create(apiContext);
  
-        String approvalLink = approvedPayment.getLinks().stream()
-            .filter(link -> link.getRel().equals("approval_url"))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No approval URL found"))
-            .getHref();
+        return getApprovalLink(approvedPayment);
 
-    // Use the approval link later in your code
-    System.out.println(approvalLink);
-        return null;
+
  
     }
     
@@ -74,8 +68,8 @@ public class PaymentServices {
     
     private RedirectUrls getRedirectURLs() {
     RedirectUrls redirectUrls = new RedirectUrls();
-    redirectUrls.setCancelUrl("http://localhost:8080/AmoraShop/viewCart.jsp");
-    redirectUrls.setReturnUrl("http://localhost:8080/AmoraShop/success.jsp");
+    redirectUrls.setCancelUrl("http://localhost:8080/AmoraShop/shipping-details.jsp");
+    redirectUrls.setReturnUrl("http://localhost:8080/AmoraShop/review_payment");
      
     return redirectUrls;
 }
@@ -94,11 +88,11 @@ public class PaymentServices {
     return approvalLink;
 }
     private List<Transaction> getTransactionInformation(OrderDetail orderDetail) {
-        String total = String.valueOf(orderDetail.getTotal());
-        String quantity = String.valueOf(orderDetail.getQuantity());
+    String total = String.valueOf(orderDetail.getTotalPrice());
     Details details = new Details();
-    details.setShipping(orderDetail.getProductName());
+    details.setShipping("0");
     details.setSubtotal(total);
+    details.setTax("0");
     
  
     Amount amount = new Amount();
@@ -108,17 +102,18 @@ public class PaymentServices {
  
     Transaction transaction = new Transaction();
     transaction.setAmount(amount);
-    transaction.setDescription(orderDetail.getProductName());
+    transaction.setDescription(orderDetail.getProductID());
      
     ItemList itemList = new ItemList();
     List<Item> items = new ArrayList<>();
      
     Item item = new Item();
     item.setCurrency("USD");
-    item.setName(orderDetail.getProductName());
+    item.setName(orderDetail.getProductID());
     item.setPrice(total);
+    item.setTax("0");
+    item.setQuantity("1");
 
-    item.setQuantity(quantity);
      
     items.add(item);
     itemList.setItems(items);

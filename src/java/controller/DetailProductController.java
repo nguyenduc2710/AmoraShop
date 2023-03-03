@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.apache.catalina.Session;
 import product.ProductDAO;
 import product.ProductDTO;
 
@@ -37,10 +39,11 @@ public class DetailProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             int productID = Integer.parseInt(request.getParameter("productID"));
             ProductDAO product = new ProductDAO();
             ProductDTO p = product.getProductById(productID);
-            request.setAttribute("products", p);
+            session.setAttribute("products", p);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at CreateController: " + e.toString());

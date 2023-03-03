@@ -7,10 +7,17 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import product.ProductDAO;
 import product.ProductDTO;
 import product.ProductImageDTO;
@@ -19,6 +26,11 @@ import product.ProductImageDTO;
  *
  * @author thaiq
  */
+
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 1000,
+        maxRequestSize = 1024 * 1024 * 1000)
 public class UpdateProductController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
@@ -29,6 +41,7 @@ public class UpdateProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             int productID = Integer.parseInt(request.getParameter("productID"));
             String pName = request.getParameter("pName");
             int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
@@ -37,12 +50,30 @@ public class UpdateProductController extends HttpServlet {
             String pCapacity = request.getParameter("pCapacity");
             String pBrand = request.getParameter("pBrand");
             float pPrice = Float.parseFloat(request.getParameter("pPrice"));
-            int pCategory = Integer.parseInt(request.getParameter("pCategory"));
-            String pImage = request.getParameter("pImage");
+            int pCategory = Integer.parseInt(request.getParameter("pCategory"));  
+            System.out.println(session.getAttribute("products"));
+            String folderName = "images";
+            Part filePart = request.getPart("pImage");
+            String fileName = filePart.getSubmittedFileName();
+            String path = "";
+            String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+            if (fileName != null && !fileName.isEmpty()) {
+                File dir = new File(uploadPath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                path = folderName + File.separator + fileName;
+                InputStream is = filePart.getInputStream();
+                Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                // product existing image if file is null
+                ProductDTO product = (ProductDTO) session.getAttribute("products");
+                path = product.getImage();
+            }
             ProductDAO dao = new ProductDAO();
-            ProductDTO product = new ProductDTO(productID, pName, pQuantity, pStatus, pDescrip, pCapacity, pBrand, pPrice, pCategory, pImage);
-            ProductImageDTO productImage = new ProductImageDTO(productID, pImage, productID);
-            boolean checkUpdate = dao.update(product, productImage);
+            ProductDTO product2 = new ProductDTO(productID, pName, pQuantity, pStatus, pDescrip, pCapacity, pBrand, pPrice, pCategory, path);
+            ProductImageDTO productImage = new ProductImageDTO(0, path, 0);
+            boolean checkUpdate = dao.update(product2, productImage);
             if (checkUpdate) {
                 url = SUCCESS;
             }

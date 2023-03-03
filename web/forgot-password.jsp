@@ -85,6 +85,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
+                            <h1 style="color: #dc3545">${sessionScope.notExist}</h1>
                             <button class="btn btn-success" type="submit">Get New
                                 Password</button>
                             <a class="btn btn-danger" type="submit" href="login.jsp">Back to

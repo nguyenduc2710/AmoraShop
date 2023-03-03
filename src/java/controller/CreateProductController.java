@@ -8,9 +8,16 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import product.ProductDAO;
 import product.ProductDTO;
 import product.ProductImageDTO;
@@ -19,6 +26,11 @@ import product.ProductImageDTO;
  *
  * @author thaiq
  */
+
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 1000,
+        maxRequestSize = 1024 * 1024 * 1000)
 public class CreateProductController extends HttpServlet {
    
      private static final String ERROR = "error.jsp";
@@ -37,9 +49,28 @@ public class CreateProductController extends HttpServlet {
             String brand = request.getParameter("newbrand");
             float price = Float.parseFloat(request.getParameter("newprice"));
             int categoryID = Integer.parseInt(request.getParameter("newcategoryid"));
-            String image = request.getParameter("newimage");
-            ProductImageDTO productImage = new ProductImageDTO(categoryID, brand, categoryID);
-            ProductDTO product = new ProductDTO(0, productName, quantity, status, description, capacity, brand, price, categoryID, image);
+            String folderName = "images";
+            Part filePart = request.getPart("newimage");
+            String fileName = filePart.getSubmittedFileName();
+            String path = "";
+            String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+
+            if (fileName != null && !fileName.isEmpty()) {
+                File dir = new File(uploadPath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+
+                path = folderName + File.separator + fileName;
+
+                InputStream is = filePart.getInputStream();
+                Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                // product existing image if file is null
+                path = "";
+            }
+            ProductImageDTO productImage = new ProductImageDTO(0, path, 0);
+            ProductDTO product = new ProductDTO(0, productName, quantity, status, description, capacity, brand, price, categoryID, path);
             dao.insert(product, productImage);
             url = SUCCESS;
         } catch (Exception e) {
@@ -47,7 +78,7 @@ public class CreateProductController extends HttpServlet {
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

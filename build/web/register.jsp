@@ -60,8 +60,9 @@
                             <label for="radio0">Female</label>
                         </div>
 
-                        <input name="email" id="user-email" class="user-login-signup-input" placeholder="Email" onchange="validateEmail()" required=""/>
+                        <input name="email" id="user-email" class="user-login-signup-input" placeholder="Email" onchange="validateEmail()" onkeyup="CheckEmail()" required=""/>
                         <div class="error" id="errorMessage" style="color: red">Please enter a valid email address(Example: example@domain.com)</div>
+                        <h2 id="email-validation-message" style="color: red"></h2>
                         <input type="password" name="password" id="user-email-password" class="user-login-signup-input" placeholder="Password" required="" />
                         <div class="error" id="errorMessage3" style="color: red">Password must have  9 to 30 characters and at least one number</div>
                         <input type="password" name="repassword" id="user-email-passwords" class="user-login-signup-input" placeholder="Repeat password" onchange="validatePassword()" required=""/><h2 style="color: red">${requestScope.errorRepeat}</h2>
@@ -108,10 +109,44 @@
                 </div>
             </div>
 
-                              <jsp:include page="components/footer.jsp" />
+            <jsp:include page="components/footer.jsp" />
 
         </div>
         <script src="assets/js/validation.js"></script>
+
+
+
+
+        <!--        Cho nay khong co sua cua anh nha Duc !!!!!!!!!!!!!!!!!!!!-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+                            $(document).ready(function () {
+                                $('#user-email').on('input', function () {
+                                    var email = $(this).val();
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'CheckEmailController',
+                                        data: {email: email},
+                                        success: function (data) {
+                                            $('#email-validation-message').text(data);
+                                            if (data) {
+                                                // email already exists
+                                                document.getElementById("user-email-password").disabled = true;
+                                                document.getElementById("user-email-passwords").disabled = true;
+                                                document.getElementById("user-address").disabled = true;
+                                                document.getElementById("user-phone-num").disabled = true;
+                                                document.getElementById("user-email").classList.add("invalid");
+                                                document.getElementById("button").style.display = "none";
+                                            } else {
+                                                // email is available
+                                                messageElem.text('');
+                                                $('#user-email').prop('disabled', false);
+                                            }
+                                        }
+                                    });
+                                });
+                            });
+        </script>
     </body>
 
 </html>

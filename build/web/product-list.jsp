@@ -135,7 +135,7 @@
                                                         <c:param name="productID" value="${product.productID}"></c:param>
 
                                                     </c:url>
-                                                    <a href="${delete}">Delete</a>
+                                                    <a href="${delete}" onclick="return confirm('Are you sure you want to delete?')">delete</a>
                                                 </td>
 
                                                

@@ -15,7 +15,7 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
     <body>
-        <form class="form-horizontal" action="MainController" method="POST">
+        <form class="form-horizontal" action="CreateProductController" enctype="multipart/form-data"  method="POST">
             <fieldset>
 
                 <!-- Form Name -->
@@ -71,8 +71,13 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="percentage_discount">BRAND</label>  
                     <div class="col-md-4">
-                        <input id="percentage_discount" name="newbrand" class="form-control input-md" required="" type="text">
-
+                        <select name="newbrand" id="newbrand">
+                            <option value="Gucci">Gucci</option>
+                            <option value="Dior">Dior</option>
+                            <option value="YSL">YSL</option>
+                            <option value="Hermes">Hermes</option>
+                            <option value="Burberry">Burberry</option>
+                        </select>
                     </div>
                 </div>
 
@@ -96,11 +101,8 @@
 
 
                 <!-- File Button --> 
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="filebutton">main_image</label>
-                    <div class="col-md-4">
-                        <input id="filebutton" name="pImage" class="input-file" type="text" required=""/>
-                    </div>
+                <div class="col-md-12"> Image
+                    Choose a file: <input type="file" name="newimage" class="form-control" placeholder="image" value="">
                 </div>
 
 

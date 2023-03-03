@@ -12,8 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -21,6 +24,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import user.UserDAO;
 
 /**
  *
@@ -36,14 +40,21 @@ public class ForgetPasswordController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String email = request.getParameter("email");
 		RequestDispatcher dispatcher = null;
 		int otpvalue = 0;
 		HttpSession mySession = request.getSession();
-		
-		if(email!=null || !email.equals("")) {
+		UserDAO dao = new UserDAO();
+                boolean user = dao.checkDuplicate(email);
+                
+                if (user == false) {
+                    mySession.setAttribute("notExist", "Your Email Not Exist!!!");
+                    dispatcher = request.getRequestDispatcher("forgot-password.jsp");
+                    dispatcher.forward(request, response);
+                }
+                else if(email!=null || !email.equals("")|| user == true) {
 			// sending otp
 			Random rand = new Random();
 			otpvalue = rand.nextInt(1255650);
@@ -100,7 +111,11 @@ public class ForgetPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ForgetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
 
     /** 
@@ -113,7 +128,11 @@ public class ForgetPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ForgetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 

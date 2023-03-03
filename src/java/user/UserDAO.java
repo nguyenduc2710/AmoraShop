@@ -43,16 +43,6 @@ public class UserDAO {
             + " WHERE [user_id] = ?";
     
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    private static final String UPDATE_USER_BY_EMAIL = "UPDATE [dbo].[Users]\n"
             + "   SET full_name = ?\n"
             + "      ,[password] = ?\n"
@@ -63,6 +53,17 @@ public class UserDAO {
             + " WHERE email = ?";
     private static final String CHANGE_PASSWORD = "UPDATE [dbo].[Users] SET [password] = ? WHERE email = ?";
     private static final String GET_IMAGE_BY_USERID = "SELECT image FROM [Users] where user_id = ?";
+    
+    
+    private static final String INSERT_USER_BY_ADMIN = "INSERT INTO Users([full_name]\n"
+            + "           ,[password]\n"
+            + "           ,[gender]\n"
+            + "           ,[email]\n"
+            + "           ,[phone_number]\n"
+            + "           ,[address]\n"
+            + "           ,[status]\n"
+            + "           ,[role_id]) VALUES(?,?,?,?,?,?,?,?)";
+
 
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
@@ -452,4 +453,33 @@ public class UserDAO {
 
     }
 
+      public UserDTO insertNewUserByAdmin(String fullName, String password, String gender, String email, String phoneNumber, String address, String status, int roleID) throws SQLException {
+          Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(INSERT_USER_BY_ADMIN);
+               ptm.setString(1, fullName);
+                ptm.setString(2, password);
+                ptm.setString(3, gender);
+                ptm.setString(4, email);
+                ptm.setString(5, phoneNumber);
+                ptm.setString(6, address);
+                ptm.setString(7, status);
+                ptm.setInt(8, roleID);
+
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 }

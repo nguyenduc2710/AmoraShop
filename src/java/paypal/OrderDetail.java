@@ -10,43 +10,40 @@ package paypal;
  */
 public class OrderDetail {
     
-    private String productName;
+    private int orderID;
+    private int productID;
+    private float price;
     private int quantity;
-    private float total;
+    private float totalPrice;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(String productName, int quantity, float total) {
-        this.productName = productName;
-        this.quantity = quantity;
-        this.total = total;
+    public OrderDetail(String orderID, String productID, String price, String quantity, String totalPrice) {
+        this.orderID = Integer.parseInt(orderID);
+        this.productID = Integer.parseInt(productID);
+        this.price = Float.parseFloat(price);
+        this.quantity = Integer.parseInt(quantity);
+        this.totalPrice = Float.parseFloat(totalPrice);
     }
 
-    public String getProductName() {
-        return productName;
+    public String getOrderID() {
+         return String.format("%d", orderID);
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public String getProductID() {
+        return String.format("%d", productID);
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getPrice() {
+        return String.format("%.2f", price);
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public String getQuantity() {
+       return String.format("%d", quantity);
     }
 
-    public float getTotal() {
-        return total;
+    public String getTotalPrice() {
+        return String.format("%.2f", totalPrice);
     }
-
-    public void setTotal(float total) {
-        this.total = total;
-    }
-    
-    
-    
 }

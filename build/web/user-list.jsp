@@ -128,6 +128,10 @@
                                                     <c:if test="${user.roleID == 2}">
                                                         USER
                                                     </c:if>
+                                                        
+                                                        <c:if test="${user.roleID == 3}">
+                                                        STAFF
+                                                    </c:if>
                                                 </td>
 
 
@@ -149,6 +153,7 @@
                             </div>
                         </div>
                     </div>
+                    <a href="create-user.jsp">Create new user</a>
                 </main>
 
             </div>
