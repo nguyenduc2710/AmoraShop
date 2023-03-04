@@ -99,7 +99,9 @@
 
  Shipping details css section 
 .shipping-details-section {
-    padding: 5.6rem 6.7rem 0;
+    padding: 0 0 0 6.7rem;
+    display: flex;
+    height: 100%
 }
 
 .logo-text {
@@ -190,13 +192,13 @@
 }
 
 .select-form {
-    width: 30%;
+     width: 30%; 
     font-size: 14px;
     height: 35px;
 }
 
 .select-form:not(:last-child) {
-    margin-right: 20px;
+     margin-right: 20px; 
 }
 
 .shipping-details-action {
@@ -211,25 +213,116 @@
 }
 
 .continue-to-payment-btn {
-    padding: 14px 28px;
+    padding: 1.4rem 2.8rem;
     border: none;
     background-color: #468dbc;
     font-weight: 500;
     border-radius: 5px;
+    color: white;
+}
+
+.continue-to-payment-btn:hover {
+    filter: brightness(1.2);
 }
 
 .continue-to-payment-btn a{
     color: white;
     font-size: 1.6rem;
-}*/
-
-.cart-content-container {
-    padding: 0 100px;
-    margin-bottom: 20px;
 }
 
+.side-bar {
+    padding: 5.6rem 4.4rem 0;
+    background-color: #fafafa;
+    border-left: 0.5px solid #e1e1e1;
+    height: 100%;
+    min-height: 100vh;
+}
+
+ Side bar order summary css 
+
+.order-summary .product-image-container {
+    width: 20%;
+    position: relative;;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.product-image-container .cart-item-img{
+    border-radius: 15px;
+}
+
+.buy-quantity {
+    position: absolute;
+    top: -5%;
+    right: -10%;
+    background-color: #a3a3a3;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+
+.order-describe {
+    padding: 0 0 0 20px;
+    line-height: 1.5;
+    width: 70%;
+    position: relative;
+}
+
+.order-item-name {
+    font-size: 1.4rem;
+}
+
+.order-item-capacity {
+    font-size: 1.2rem;
+}
+
+
+.order-item-price {
+    font-size: 1.4rem;
+    font-weight: 500;
+    position: absolute;
+    top: 27%;
+    right: 0;
+}
+
+.order-total-sum {
+    display: flex;
+    align-items: center;
+    padding: 15px 4.7rem 15px 0;
+    justify-content: space-between;
+    border-top: 0.4px solid rgba(0,0,0,0.2);
+}
+
+.order-sum-cald i {
+    margin-right: 10px;
+}
+
+.order-total-sum .text {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.order-sum-cald {
+    font-size: 2.4rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}*/
+
 .cart-product-list {
-    margin: 0 0 4rem 0;
+/*    margin: 0 0 4rem 0;*/
+}
+
+.order-info-container {
+    padding: 4rem 0;
 }
 
 .product-image-container {
@@ -260,6 +353,24 @@
     color: var(--main-page-color);
     font-size: 1.6rem;
     font-weight: 700;
+    text-decoration: none;
+    width: max-content;
+}
+
+.item-name:hover {
+    color: var(--main-page-color);
+    filter: brightness(0.5);
+}
+
+.login-navigation {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: black;
 }
 
 .item-price {
@@ -320,6 +431,22 @@
 .order-actions .button-57 {
     margin: 10px 0 0 8px;
 }
+
+/* Css if there is not product in cart */
+.order-actions-no-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.noProduct {
+    margin: 16px 0;
+    font-size: 16px;
+}
+
 
 
 /* Shipping details css section */

@@ -14,57 +14,93 @@ import product.ProductDTO;
  *
  * @author long
  */
-public class CartObj implements Serializable{
+public class CartObj implements Serializable {
+
     private Map<String, Integer> items;
 
     public Map<String, Integer> getItems() {
         return items;
     } //khong co phuong thuc set vi phai lay hang tung mon
-    
-    public void addItemToCart(String productID, int quantity){
-        if(productID == null){
+
+    public void addItemToCart(String productID, int quantity) {
+        if (productID == null) {
             return;
         }
-        if(productID.trim().isEmpty()){
+        if (productID.trim().isEmpty()) {
             return;
         }
-        if(quantity == 0){
+        if (quantity == 0) {
             return;
         }
         //1. Check cart has existed?
-        if(this.items == null){
+        if (this.items == null) {
             this.items = new HashMap<>();
         }
         //2. Check item has existed? --> increase quantity
-        if(this.items.containsKey(productID)){
+        if (this.items.containsKey(productID)) {
             quantity += this.items.get(productID);
         }
         //3. Update items
-        this.items.put(productID,quantity);      
+        this.items.put(productID, quantity);
     }
-    
-    public void removeItemFromCart(String sku){
-        if(sku == null){
+
+    public void updateItemCart(String productID, int quantity) {
+        if (productID == null) {
             return;
         }
-        if(sku.trim().isEmpty()){
+        if (productID.trim().isEmpty()) {
+            return;
+        }
+        if (quantity == 0) {
             return;
         }
         //1. Check cart has existed?
-        if(this.items == null){
+        if (this.items == null) {
+            this.items = new HashMap<>();
+        }
+        //2. Check item has existed? --> increase quantity
+        if (this.items.containsKey(productID)) {
+            quantity += this.items.get(productID);
+        }
+        //3. Update items
+        this.items.put(productID, quantity);
+        int check = this.items.get(productID);
+
+        //Checking if quantity =< 0 then delete the item from obj
+        if (check <= 0) {
+            removeItemFromCart(productID);
+        }
+    }
+
+    public int getQuantityItemCurrent(String productID) {
+        int quantityCurrent = 0;
+        if (this.items != null && this.items.containsKey(productID)) {
+            quantityCurrent += this.items.get(productID);
+        }
+        return quantityCurrent;
+    }
+    
+
+    public void removeItemFromCart(String sku) {
+        if (sku == null) {
+            return;
+        }
+        if (sku.trim().isEmpty()) {
+            return;
+        }
+        //1. Check cart has existed?
+        if (this.items == null) {
             return;
         }
         //2. Check item has existed?
-        if(this.items.containsKey(sku)){
+        if (this.items.containsKey(sku)) {
             this.items.remove(sku);
             //Sau khi dele product, gio hang trong thi set null
-            if(this.items.isEmpty()){
+            if (this.items.isEmpty()) {
                 this.items = null;
             }
         }
-        
-        
-    }
-    
-}
 
+    }
+
+}

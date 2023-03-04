@@ -94,6 +94,12 @@ font {
             <font style="color: green">Your order has been checked out successfully!</font><br/>
             Your order id: ${orderId} <br/>
             Date buy: ${date} <br/>
+            <form action="AuthorizePaymentServlet" method="POST">
+                <input type="hidden" value="${sessionScope.ORDER_ID}">
+                <input type="hidden" value="${sessionScope.TOTAL_BILL}">
+                <input type="submit" value="Paypal">
+                
+            </form>
             <table border="1">
                 <thead>
                     <tr>

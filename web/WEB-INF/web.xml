@@ -124,6 +124,14 @@
         <servlet-name>ReviewPaymentServlet</servlet-name>
         <servlet-class>paypal.ReviewPaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateItemCartServlet</servlet-name>
+        <servlet-class>Cart.UpdateItemCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExecutePaymentServlet</servlet-name>
+        <servlet-class>paypal.ExecutePaymentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -247,6 +255,14 @@
     <servlet-mapping>
         <servlet-name>ReviewPaymentServlet</servlet-name>
         <url-pattern>/review_payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateItemCartServlet</servlet-name>
+        <url-pattern>/UpdateItemCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExecutePaymentServlet</servlet-name>
+        <url-pattern>/ExecutePaymentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

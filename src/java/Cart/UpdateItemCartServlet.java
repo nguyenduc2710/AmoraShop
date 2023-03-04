@@ -5,8 +5,8 @@
  */
 package Cart;
 
-import Cart.CartError;
 import Cart.CartObj;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,13 +17,20 @@ import product.ProductDAO;
 import product.ProductDTO;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author long
+ * @author Admin
  */
-public class AddToCartServlet extends HttpServlet {
+public class UpdateItemCartServlet extends HttpServlet {
 
+//    private static final String ERROR = "error.html";
+//    private static final String UPDATE_SUCCESS = "viewCart.jsp";
+//    private static final String VIEW_CART = "ViewCartController";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,42 +43,40 @@ public class AddToCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+//        int updateQuantity = Integer.parseInt(request.getParameter("updateQuantity"));
+        String productID = request.getParameter("productID");
+        String plusQuan = request.getParameter("plusQuan");
+        String minusQuan = request.getParameter("minusQuan");
+//        String URL = VIEW_CART;
 
-        try (PrintWriter out = response.getWriter()) {
-
+        try {
             HttpSession session = request.getSession();
             ProductDAO dao = new ProductDAO();
             CartObj cart = (CartObj) session.getAttribute("CART");
-            if (cart == null) {
-                cart = new CartObj();
-            }
-            int productID = Integer.parseInt(request.getParameter("productID"));
-            int productQuantity = Integer.parseInt(request.getParameter("quantity"));
-            String id = String.valueOf(productID);
-
-            String checkID = request.getParameter("productID");
-            int dataPrdQuan = dao.getProductByIdTypeString(checkID).getQuantity();
-            if (dataPrdQuan >= productQuantity) {
-                if (productQuantity >= 1) {
-                    int quantityCurrent = cart.getQuantityItemCurrent(id) + productQuantity;
-                    if(quantityCurrent <= dataPrdQuan){
-                    cart.addItemToCart(id, productQuantity);    
+            int dataPrdQuan = dao.getProductByIdTypeString(productID).getQuantity();
+            
+            if (cart != null) {
+                //Check para not null & contain vaule = true
+                if (plusQuan != null && !plusQuan.isEmpty()) {
+                    int currentQuan = cart.getQuantityItemCurrent(productID) + 1;
+                    if(currentQuan <= dataPrdQuan){
+                    cart.updateItemCart(productID, 1);    
                     }else{
-                        request.setAttribute("ERROR_QUANTITY_DB", "Sorry, we don't have enough product for your request!!!");
-                    }//Check kiểm tra số lượng của req và số lượng sản phẩm hiện tại có trog cart không được quá SL kho                    
-                } else {
-                    request.setAttribute("ERROR_QUANTITY_INPUT", "Can not add product with 0 or negative number!!!");
+                        request.setAttribute("ERROR_QUAN_DB", "Your request has exceeded our stock");
+                    }
                 }
-            } else{
-                request.setAttribute("ERROR_QUANTITY_DB", "Sorry, we don't have enough product for your request!!!");
-            } // KH không được req số lượng trog 1 lần lớn hơn SL kho
-
-
-//            cart.addItemToCart(id, 1);
-            session.setAttribute("CART", cart);
-            request.getRequestDispatcher("ShowProductDetailUserController?product_id=" + productID).forward(request, response);
+                if (minusQuan != null && !minusQuan.isEmpty()) {
+                    cart.updateItemCart(productID, -1);
+                }
+            } else {
+                request.setAttribute("UPDATE_QUANTITY_ERR", "Some thing has gone wrong on update item cart!");
+            }
         } catch(SQLException ex){
             log("SQL " + ex.getMessage());
+        } 
+        finally {
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/ViewCartController");
+            rd.forward(request, response);
         }
     }
 

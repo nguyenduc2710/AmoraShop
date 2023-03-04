@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import orders.OrderDAO;
 import org.apache.jasper.tagplugins.jstl.core.Catch;
 import product.ProductDAO;
 import product.ProductDTO;
@@ -23,7 +24,7 @@ import user.UserDTO;
  */
 public class test {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         //Test getAllUsers() function in User DAO
 //        UserDAO dao = new UserDAO();
 //        List<UserDTO> list = dao.getAllUsers();
@@ -38,10 +39,13 @@ public class test {
 
         //Test getAllProduct() function in product DAO
         
-      ProductDAO dao = new ProductDAO();
-      List<ProductDTO> list = dao.getAllProducts();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).toString());
-        }
+//      ProductDAO dao = new ProductDAO();
+//      List<ProductDTO> list = dao.getAllProducts();
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i).toString());
+//        }
+
+OrderDAO  dao = new OrderDAO();
+dao.updateOrderStatus(66,"DONE");
     }
 }

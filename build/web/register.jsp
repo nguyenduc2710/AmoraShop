@@ -117,36 +117,7 @@
 
 
 
-        <!--        Cho nay khong co sua cua anh nha Duc !!!!!!!!!!!!!!!!!!!!-->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-                            $(document).ready(function () {
-                                $('#user-email').on('input', function () {
-                                    var email = $(this).val();
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: 'CheckEmailController',
-                                        data: {email: email},
-                                        success: function (data) {
-                                            $('#email-validation-message').text(data);
-                                            if (data) {
-                                                // email already exists
-                                                document.getElementById("user-email-password").disabled = true;
-                                                document.getElementById("user-email-passwords").disabled = true;
-                                                document.getElementById("user-address").disabled = true;
-                                                document.getElementById("user-phone-num").disabled = true;
-                                                document.getElementById("user-email").classList.add("invalid");
-                                                document.getElementById("button").style.display = "none";
-                                            } else {
-                                                // email is available
-                                                messageElem.text('');
-                                                $('#user-email').prop('disabled', false);
-                                            }
-                                        }
-                                    });
-                                });
-                            });
-        </script>
+        
     </body>
 
 </html>

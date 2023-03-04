@@ -122,7 +122,7 @@
                                 </button>
                             </div>
                         </form>
-                            <form action="AuthorizePaymentServlet" method="POST">
+<!--                            <form action="AuthorizePaymentServlet" method="POST">
                                 <div class="field-input-wrapper">
                                 <input class="input-field" type="text"
                                        placeholder="Full name" name="fullName"
@@ -142,7 +142,7 @@
                                        value="${sessionScope.LOGIN_USER.getAddress()}"/>
                             </div>
                                 <button type="submit">Pay pal</button>
-                            </form>
+                            </form>-->
                     </div>
                 </div>
 

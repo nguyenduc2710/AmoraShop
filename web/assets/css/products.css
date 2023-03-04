@@ -1,5 +1,4 @@
-/* This will hide the updown arrow of input type number 
-input::-webkit-outer-spin-button,
+/*input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -307,7 +306,7 @@ input[type=number] {
     width: 8rem;
 }
 
-.search-product-title {
+.header-page-title {
     color: var(--main-page-color);
     font-size: 32px;
     font-weight: 700;
@@ -315,6 +314,10 @@ input[type=number] {
 }
 
 .search-quantity-result{
+    font-size: 14px;
+}
+
+.header-quantity-result{
     font-size: 14px;
 }
 
@@ -354,8 +357,43 @@ input[type=number] {
     display: flex;
     justify-content: center;
     flex-direction: column;
-}*/
+}
 
+ Search product page with no value css 
+
+.search-by-name-wrapper-noval {
+    margin: 30px 0 27px 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.search-by-name-wrapper-noval .search-product-name {
+    width: 55%;
+    height: 55px;
+    display: flex;
+    background-color: #ededed;
+    border: none;
+}
+
+.search-by-name-wrapper-noval .search-submit-btn {
+    top: 0%;
+    left: 73.5%;
+    height: 55px;
+    width: 55px;
+    padding: 11px;
+    background-color: rgb(37, 42, 43);
+    rotate: none;
+}
+
+.search-error-note {
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0 20px;
+    line-height: 1.8;
+    color: rgb(202 29 29);
+}*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -583,11 +621,19 @@ input[type=number] {
     font-weight: 700;
 }
 
+.product-quantity {
+    display: flex;
+    font-size: 1.2rem;
+    color: #a3a5a7;
+    font-weight: 500;
+    padding-top: 4px;
+}
+
 .product-detail-price {
     font-size: 1.8rem;
     font-weight: 600;
     color: rgba(255,0,0);
-    margin: 20px 0;
+    margin: 10px 0 20px;
     padding: 10px 0;
     border-top: 1px dotted #dfe0e1;
     border-bottom: 1px dotted #dfe0e1;

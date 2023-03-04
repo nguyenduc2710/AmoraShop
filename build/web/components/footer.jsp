@@ -24,13 +24,12 @@
         <div class="footer-inner-block col-5">
             <h4 class="footer-inner-title">Information</h4>
             <div class="footer-container">
-                <div class="inner-footer-text">
-                    <i class="ti-headphone-alt"></i>
-                    Phone: 08369xxxxx
-                </div>
-                <div class="inner-footer-text">
+                <a href="tel:0836935789" class="inner-footer-text">   
+                    Phone: 0836935789
+                </a> <br>
+                <a href="mailto:hongducnguyenho0@gmail.com" class="inner-footer-text">
                     Gmail: hongducnguyenho0@gmail.com
-                </div>
+                </a>
                 <div class="inner-footer-text">
                     Address: FPT University 
                     Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh 700000, Việt Nam

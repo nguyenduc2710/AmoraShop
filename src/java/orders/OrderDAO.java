@@ -19,7 +19,30 @@ import utils.DBUtils;
 public class OrderDAO {
 
 
-
+ public void updateOrderStatus(int orderID,String status) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement st = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [dbo].[Orders]\n"
+                        + "   SET [status] = ?\n"
+                        + " WHERE order_id = ?";
+                st = con.prepareStatement(sql);
+                st.setString(1, status);
+                st.setInt(2, orderID);
+                
+                st.executeUpdate();
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        }
+    }
     public boolean removeOrder(int orderID) throws SQLException, ClassNotFoundException {
         boolean result = false;
         Connection con = null;

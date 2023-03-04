@@ -32,7 +32,7 @@
                     <div class="bread-crumbs">
                         <a href="home.html" class="main-page link">Home</a>
                         <div class="slash">/</div>
-                        <a href="products.html" class="main-page link">Products</a>
+                        <a href="ShowProductController" class="main-page link">Products</a>
                         <div class="slash">/</div>
                         <a href="#" class="main-page link">Product Details</a>
                     </div>
@@ -50,17 +50,26 @@
                         
                         <div class="product-detail-name">
                             ${productDto.name}
+                            <span class="product-quantity">Quantity left: ${productDto.quantity}</span>
                         </div>
                         <div class="product-detail-price">
                             ${productDto.price}$
                         </div>
-
+                        
                         <form class="buy-area" action="AddToCartServlet">
-                            <div class="select-quantity-area">
-                                <input type="button" value="-" class="quantity-btn">
-                                <input type="text" id="quantity" name="quantity" value="1" class="quantity-selector">
-                                <input type="button" value="+" class="quantity-btn">
+                            <div style="display: flex; align-items: center;" class="select-quantity-area">
+                                <input type="button" value="-" onclick="decrementQuantity()" class="quantity-btn">
+                                <input type="number" id="quantity" name="quantity" value="1" class="quantity-selector">
+                                <input type="button" value="+" onclick="incrementQuantity()" class="quantity-btn">
                                 <input type="hidden" value="${productDto.productID}" name="productID"/>
+                                <span style="color: red; font-size: 16px; margin-left: 10px">
+                                    <c:if test="${not empty requestScope.ERROR_QUANTITY_INPUT}">
+                                        ${requestScope.ERROR_QUANTITY_INPUT}
+                                    </c:if>
+                                    <c:if test="${not empty requestScope.ERROR_QUANTITY_DB}">
+                                        ${requestScope.ERROR_QUANTITY_DB}
+                                    </c:if>
+                                </span>
                             </div>
                             <button type="submit" class="add-to-cart-btn button-57">
                                 <span>ADD TO CART</span>   
@@ -83,5 +92,6 @@
         </div>
 
         <jsp:include page="components/footer.jsp" />
+        <script src="assets/js/script.js"></script>
     </body>
 </html>
