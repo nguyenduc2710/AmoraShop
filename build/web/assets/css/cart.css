@@ -668,3 +668,61 @@
     display: flex;
     align-items: center;
 }
+ 
+/*Check out status page css*/
+/* CheckoutStatus page css */
+/*.payment-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-status {
+    font-size: 4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.icon-success {
+    display: block;
+    width: 38px;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.success-icon {
+    cursor: default;
+    display: flex
+}
+
+.payment-description {
+    font-size: 1.6rem;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.payment-navigations {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.payment-actions {
+    outline: none;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: ease 0.6s;
+}
+
+.payment-actions:first-child {
+    margin-right: 3rem;
+}
+
+.payment-actions:hover {
+    background-color: var(--main-page-color);
+    filter: brightness(1.2);
+}*/

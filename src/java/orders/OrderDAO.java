@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 
 /**
@@ -148,5 +150,171 @@ public class OrderDAO {
             }
         }
         return 0;
+    }
+    
+    public List<OrderDTO> getListOrderByUserId(int userID) throws SQLException {
+        List<OrderDTO> list = new ArrayList<>();
+        OrderDTO order = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select * from Orders where user_id = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, userID);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int orderID = rs.getInt("order_id");
+                    String fullName = rs.getString("full_name");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    String orderDate = rs.getString("order_date");
+                    userID = rs.getInt("user_id");
+                    float totalPrice = rs.getFloat("total_price");
+                    String note = rs.getString("note");
+
+                    order = new OrderDTO(orderID, fullName, address, status, orderDate, userID, totalPrice, note);
+                    list.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+
+    public boolean updateStatusOder(String status,int orderID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement st = null;
+        boolean result = false;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [dbo].[Orders]\n"
+                        + "   SET [status] = ?\n"
+                        + " WHERE order_id = ?";
+                st = con.prepareStatement(sql);
+                st.setString(1, status);
+                st.setInt(2, orderID);
+                int effectedRows = st.executeUpdate();
+                if (effectedRows > 0) {
+                    result = true;
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        }
+        return result;
+    }
+
+
+    public List<OrderDTO> getOrderProcessing() throws SQLException {
+         List<OrderDTO> list = new ArrayList<>();
+        OrderDTO order = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select * from Orders where status = 'PROCESSING'";
+                ptm = conn.prepareStatement(sql);
+              
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int orderID = rs.getInt("order_id");
+                    String fullName = rs.getString("full_name");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    String orderDate = rs.getString("order_date");
+                   int userID = rs.getInt("user_id");
+                    float totalPrice = rs.getFloat("total_price");
+                    String note = rs.getString("note");
+
+                    order = new OrderDTO(orderID, fullName, address, status, orderDate, userID, totalPrice, note);
+                    list.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<OrderDTO> getOrderComplete() throws SQLException {
+        List<OrderDTO> list = new ArrayList<>();
+        OrderDTO order = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select * from Orders where status != 'PROCESSING'";
+                ptm = conn.prepareStatement(sql);
+              
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int orderID = rs.getInt("order_id");
+                    String fullName = rs.getString("full_name");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    String orderDate = rs.getString("order_date");
+                   int userID = rs.getInt("user_id");
+                    float totalPrice = rs.getFloat("total_price");
+                    String note = rs.getString("note");
+
+                    order = new OrderDTO(orderID, fullName, address, status, orderDate, userID, totalPrice, note);
+                    list.add(order);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }

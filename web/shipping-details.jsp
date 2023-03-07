@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <meta charset="UTF-8">
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
@@ -26,38 +26,13 @@
         <title>AmoraShop</title>
     </head>
     <body>
-        <%-- <h3>Information of customer</h3>
-         <form action="CheckoutController" method="POST">
-             <div class="mb-3">
-                       <label>Full Name</label>
-                     <input value="${sessionScope.LOGIN_USER.getFullName()}" type="text" name="fullName">
+        <jsp:include page="components/header.jsp" />
 
-                    </div>
-                    <div class="mb-3">
-                        <label>Address</label>
-                        <input value="${sessionScope.LOGIN_USER.getAddress()}" type="text" name="address">
-
-                    </div>
-                    <div class="mb-3">
-                        <input value="${sessionScope.LOGIN_USER.getStatus()}" type="hidden" name="status">
-                    </div>
-                    <div class="mb-3">
-
-                        <input value="${sessionScope.LOGIN_USER.getUserID()}" type="hidden" name="userID">
-
-                    </div>
-                    <div class="mb-3">
-                        <label for="note" class="form-label">Note</label>
-                        <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
-                    
-                </form>--%>
 
         <c:set var="cart" value="${sessionScope.CART.items}" />
         <c:set var="userProduct" value="${sessionScope.USER_PRODUCTS}" />
 
-        
+
         <div class="wrapper row">
             <div class="shipping-details-section row">
                 <div class="main col-7">
@@ -100,7 +75,7 @@
                                 <input class="input-field" type="text"
                                        placeholder="Full name" name="fullName"
                                        value="${sessionScope.LOGIN_USER.getFullName()}"/>
-                                <input type="hidden" value="confirmed" name="status">
+                                <input type="hidden" value="PROCESSING" name="status">
                                 <input value="${sessionScope.LOGIN_USER.getUserID()}" type="hidden" name="userID">
 
                             </div>
@@ -122,27 +97,27 @@
                                 </button>
                             </div>
                         </form>
-<!--                            <form action="AuthorizePaymentServlet" method="POST">
-                                <div class="field-input-wrapper">
-                                <input class="input-field" type="text"
-                                       placeholder="Full name" name="fullName"
-                                       value="${sessionScope.LOGIN_USER.getFullName()}"/>
-                                <input type="hidden" value="confirmed" name="status">
-                                <input value="${sessionScope.LOGIN_USER.getUserID()}" type="hidden" name="userID">
-
-                            </div>
-                            <div class="field-input-wrapper">
-                                <input class="input-field" type="text"
-                                       placeholder="Phone number" name="phoneNumber"
-                                       value="${sessionScope.LOGIN_USER.getPhoneNumber()}"/>
-                            </div>
-                            <div class="field-input-wrapper">
-                                <input class="input-field" type="text"
-                                       placeholder="Address" name="address"
-                                       value="${sessionScope.LOGIN_USER.getAddress()}"/>
-                            </div>
-                                <button type="submit">Pay pal</button>
-                            </form>-->
+                        <!--                            <form action="AuthorizePaymentServlet" method="POST">
+                                                        <div class="field-input-wrapper">
+                                                        <input class="input-field" type="text"
+                                                               placeholder="Full name" name="fullName"
+                                                               value="${sessionScope.LOGIN_USER.getFullName()}"/>
+                                                        <input type="hidden" value="confirmed" name="status">
+                                                        <input value="${sessionScope.LOGIN_USER.getUserID()}" type="hidden" name="userID">
+                        
+                                                    </div>
+                                                    <div class="field-input-wrapper">
+                                                        <input class="input-field" type="text"
+                                                               placeholder="Phone number" name="phoneNumber"
+                                                               value="${sessionScope.LOGIN_USER.getPhoneNumber()}"/>
+                                                    </div>
+                                                    <div class="field-input-wrapper">
+                                                        <input class="input-field" type="text"
+                                                               placeholder="Address" name="address"
+                                                               value="${sessionScope.LOGIN_USER.getAddress()}"/>
+                                                    </div>
+                                                        <button type="submit">Pay pal</button>
+                                                    </form>-->
                     </div>
                 </div>
 
@@ -201,8 +176,9 @@
 
         </div>
 
-        
-        
-        
+
+
+        <jsp:include page="components/footer.jsp" />
+
     </body>
 </html>

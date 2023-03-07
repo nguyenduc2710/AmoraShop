@@ -16,16 +16,24 @@ public class OrderDetailDTO {
     private float price;
     private int quantity;
     private float totalPrice;
+    private String name;
+    private String capacity;
+    private String brand;
+    private String image;
 
     public OrderDetailDTO() {
     }
 
-    public OrderDetailDTO(int orderID, int productID, float price, int quantity, float totalPrice) {
+    public OrderDetailDTO(int orderID, int productID, float price, int quantity, float totalPrice, String name, String capacity, String brand, String image) {
         this.orderID = orderID;
         this.productID = productID;
         this.price = price;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+        this.name = name;
+        this.capacity = capacity;
+        this.brand = brand;
+        this.image = image;
     }
 
     public int getOrderID() {
@@ -68,5 +76,42 @@ public class OrderDetailDTO {
         this.totalPrice = totalPrice;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetailDTO{" + "orderID=" + orderID + ", productID=" + productID + ", price=" + price + ", quantity=" + quantity + ", totalPrice=" + totalPrice + ", name=" + name + ", capacity=" + capacity + ", brand=" + brand + ", image=" + image + '}';
+    }
+
+ 
 }

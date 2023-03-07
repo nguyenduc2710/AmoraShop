@@ -45,7 +45,7 @@ public class ExecutePaymentServlet extends HttpServlet {
         try {
             PaymentServices paymentServices = new PaymentServices();
             Payment payment = paymentServices.executePayment(paymentId, payerId);
-             dao.updateOrderStatus(oId, "DONE");
+             dao.updateOrderStatus(oId, "FINISHED");
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
              

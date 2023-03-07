@@ -1,0 +1,75 @@
+.user-order-container {
+    padding: 40px 5rem;
+}
+
+.order-details-wrap {
+    background-color: rgb(236 236 236 / 40%);
+    padding: 30px 6rem;
+}
+
+
+.order-details-wrap:not(:first-child){
+    margin-top: 30px;
+}
+
+.order-title {
+    display: flex;
+    font-size: 1.5rem;
+    margin: 0 0 22px 0;
+    justify-content: space-between;
+}
+
+.order-title-left {
+    display: flex;
+}
+
+.order-status::before {
+    content: "";
+    margin: 0 10px;
+    border: 1px solid rgba(0,0,0,0.4);
+}
+
+.order-item-list {
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 10px 0;
+}
+
+.product-image-container .cart-item-img {
+    border-radius: 0px;
+}
+
+.order-describe{
+    width: 100%;
+}
+
+.order-describe, .order-item-name,
+.order-item-capacity{
+    font-size: 1.5rem;
+}
+
+.order-item-price{
+    font-size: 1.6rem;
+}
+
+.item-wrap:not(:first-child)::before {
+    content: "";
+    border-top: 0.2px solid rgba(0,0,0,0.2);
+    width: 100%;
+    display: flex;
+    margin: 10px 0;
+}
+
+.order-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    font-size: 1.8rem;
+    padding: 20px 0 0;
+}
+
+.order-total-money {
+    margin-bottom: 20px;
+}
+

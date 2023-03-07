@@ -23,7 +23,8 @@ import user.UserDTO;
 public class LoginController extends HttpServlet {
    
     private static final String ERROR = "login.jsp";
-    private static final String ADMIN_PAGE = "admin.jsp";
+//    private static final String ADMIN_PAGE = "admin.jsp";
+//    private static final String STAFF_PAGE = "staff.jsp";
     private static final String USER_PAGE = "user.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -42,10 +43,12 @@ public class LoginController extends HttpServlet {
                 int roleID = loginUser.getRoleID();
                 String status = loginUser.getStatus();
                 if (status.equalsIgnoreCase("ACTIVE")) {
-                    if (roleID == 1) {
+                    if(roleID == 1) {
                         url = "/ShowUserController";
                     } else if (roleID == 2) {
                         url = USER_PAGE;
+                    } else if (roleID == 3) {
+                        url = "/ShowProductAdminController";
                     } else {
                         request.setAttribute("ERROR", "Your role is not support:");
                     }

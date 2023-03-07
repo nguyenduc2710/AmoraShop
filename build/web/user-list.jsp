@@ -57,8 +57,9 @@
                             <div class="collapse" id="collapseAuthentication" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
-                                    <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
-
+                                    
+                                    <a class="nav-link" href="OrderCompleteController">Order Complete</a>
+                                    
                                 </nav>
                             </div>
 

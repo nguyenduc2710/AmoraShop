@@ -25,7 +25,6 @@
         <script src="assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
         <title>AmoraShop</title>
     </head>
 
@@ -232,7 +231,7 @@
                         <span class="noProduct">
                             Your cart is empty.
                         </span>
-                        <a class="button-57" href="#" class="continues-buying-btn">
+                        <a class="button-57" href="ShowProductController" class="continues-buying-btn">
                             <span>Continues Buying</span>
                             <span>Continues Buying</span>
                         </a>

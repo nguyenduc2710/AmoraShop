@@ -120,7 +120,7 @@
                                     <label class="input-field-title" for="phone">
                                         Password:
                                     </label>
-                                    <input type="password" class="form-control" name="newPassword"
+                                    <input type="password" class="form-control" name="newPassword" value="${sessionScope.LOGIN_USER.password}"
                                         id="user-email-password" placeholder="enter new password"
                                         onchange="validatePassword()" />
                                     <div class="error" id="errorMessage3" style="color: red">Password must have 9 to 30
@@ -133,7 +133,7 @@
                                     <label class="input-field-title" for="mobile">
                                         Gender:
                                     </label>
-                                    <input type="text" class="form-control" name="newGender" id="mobile"
+                                    <input type="text" class="form-control" name="newGender" id="mobile" value="${sessionScope.LOGIN_USER.gender}"
                                         placeholder="enter new gender" required="" />
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                 <label class="input-field-title" for="password">
                                     Confirm Password:
                                 </label>
-                                <input type="password" class="form-control" name="confirmPassword"
+                                <input type="password" class="form-control" name="confirmPassword" value="${sessionScope.LOGIN_USER.password}"
                                     id="user-email-passwords" placeholder="confirm password"
                                     onchange="validatePassword()" required="" />
                                 <div class="error" id="errorMessage2" style="color: red">Confirm password does not match
@@ -154,7 +154,7 @@
                                     <label class="input-field-title" for="password2">
                                         Phone:
                                     </label>
-                                    <input type="text" class="form-control" name="newPhone" id="user-phone-num"
+                                    <input type="text" class="form-control" name="newPhone" id="user-phone-num" value="${sessionScope.LOGIN_USER.phoneNumber}"
                                         placeholder="enter new phone" onchange="checkPhone()" required="" />
                                     <div class="error" id="errorMessage4" style="color: red">Phone number must be 10digits</div>
                                 </div>
@@ -165,7 +165,7 @@
                                     <label class="input-field-title" for="password2">
                                         Address:
                                     </label>
-                                    <input type="text" class="form-control" name="newAddress" id="user-address"
+                                    <input type="text" class="form-control" name="newAddress" id="user-address" value="${sessionScope.LOGIN_USER.address}"
                                         placeholder="enter new address" required="" />
                                 </div>
                             </div>

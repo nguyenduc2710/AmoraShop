@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import orderDetail.OrderDetailDAO;
 import orders.OrderDAO;
 import org.apache.jasper.tagplugins.jstl.core.Catch;
 import product.ProductDAO;
@@ -45,7 +46,7 @@ public class test {
 //            System.out.println(list.get(i).toString());
 //        }
 
-OrderDAO  dao = new OrderDAO();
-dao.updateOrderStatus(66,"DONE");
+OrderDetailDAO dao = new OrderDetailDAO();
+//        System.out.println(dao.getListOrderDetailByOrderID().toString());
     }
 }

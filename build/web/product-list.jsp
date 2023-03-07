@@ -56,9 +56,26 @@
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseAuthentication" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <!--                                <nav class="sb-sidenav-menu-nested nav">
+                                                                    <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
+                                                                    <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
+                                                                </nav>-->
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
-                                    <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
+                                    <!--                    ROLE load tu database kh dc fix cung-->   
+                                    <c:choose>
+                                        <c:when test="${sessionScope.LOGIN_USER.roleID == 1}">
+                                            <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
+                                            <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
+                                            <a class="nav-link" href="OrderCompleteController">Order Complete</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
+                                            <a class="nav-link" href="OrderProcessingStaffController">Order Processing</a>
+                                            <a class="nav-link" href="OrderCompleteController">Order Complete</a>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
                                 </nav>
                             </div>
 
@@ -67,7 +84,14 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as: </div>
-                        ADMIN ${sessionScope.LOGIN_USER.fullName}
+                        <c:choose>
+                            <c:when test="${sessionScope.LOGIN_USER.roleID == 1}">
+                                ADMIN: ${sessionScope.LOGIN_USER.fullName}
+                            </c:when>
+                            <c:otherwise>
+                                STAFF: ${sessionScope.LOGIN_USER.fullName}
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </nav>
             </div>
@@ -128,7 +152,7 @@
 
                                                     </c:url>
                                                     <a href="${update}">Update</a> 
-                                                    
+
                                                     <!--delete-->
                                                     <c:url var="delete" value="MainController">
                                                         <c:param name="action" value="Delete"></c:param>
@@ -138,7 +162,7 @@
                                                     <a href="${delete}" onclick="return confirm('Are you sure you want to delete?')">delete</a>
                                                 </td>
 
-                                               
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>

@@ -39,7 +39,7 @@
                         </nav>
                     </div>
                 </div>
-               
+
 
                 <div class="row">
                     <div class="col-lg-4">
@@ -116,11 +116,16 @@
 
         </h2>
         <h2>
+            <form action="OrderListByUserIdController">
+                <input type="submit" value="View Your Orders">
+            </form>
+        </h2>
+        <h2>
             <form action="LogoutController" method="POST">
                 <input type="submit" name="action" value="Logout">
             </form>
         </h2>
 
-
+<jsp:include page="components/footer.jsp" />
     </body>
 </html>

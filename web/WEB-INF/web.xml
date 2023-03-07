@@ -132,6 +132,26 @@
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <servlet-class>paypal.ExecutePaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderCompleteController</servlet-name>
+        <servlet-class>orderController.OrderCompleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailController</servlet-name>
+        <servlet-class>orderController.OrderDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderListByUserIdController</servlet-name>
+        <servlet-class>orderController.OrderListByUserIdController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatusOrderController</servlet-name>
+        <servlet-class>orderController.UpdateStatusOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderProcessingStaffController</servlet-name>
+        <servlet-class>orderController.OrderProcessingStaffController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -263,6 +283,26 @@
     <servlet-mapping>
         <servlet-name>ExecutePaymentServlet</servlet-name>
         <url-pattern>/ExecutePaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderCompleteController</servlet-name>
+        <url-pattern>/OrderCompleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailController</servlet-name>
+        <url-pattern>/OrderDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderListByUserIdController</servlet-name>
+        <url-pattern>/OrderListByUserIdController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatusOrderController</servlet-name>
+        <url-pattern>/UpdateStatusOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderProcessingStaffController</servlet-name>
+        <url-pattern>/OrderProcessingStaffController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

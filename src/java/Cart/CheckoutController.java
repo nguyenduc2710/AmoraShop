@@ -282,7 +282,9 @@ public class CheckoutController extends HttpServlet {
                                     session.setAttribute("DATE", date);
                                     session.setAttribute("ORDER_ID", orderId);
                                     session.setAttribute("CART", cart);
-                                    //       session.setAttribute("ProductQuantity", price);
+                                    
+                                    //Checkout status
+                                    session.setAttribute("SUCCESS_PAY", "Your order has submit successfully");
                                 }
                             }
                         }//create order successful
