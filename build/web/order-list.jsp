@@ -77,7 +77,7 @@
                                 <td>${order.orderDate}</td>
                                 <td>${order.totalPrice}</td>
                                 <td>${order.note}</td>
-
+                                
                                 <td>
                                     <form action="OrderDetailController" method="POST">
                                         <input type="hidden" name="orderID" value="${order.orderID}">

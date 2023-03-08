@@ -104,145 +104,148 @@
         <a href="ShowProductController">Click here to buy more</a>  
     </c:if>--%>
         <jsp:include page="components/header.jsp"/>
+        <c:if test="${sessionScope.LOGIN_USER.roleID == 1 ||sessionScope.LOGIN_USER.roleID == 3 }">
+            <h1 style="color: red; text-align:center">Your Role Not Support This Service</h1>
+        </c:if>
+        <c:if test="${sessionScope.LOGIN_USER.roleID == 2||sessionScope.LOGIN_USER.roleID == null }">
+            <c:set var="cart" value="${sessionScope.CART.items}" />
+            <c:set var="userProduct" value="${sessionScope.USER_PRODUCTS}" />
+            <%
+                float total = 0;
+            %>
+            <div class="body-container">
 
-        <c:set var="cart" value="${sessionScope.CART.items}" />
-        <c:set var="userProduct" value="${sessionScope.USER_PRODUCTS}" />
-        <%
-            float total = 0;
-        %>
-        <div class="body-container">
-
-            <div class="bread-crumb-container">
-                <div class="bread-crumbs">
-                    <a href="homePage.html" class="main-page-link">Home</a>
-                    <div class="slash">/</div>
-                    <a href="#" class="main-page link">Cart</a>
+                <div class="bread-crumb-container">
+                    <div class="bread-crumbs">
+                        <a href="homePage.html" class="main-page-link">Home</a>
+                        <div class="slash">/</div>
+                        <a href="#" class="main-page link">Cart</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="search-heading-page">
-                <div class="cart-container">
-                    <div class="header-text-container">
-                        <div class="header-page-title">
-                            Your Inventory
-                        </div>
-                        <div class="header-quantity-result">
-                            <c:if test="${not empty cart}">
-                                There are ${sessionScope.CART.items.size()} products in your cart    
-                            </c:if>
-                            <c:if test="${empty cart}">
-                                There is no product in your cart    
-                            </c:if>
-                            <c:if test="${requestScope.error != null}">
-                                <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; padding-top: 5px ">
-                                    <h3 class="text-danger">${error}</h3>
-                                    <a class="login-navigation" href="login.jsp">Click here to login</a>    
-                                </div>
-                            </c:if> 
+                <div class="search-heading-page">
+                    <div class="cart-container">
+                        <div class="header-text-container">
+                            <div class="header-page-title">
+                                Your Inventory
+                            </div>
+                            <div class="header-quantity-result">
+                                <c:if test="${not empty cart}">
+                                    There are ${sessionScope.CART.items.size()} products in your cart    
+                                </c:if>
+                                <c:if test="${empty cart}">
+                                    There is no product in your cart    
+                                </c:if>
+                                <c:if test="${requestScope.error != null}">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; padding-top: 5px ">
+                                        <h3 class="text-danger">${error}</h3>
+                                        <a class="login-navigation" href="login.jsp">Click here to login</a>    
+                                    </div>
+                                </c:if> 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="cart-content-container">
-                <div class="cart-product-list row">
-                    <c:if test="${not empty cart}">
+                <div class="cart-content-container">
+                    <div class="cart-product-list row">
+                        <c:if test="${not empty cart}">
 
-                        <c:forEach var="item" items="${cart}">
-                            <c:set var="productId" value="${item.key}" />
-                            <c:set var="quantity" value="${item.value}" />
-                            <c:forEach var="product" items="${userProduct}">
-                                <c:if test="${product.productID eq productId}">
-                                    <div class="cart-item row">
-                                        <div class="product-image-container col-3">
-                                            <img class="cart-item-img" src="${product.image}"
-                                                 alt="${product.name}">
-                                        </div>
-                                        <div class="item-content col-9">
-                                            <a href="ShowProductDetailUserController?product_id=${product.productID}" class="item-name">
-                                                ${product.name}
-                                            </a>                                                                                                        
-
-                                            <div class="item-price">
-                                                ${product.price}$
+                            <c:forEach var="item" items="${cart}">
+                                <c:set var="productId" value="${item.key}" />
+                                <c:set var="quantity" value="${item.value}" />
+                                <c:forEach var="product" items="${userProduct}">
+                                    <c:if test="${product.productID eq productId}">
+                                        <div class="cart-item row">
+                                            <div class="product-image-container col-3">
+                                                <img class="cart-item-img" src="${product.image}"
+                                                     alt="${product.name}">
                                             </div>
-                                            
-                                            <c:if test="${not empty requestScope.ERROR_QUAN_DB}">
-                                                <div class="error-notification">${requestScope.ERROR_QUAN_DB}</div>
-                                            </c:if>
-                                            <form action="UpdateItemCartServlet" class="select-quantity-area">
-                                                <button type="submit" value="-" name="minusQuan" class="quantity-btn">
-                                                    -
-                                                </button>
-                                                <p class="quantity-selector">${quantity}</p>
-                                                <button type="submit" name="plusQuan" value="+" class="quantity-btn">
-                                                    +
-                                                </button>
-                                                <input type="hidden" name="productID" value="${productId}">
-                                            </form>
+                                            <div class="item-content col-9">
+                                                <a href="ShowProductDetailUserController?product_id=${product.productID}" class="item-name">
+                                                    ${product.name}
+                                                </a>                                                                                                        
 
-                                            <div class="product-item-action">
-                                                <form action="RemoveCartServlet">
+                                                <div class="item-price">
+                                                    ${product.price}$
+                                                </div>
 
-                                                    <button class="delete-item-btn" type="submit" name="chkItem" value="${productId}">
-                                                        <img class="detete-item-icon" src="assets/font/close_black_24dp.svg" alt="Remove Item">
+                                                <c:if test="${not empty requestScope.ERROR_QUAN_DB}">
+                                                    <div class="error-notification">${requestScope.ERROR_QUAN_DB}</div>
+                                                </c:if>
+                                                <form action="UpdateItemCartServlet" class="select-quantity-area">
+                                                    <button type="submit" value="-" name="minusQuan" class="quantity-btn">
+                                                        -
                                                     </button>
+                                                    <p class="quantity-selector">${quantity}</p>
+                                                    <button type="submit" name="plusQuan" value="+" class="quantity-btn">
+                                                        +
+                                                    </button>
+                                                    <input type="hidden" name="productID" value="${productId}">
                                                 </form>
 
-                                                <div class="item-total-money">
-                                                    <fmt:formatNumber value="${product.price*quantity}" pattern="#.##"/>$                        
+                                                <div class="product-item-action">
+                                                    <form action="RemoveCartServlet">
 
-                                                    <c:set var="total_all" value="${total_all + product.price*quantity}" />
+                                                        <button class="delete-item-btn" type="submit" name="chkItem" value="${productId}">
+                                                            <img class="detete-item-icon" src="assets/font/close_black_24dp.svg" alt="Remove Item">
+                                                        </button>
+                                                    </form>
+
+                                                    <div class="item-total-money">
+                                                        <fmt:formatNumber value="${product.price*quantity}" pattern="#.##"/>$                        
+
+                                                        <c:set var="total_all" value="${total_all + product.price*quantity}" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>                                       
-                                </c:if>
+                                        </div>                                       
+                                    </c:if>
+                                </c:forEach>
                             </c:forEach>
-                        </c:forEach>
-                    </c:if>
+                        </c:if>
 
-                </div>
-                <c:if test="${not empty cart}">
-                    <div class="order-info-container">
-                        <div class="order-info">
-                            Total price:
-                            <div class="total-price">
-                                <fmt:formatNumber value="${total_all}" pattern="#.##"/>$                        
+                    </div>
+                    <c:if test="${not empty cart}">
+                        <div class="order-info-container">
+                            <div class="order-info">
+                                Total price:
+                                <div class="total-price">
+                                    <fmt:formatNumber value="${total_all}" pattern="#.##"/>$                        
+                                </div>
+                            </div>
+
+                            <div class="order-actions">
+                                <a class="button-57" href="ShowProductController" class="continues-buying-btn">
+                                    <span>Continues Buying</span>
+                                    <span>Continues Buying</span>
+                                </a>
+                                <a class="button-57" href="CheckoutController" class="checkout-btn">  
+                                    <span>Check Out</span>
+                                    <span>Check Out</span>
+                                </a>
                             </div>
                         </div>
+                    </c:if>
 
-                        <div class="order-actions">
+                    <c:if test="${empty cart}">
+                        <div class="order-actions-no-product">
+                            <span class="noProduct">
+                                Your cart is empty.
+                            </span>
                             <a class="button-57" href="ShowProductController" class="continues-buying-btn">
                                 <span>Continues Buying</span>
                                 <span>Continues Buying</span>
                             </a>
-                            <a class="button-57" href="CheckoutController" class="checkout-btn">  
-                                <span>Check Out</span>
-                                <span>Check Out</span>
-                            </a>
                         </div>
-                    </div>
-                </c:if>
+                    </c:if>
 
-                <c:if test="${empty cart}">
-                    <div class="order-actions-no-product">
-                        <span class="noProduct">
-                            Your cart is empty.
-                        </span>
-                        <a class="button-57" href="ShowProductController" class="continues-buying-btn">
-                            <span>Continues Buying</span>
-                            <span>Continues Buying</span>
-                        </a>
-                    </div>
-                </c:if>
+                </div>
 
             </div>
 
-        </div>
-
-
+        </c:if>
         <jsp:include page="components/footer.jsp"/>
 
 

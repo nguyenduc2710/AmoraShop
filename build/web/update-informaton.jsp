@@ -91,10 +91,9 @@
                 <div class="text-center">
                     <img src="${sessionScope.LOGIN_USER.image}" class="avatar img-circle img-thumbnail"
                         alt="avatar">
-                    <h6 class="update-img-des">Upload a different photo...</h6>
-                    <input type="file" name="image" class="text-center center-block file-upload update-img-action">
+                    
                 </div>
-                </hr>
+                
             </div><!--/col-3-->
 
             <div class="col-sm-9">
@@ -103,7 +102,16 @@
                         <hr/>
                         <form class="form row" action="UpdateProfileController" method="POST" id="registrationForm" enctype="multipart/form-data">
                             <input type="hidden" name="email" value="${sessionScope.LOGIN_USER.email}">
-
+                            
+                            <div class="form-group col-6">
+                                <div>
+                                    <label class="input-field-title" for="first_name">
+                                        Update Image
+                                    </label>
+                                    <input type="file" name="image" class="form-control">
+                                    <input type="hidden" name="image-new" value="${sessionScope.LOGIN_USER.image}"/>
+                                </div>
+                            </div>
                             <div class="form-group col-6">
                                 <div>
                                     <label class="input-field-title" for="first_name">

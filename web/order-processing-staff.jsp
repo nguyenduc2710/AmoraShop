@@ -50,7 +50,9 @@
                                 <td>
                                     <form action="OrderDetailController" method="POST">
                                         <input type="hidden" name="orderID" value="${order.orderID}">
-
+                                        <input type="hidden" name="status" value="${order.status}">
+                                        <input type="hidden" name="totalPrice" value="${order.totalPrice}">
+                                        <input type="hidden" name="orderDate" value="${order.orderDate}">
                                         <input type="submit" value="View Your Order Detail">
                                     </form>
                                 </td>
@@ -61,9 +63,9 @@
                                             <input type="hidden" name="orderID" value="${order.orderID}">
                                             Trang thái đơn hàng
                                             <select name="status" onchange="this.form.submit()">
-                                                <option value="processing">${order.status}</option>
-                                                <option value="cancel">Cancel</option>
-                                                <option value="confirmed">Confirmed</option>
+                                                <option value="PROCESSING">${order.status}</option>
+                                                <option value="CANCEL">CANCEL</option>
+                                                <option value="FINISHED">FINISHED</option>
                                             </select>
                                         </form>
                                     </td>

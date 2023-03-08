@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import java.io.IOException;
@@ -15,35 +14,39 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import user.UserDAO;
 import user.UserDTO;
+import utils.Encode;
 
 /**
  *
  * @author thaiq
  */
 public class LoginController extends HttpServlet {
-   
+
     private static final String ERROR = "login.jsp";
 //    private static final String ADMIN_PAGE = "admin.jsp";
 //    private static final String STAFF_PAGE = "staff.jsp";
     private static final String USER_PAGE = "user.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");      
-            String url = ERROR;
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            password = Encode.toSHA1(password);
+
             UserDAO dao = new UserDAO();
             UserDTO loginUser = dao.checkLogin(email, password);
             //validate user in here
             if (loginUser != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_USER", loginUser);
-                session.setMaxInactiveInterval(60*60); // 1 hour
+                session.setMaxInactiveInterval(60 * 60); // 1 hour
                 int roleID = loginUser.getRoleID();
                 String status = loginUser.getStatus();
                 if (status.equalsIgnoreCase("ACTIVE")) {
-                    if(roleID == 1) {
+                    if (roleID == 1) {
                         url = "/ShowUserController";
                     } else if (roleID == 2) {
                         url = USER_PAGE;
@@ -52,7 +55,7 @@ public class LoginController extends HttpServlet {
                     } else {
                         request.setAttribute("ERROR", "Your role is not support:");
                     }
-                }else{
+                } else {
                     request.setAttribute("ERROR", "Your account does not have access to system!!!");
                 }
 
@@ -64,12 +67,12 @@ public class LoginController extends HttpServlet {
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -77,12 +80,13 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -90,12 +94,13 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

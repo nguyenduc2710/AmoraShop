@@ -43,40 +43,44 @@ public class UpdateProfileController extends HttpServlet {
         String email = request.getParameter("email");
         String url = "update-information.jsp";
         String newFullName = request.getParameter("newName");
+        String newPassword = request.getParameter("newPassword");
         String newGender = request.getParameter("newGender");
         String newPhone = request.getParameter("newPhone");
         String newAddress = request.getParameter("newAddress");
+        String image = request.getParameter("image-new");
+        String folderName = "images";
 
-//        String folderName = "images";
-//
-//        String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
-//
-//        File dir = new File(uploadPath);
-//        if (!dir.exists()) {
-//            dir.mkdirs();
-//        }
-//        Part filePart = request.getPart("image");
-//        String fileName = filePart.getSubmittedFileName();
-//        String path = folderName + File.separator + fileName;
-//        Timestamp added_date = new Timestamp(System.currentTimeMillis());
-//        InputStream is = filePart.getInputStream();
-//        Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+        Part filePart = request.getPart("image");
+        String fileName = filePart.getSubmittedFileName();
+        String path = "";
+        String uploadPath = request.getServletContext().getRealPath("") + File.separator + folderName;
+
+        if (fileName != null && !fileName.isEmpty()) {
+            File dir = new File(uploadPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            path = folderName + File.separator + fileName;
+
+            InputStream is = filePart.getInputStream();
+            Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
+        } else {
+            // Use existing image if file is null
+            path = image;
+        }
 
         HttpSession session = request.getSession();
         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         UserDAO dao = new UserDAO();
 
         if (email.equals(loginUser.getEmail())) {
-            loginUser.setFullName(newFullName);
-            loginUser.setGender(newGender);
-            loginUser.setPhoneNumber(newPhone);
-//            loginUser.setImage(path);
-            dao.updateUserByEmail(newFullName,newGender, newPhone, newAddress,"https://i.pinimg.com/236x/e4/21/92/e42192b0682ede9d80d92260fb5e17cd.jpg", email);
+            dao.updateUserByEmail(newFullName, newPassword,newGender, newPhone, newAddress, email, path);
             session.setAttribute("LOGIN_USER", loginUser);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

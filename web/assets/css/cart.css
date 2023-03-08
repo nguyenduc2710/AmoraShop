@@ -340,6 +340,10 @@
     width: 100%;
 }
 
+.cart-content-container {
+    padding: 0 100px;
+}
+
 .item-content {
     display: flex;
     flex-direction: column;

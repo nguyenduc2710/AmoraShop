@@ -33,7 +33,7 @@
                             <th>Total Bill</th>
                             <th>Note</th>
                             <th>View Details</th>
-                           
+
                         </tr>
                     </thead>
                     <tbody>
@@ -48,12 +48,14 @@
                         <form action="OrderDetailController" method="POST">
                             <td>
                                 <input type="hidden" name="orderID" value="${order.orderID}">
-
+                                <input type="hidden" name="status" value="${order.status}">
+                                <input type="hidden" name="totalPrice" value="${order.totalPrice}">
+                                <input type="hidden" name="orderDate" value="${order.orderDate}">
                                 <input type="submit" value="View Your Order Detail">
                             </td>
                         </form>
 
-                    
+
 
                         </tr>
                     </c:forEach>

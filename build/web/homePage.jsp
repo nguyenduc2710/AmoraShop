@@ -34,8 +34,8 @@
             <div class="body-container">
 
                 <div id="banner">
-                    <img class="mySlides home-banner" src="assets/images/happyNewYearWhiteTheme.jpg" alt="Happy Cat Year 2023">
                     <img class="mySlides home-banner" src="assets/images/threePerfumeBottleBlackTheme.png" alt="Beautiful man likely perfume">
+                    <img class="mySlides home-banner" src="assets/images/happyNewYearWhiteTheme.jpg" alt="Happy Cat Year 2023">                    
                     <img class="mySlides home-banner" src="assets/images/twoPefumeWomanTheme.png" alt="Beautiful woman likely perfume">
                     <button class="button-navigation-banner prev-banner-button" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="button-navigation-banner next-banner-button" onclick="plusDivs(1)">&#10095;</button>

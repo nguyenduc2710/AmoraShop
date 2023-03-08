@@ -44,6 +44,7 @@
                                             </div>
 
                                             <img  width="100px" class="mt-5"  src="${us.image}"/>
+                                            <input type="hidden" name="image-new" value="${us.image}"/>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">

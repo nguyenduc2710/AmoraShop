@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import user.UserDAO;
 import user.UserDTO;
+import utils.Encode;
 
 /**
  *
@@ -42,6 +43,8 @@ public class NewPasswordController extends HttpServlet {
         if (newPassword != null && confPassword != null && newPassword.equals(confPassword)) {
             UserDAO dao = new UserDAO();
             String email = (String) session.getAttribute("email");
+            newPassword = Encode.toSHA1(newPassword);
+
             dao.updatePassword(newPassword, email);
             request.setAttribute("status", "Update new password successfully");
             request.getRequestDispatcher("login.jsp").forward(request, response);

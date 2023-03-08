@@ -95,7 +95,6 @@ public class UpdateUserController extends HttpServlet {
 
             HttpSession session = request.getSession();
 
-            String message = null;
             UserDAO dao = new UserDAO();
 
             String fullName = request.getParameter("fullName");
@@ -107,6 +106,8 @@ public class UpdateUserController extends HttpServlet {
             String email = request.getParameter("email");
             String phoneNumber = request.getParameter("phoneNumber");
             String status = request.getParameter("status");
+            
+            String image = request.getParameter("image-new");
 
             int roleID = Integer.parseInt(request.getParameter("roleID"));
 
@@ -131,8 +132,7 @@ public class UpdateUserController extends HttpServlet {
                 Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
             } else {
                 // Use existing image if file is null
-                UserDTO user = (UserDTO) session.getAttribute("us");
-                path = user.getImage();
+                path = image;
             }
 
             UserDTO updateUser = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, path);

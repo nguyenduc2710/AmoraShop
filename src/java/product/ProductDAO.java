@@ -73,6 +73,94 @@ public class ProductDAO {
     
     private static final String COUNT_PRODUCT_SEARCH_BY_NAME = "select count(product_id) from Product WHERE product_name LIKE ?";
     
+    //moi
+    private static final String NEW_ARRIVALS_PRODUCT_BY_PAGGINGSIZE = "  SELECT [Product].*, [ProductImage].image FROM [Product] INNER JOIN [ProductImage] ON [Product].product_id = [ProductImage].product_id WHERE [Product].status = 'NEW' order by price offset (?-1)*? row fetch next ? rows only";
+
+    private static final String COUNT_NEW_ARRIVALS_PRODUCT = "select count(product_id) from Product WHERE status = 'NEW'";
+
+    public List<ProductDTO> getAllProductByStatusArrivals(int page, int PAGE_SIZE) throws SQLException {
+        List<ProductDTO> list = new ArrayList<>();
+        ProductDTO product = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(NEW_ARRIVALS_PRODUCT_BY_PAGGINGSIZE);
+                ptm.setInt(1, page);
+                ptm.setInt(2, PAGE_SIZE);
+                ptm.setInt(3, PAGE_SIZE);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("product_id");
+                    String name = rs.getString("product_name");
+                    int quantity = rs.getInt("quantity");
+                    String status = rs.getString("status");
+                    String description = rs.getString("description");
+                    String capacity = rs.getString("capacity");
+                    String brand = rs.getString("brand");
+                    float price = rs.getFloat("price");
+                    int categoryID = rs.getInt("category_id");
+                    String image = rs.getString("image");
+                    list.add(new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public int getNewArrivalsProductPage() throws SQLException {
+
+        ProductDTO product = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_NEW_ARRIVALS_PRODUCT);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
+
+    
+    
+    
+    
     public int getProductPage(String prdName) throws SQLException {
 
         ProductDTO product = null;

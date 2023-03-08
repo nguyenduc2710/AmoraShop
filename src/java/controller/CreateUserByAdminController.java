@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import user.UserDAO;
+import utils.Encode;
 
 /**
  *
@@ -47,6 +48,7 @@ public class CreateUserByAdminController extends HttpServlet {
             UserDAO dao = new UserDAO();
             boolean user = dao.checkDuplicate(email);
             if (user == false) {
+                password = Encode.toSHA1(password);
 
                 dao.insertNewUserByAdmin(fullName, password, gender, email, phoneNumber, address, "ACTIVE", 3);
                 request.setAttribute("successfully", "successfully added new user");
@@ -61,7 +63,6 @@ public class CreateUserByAdminController extends HttpServlet {
             Logger.getLogger(CreateUserByAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

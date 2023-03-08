@@ -27,7 +27,9 @@ public class test {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         //Test getAllUsers() function in User DAO
-//        UserDAO dao = new UserDAO();
+        UserDAO dao = new UserDAO();
+        dao.updateUserByEmail("Qshu","1" ,"NAm", "123", "123", "123", "Kayme@email.com");
+        System.out.println(dao.getAllUsers());
 //        List<UserDTO> list = dao.getAllUsers();
 //        if(list.size() > 1){
 //            for (int i = 0; i < list.size(); i++) {
@@ -46,7 +48,7 @@ public class test {
 //            System.out.println(list.get(i).toString());
 //        }
 
-OrderDetailDAO dao = new OrderDetailDAO();
+
 //        System.out.println(dao.getListOrderDetailByOrderID().toString());
     }
 }

@@ -107,15 +107,18 @@
                         </div>
 
                         <div class="order-footer-actions">
+
                             <div class="payment-navigations">
                                 
-                                <form action="AuthorizePaymentServlet" method="POST">
-<%--                                    <input type="hidden" value="${sessionScope.ORDER_ID}">
-                                    <input type="hidden" value="${sessionScope.TOTAL_BILL}">--%>
-                                    <input type="hidden" value="<%= request.getParameter("orderID") %>">
-                                    <input type="hidden" value="<%= request.getParameter("totalPrice") %>">
-                                    <button type="submit" class="payment-actions">Pay with PayPal</button>
-                                </form>
+                                
+                                    <div>
+                                        <form action="AuthorizePaymentServlet" method="POST">
+                                            <input type="hidden" value="<%= request.getParameter("orderID") %>">
+                                            <input type="hidden" value="<%= request.getParameter("totalPrice") %>">
+                                            <button type="submit" class="payment-actions">Pay with PayPal</button>
+                                        </form>    
+                                    </div>
+                                
                                 <button class="payment-actions">
                                     Cancel Order
                                 </button>
@@ -123,7 +126,9 @@
                                     Contact Us
                                 </button>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
