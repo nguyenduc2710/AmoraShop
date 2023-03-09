@@ -40,7 +40,7 @@
             <a class="header-nav-link" href="#">
                 <li class="main-menu-item">Brand</li>
             </a>
-            <a class="header-nav-link" href="#">
+            <a class="header-nav-link" href="ShowAllArrivalsProduct">
                 <li class="main-menu-item">New Arrivals</li>
             </a>
             <a class="header-nav-link" href="#">

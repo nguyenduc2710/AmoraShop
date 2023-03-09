@@ -18,6 +18,7 @@ import product.ProductDAO;
 import product.ProductDTO;
 import user.UserDAO;
 import user.UserDTO;
+import utils.Encode;
 
 /**
  *
@@ -26,27 +27,10 @@ import user.UserDTO;
 public class test {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        //Test getAllUsers() function in User DAO
-//        UserDAO dao = new UserDAO();
-//        List<UserDTO> list = dao.getAllUsers();
-//        if(list.size() > 1){
-//            for (int i = 0; i < list.size(); i++) {
-//                System.out.println(list.get(i).toString());
-//            }
-//        } else if(list.size() < 0){
-//            System.out.println("NULL");
-//    }
-//}
-
-        //Test getAllProduct() function in product DAO
-        
-//      ProductDAO dao = new ProductDAO();
-//      List<ProductDTO> list = dao.getAllProducts();
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i).toString());
-//        }
+       
+        String pass = Encode.toSHA1("1");
 
 OrderDetailDAO dao = new OrderDetailDAO();
-//        System.out.println(dao.getListOrderDetailByOrderID().toString());
+        System.out.println(pass);
     }
 }

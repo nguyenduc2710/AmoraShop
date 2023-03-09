@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import user.UserDAO;
+import utils.Encode;
 
 /**
  *
@@ -44,6 +45,7 @@ public class RegisterController extends HttpServlet {
                 boolean user = dao.checkDuplicate(email);
                 
                 if (user == false) {
+                    password = Encode.toSHA1(password);
                     //dang ky thanh cong
                     dao.register(fullName, password, gender, email, mobile, address);
                     request.setAttribute("successfully", "Register Sucessfully");

@@ -61,9 +61,9 @@
                                             <input type="hidden" name="orderID" value="${order.orderID}">
                                             Trang thái đơn hàng
                                             <select name="status" onchange="this.form.submit()">
-                                                <option value="processing">${order.status}</option>
-                                                <option value="cancel">Cancel</option>
-                                                <option value="confirmed">Confirmed</option>
+                                                <option value="PROCESSING">${order.status}</option>
+                                                <option value="CANCELED">Cancel</option>
+                                                <option value="CONFIRMED">Confirmed</option>
                                             </select>
                                         </form>
                                     </td>

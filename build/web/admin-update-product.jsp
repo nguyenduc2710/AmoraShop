@@ -44,8 +44,9 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="available_quantity">STATUS</label>  
                     <div class="col-md-4">
-                        <input type="radio" name="pStatus" value="Available"  checked="checked">Available 
-                        <input type="radio" name="pStatus" value="Unavailable" >Unavailable
+                        <input type="radio" name="pStatus" value="AVAILABLE"  checked="checked">Available 
+                        <input type="radio" name="pStatus" value="UNAVAILABLE" >Unavailable
+                        <input type="radio" name="pStatus" value="NEW" >New
                     </div>
                 </div>
 

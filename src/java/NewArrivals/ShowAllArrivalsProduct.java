@@ -3,33 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orderController;
+package NewArrivals;
 
-import jakarta.servlet.RequestDispatcher;
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import product.ProductDAO;
-import product.ProductDTO;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
-import orders.OrderDAO;
-import orders.OrderDTO;
+import product.ProductDAO;
+import product.ProductDTO;
 import user.UserDTO;
 
 /**
  *
  * @author long
  */
-public class UpdateStatusOrderController extends HttpServlet {
+public class ShowAllArrivalsProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,30 +40,41 @@ public class UpdateStatusOrderController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            UserDTO dto = (UserDTO) session.getAttribute("LOGIN_USER");
-            String status = request.getParameter("status");
-            int orderID = Integer.parseInt(request.getParameter("orderID"));
-            OrderDAO order = new OrderDAO();
-            boolean checkCancelOrder = order.updateStatusOder(status, orderID);
-            if (checkCancelOrder) {
-                if (status.equals("CANCELED")) {
-                    request.setAttribute("cancel", "Cancel succsessfull");
-                } else {
-                    request.setAttribute("confirmed", "Confirmed succsessfull");
-                }
-
-                if (dto.getRoleID() == 2) {
-                    request.getRequestDispatcher("OrderListByUserIdController").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("OrderProcessingStaffController").forward(request, response);
-                }
+              final int PAGE_SIZE = 12;
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
             }
+            ProductDAO productDAO = new ProductDAO();
+            List<ProductDTO> listProduct = productDAO.getAllProductByStatusArrivals(page, PAGE_SIZE);
+            //tinh tong so san pham trongdatabase r tra ve so trang 
+            //de hien len man hinh jsp 
+            int totalProducts = productDAO.getNewArrivalsProductPage();
+            int totalPage = totalProducts / PAGE_SIZE;
+            //chia lay du totalProducts neu co du thi + 1 page cho totalPage
+            if (totalProducts % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        
+            request.setAttribute("page", page);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("totalProducts", totalProducts);
+            request.setAttribute("products", listProduct);
+
+            List<CategoryDTO> ProductSearchResult = new CategoryDAO().getAllCategory();
+            request.setAttribute("PRODUCT_NAME_RESULT", ProductSearchResult);
+
+            if(listProduct.isEmpty()){
+                request.setAttribute("SearchErrorNote", "No result!!!");
+            }
+             request.getRequestDispatcher("new-arrivals.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdateStatusOrderController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdateStatusOrderController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowAllArrivalsProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

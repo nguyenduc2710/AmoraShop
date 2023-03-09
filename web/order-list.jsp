@@ -11,8 +11,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/js/bootstrap.bundle.js">
+        <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <script src="assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
         <link rel="stylesheet" href="assets/css/base.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/products.css">
@@ -21,15 +21,11 @@
         <link rel="icon" type="image/png" href="assets/images/LogoDoneEdited.png" />
         <title>AmoraShop</title>
 
-        <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
-
         <style>
             .dropdown:hover .dropdown-menu {
                 display: block;
             }
         </style>
-
-
     </head>
     <body>
 
@@ -48,12 +44,9 @@
         <c:if test="${sessionScope.odto.size() != 0}">
             <c:if test="${sessionScope.LOGIN_USER != null}">
 
-
                 <main>
-
                     <h3> History Your Order</h3>
                 </div>
-
 
                 <table border="1">
                     <thead>
@@ -68,6 +61,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <c:forEach items="${o}" var="order">
                             <tr>
@@ -77,7 +71,6 @@
                                 <td>${order.orderDate}</td>
                                 <td>${order.totalPrice}</td>
                                 <td>${order.note}</td>
-
                                 <td>
                                     <form action="OrderDetailController" method="POST">
                                         <input type="hidden" name="orderID" value="${order.orderID}">
@@ -90,7 +83,6 @@
                                 </td>
 
                                 <c:if test="${order.status =='cancel' ||order.status =='confirmed' }">
-
                                     <td>
                                         <span>
                                             <!-- Button trigger modal -->
@@ -120,7 +112,6 @@
                                     </td>
                                 </c:if>
                                 <c:if test="${order.status =='PROCESSING'}">
-
                                     <td>  
                                         <span>
                                             <!-- Button trigger modal -->
@@ -142,8 +133,8 @@
                                                         <div class="modal-footer">
                                                             <form action="UpdateStatusOrderController" method="get">
                                                                 <input type="hidden" name="orderID" value="${order.orderID}">
-                                                                <input type="hidden" name="status" value="cancel">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                <input type="hidden" name="status" value="CANCELED">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
                                                                 <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Cancel Order</button>
                                                             </form>
                                                         </div>
@@ -152,9 +143,6 @@
                                             </div>
                                         </span>
                                     </td>
-
-
-
                                 </c:if>
 
                             </tr>
@@ -181,108 +169,134 @@
 <c:if test="${sessionScope.odto.size() == 0}">
     <h1>You don't have any orders</h1>
 </c:if> 
-<!--        <div class="dropdown">
-            <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filter Orders
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" onclick="filterOrders('all')">All Orders</a>
-                <a class="dropdown-item" href="#" onclick="filterOrders('processing')">Order Processing</a>
-                <a class="dropdown-item" href="#" onclick="filterOrders('cancel,confirmed')">Order Completed</a>
-            </div>
-        </div>
-
-        <div class="body-container">
-            <div class="bread-crumb-container">
-                <div class="bread-crumbs">
-                    <a href="homePage.jsp" class="main-page link">Home</a>
-                    <div class="slash">/</div>
-                    <a href="products-user-page.jsp" class="main-page link">Products</a>
-                    <div class="slash">/</div>
-                    <a href="#" class="main-page link">Orders</a>
-                </div>
-            </div>
-            <div class="user-order-container">
-                <div class="product-list-header">
-                    <h2 class="category-title">Your order</h2>
-                    <div class="category-sort-cotainer">
-                        <select class="category-sort-options">
-                            <option value="all-order" onclick="filterOrders('all')">All Orders</option>
-                            <option value="finished-order" onclick="filterOrders('processing')">Order Processing</option>
-                            <option value="processing-order" onclick="filterOrders('cancel,confirmed')">Order Completed</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="order-details-wrap">
-
-                    <div class="order-title">
-                        <div class="order-title-left">
-                            <div class="order-id">
-                                Order ID: <b>23</b>
-                            </div>
-                            <div class="order-status">Status: <span style="color: #ee4d2d;">PROCESSING</span></div>
-                        </div>
-                        <div class="order-title-right">
-                            <div class="order-date">
-                                Date order: 22/2/2088
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="order-item-list">
-                        <div class="item-wrap">
-                            <div class="order-item">
-                                <div class="product-image-container">
-                                    <img src="assets/images/FreshOcean.png" alt="" class="cart-item-img">
-                                </div>
-                                <div class="order-describe">
-                                    <div class="order-item-name">
-                                        Fresh Ocean
-                                    </div>
-                                    <div class="order-item-capacity">
-                                        100ml
-                                    </div>
-                                    <div class="order-item-price">
-                                        50$
-                                    </div>
-                                    <div class="order-item-quantity">
-                                        x2
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="order-footer">
-                        <div class="order-total-money">
-                            <i class="order-icon">
-                                <img src="assets/font/paid_black_24dp.svg" alt="Paid">
-                            </i>
-                            Total:&nbsp;<span>3322$</span>
-                        </div>
-
-                        <div class="order-footer-actions">
-                            <div class="payment-navigations">
-                                <button class="payment-actions">
-                                    Cancel Order
-                                </button>
-                                <button class="payment-actions">
-                                    Contact Us
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-
-
-
 
 <form action="ShowProductController" method="POST">
     <td>
         <input type="submit" value="Click here to buy more!">
     </td>
 </form>
+
+
+<div class="body-container">
+
+    <div class="order-body">
+
+        <div class="order-list-header">
+            <h2 class="category-title">Order history</h2>
+
+            <button class="new-order-btn payment-actions">
+                <a href="ShowProductController">New Order</a>
+            </button>
+        </div>
+
+        <div class="order-list-body">
+            <c:set var="o" value="${sessionScope.odto}" />
+            <c:if test="${sessionScope.odto.size() != 0}">
+                <c:if test="${sessionScope.LOGIN_USER != null}">
+
+                    <!--                    <div class="order-sort-title">
+                                            <select class="order-sort-options">
+                                                <option value="feature">View All</option>
+                                                <option value="price-asc">Processing Order</option>
+                                                <option value="price-des">Finished Order</option>                        
+                                            </select>
+                                        </div>-->
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter Orders
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" onclick="filterOrders('all')">All Orders</a>
+                            <a class="dropdown-item" href="#" onclick="filterOrders('PROCESSING')">Order Processing</a>
+                            <a class="dropdown-item" href="#" onclick="filterOrders('FINISHED')">Order Completed</a>
+                        </div>
+                    </div>
+
+                    <div class="order-list-content">
+                        <table class="table order-table">
+
+                            <thead>
+                                <tr class="">
+                                    <th class="col-1">Order ID</th>
+                                    <th class="col">Address</th>
+                                    <th class="col-2">Date Order</th>
+                                    <th class="col">Note</th>
+                                    <th class="col">Total Price</th>
+                                    <th class="col-1">Status</th>
+                                    <th class="col-1 text-center">Action</th>
+                                    <th class="col-1 text-center">Details</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <c:forEach items="${o}" var="order">
+                                    <tr>
+                                        <td class="align-middle">${order.orderID}</td>
+                                        <td class="align-middle">${order.address}</td>
+                                        <td class="align-middle">${order.orderDate}</td>
+                                        <td class="align-middle">${order.note}</td>
+                                        <td class="align-middle">${order.totalPrice}$</td>
+                                        <td class="status-row">
+                                            <c:if test="${order.status eq 'PROCESSING'}">
+                                                <div class="status-icon processing-box">
+                                                    <img src="assets/font/pending_black_24dp.svg"
+                                                         class="processing-icon"
+                                                         alt="Processing" />
+                                                    <p>On going</p>
+                                                </div>    
+                                            </c:if>
+                                            <c:if test="${order.status eq 'CONFIRMED'}">
+                                                <div class="status-icon paid-box">
+                                                    <img src="assets/font/check_circle_white_24dp.svg"
+                                                         class="paid-icon"
+                                                         alt="paid" />
+                                                    <p>Paid</p>
+                                                </div>
+                                            </c:if>
+
+                                            <c:if test="${order.status eq 'CANCELED'}">
+                                                <div class="status-icon canceled-box">
+                                                    <img src="assets/font/highlight_off_black_24dp.svg"
+                                                         class="canceled-icon"
+                                                         alt="canceled" />
+                                                    <p>Canceled</p>
+                                                </div>
+                                            </c:if>
+                                        </td>
+                                        <td class="action-row align-middle">
+                                            <c:if test="${order.status eq 'PROCESSING'}">
+                                                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#blockBtn${order.orderID}">
+                                                    Cancel Order
+                                                </button>    
+                                            </c:if>
+                                        </td>
+                                        <td class="detail-row align-middle">
+                                            <form action="OrderDetailController" method="POST">
+                                                <input type="hidden" name="orderID" value="${order.orderID}">
+                                                <input type="hidden" name="status" value="${order.status}">
+                                                <input type="hidden" name="totalPrice" value="${order.totalPrice}">
+                                                <input type="hidden" name="orderDate" value="${order.orderDate}">
+
+                                                <input type="image" src="assets/font/article_black_24dp.svg" alt="ViewDetail">
+                                            </form>
+                                        </td>
+                                    </tr>                                    
+                                </c:forEach>             
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </c:if>
+            </c:if>
+        </div>
+
+
+    </div>
+
+</div>
+
+
 
 <script>
     function filterOrders(status) {
@@ -291,7 +305,7 @@
             var row = rows[i];
             var cells = row.getElementsByTagName("td");
             if (cells.length > 0) {
-                var orderStatus = cells[2].innerHTML;
+                var orderStatus = cells[6].innerHTML;
                 if (status.includes(orderStatus) || status === 'all') {
                     row.style.display = "";
                 } else {

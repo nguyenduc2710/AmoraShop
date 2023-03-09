@@ -318,7 +318,7 @@
 }*/
 
 .cart-product-list {
-/*    margin: 0 0 4rem 0;*/
+    /*    margin: 0 0 4rem 0;*/
 }
 
 .order-info-container {
@@ -668,7 +668,7 @@
     display: flex;
     align-items: center;
 }
- 
+
 /*Check out status page css*/
 /* CheckoutStatus page css */
 /*.payment-container {
@@ -706,7 +706,7 @@
 .payment-navigations {
     display: flex;
     justify-content: flex-start;
-}
+}*/
 
 .payment-actions {
     outline: none;
@@ -716,6 +716,7 @@
     font-size: 14px;
     font-weight: 500;
     transition: ease 0.6s;
+
 }
 
 .payment-actions:first-child {
@@ -725,4 +726,14 @@
 .payment-actions:hover {
     background-color: var(--main-page-color);
     filter: brightness(1.2);
-}*/
+    color: var(--main-page-color);
+}
+
+.payment-actions a{
+    text-decoration: none;
+    color: black;
+}
+
+.payment-actions a:hover{
+    color: black;
+}

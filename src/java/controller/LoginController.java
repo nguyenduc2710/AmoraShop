@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import user.UserDAO;
 import user.UserDTO;
+import utils.Encode;
 
 /**
  *
@@ -33,6 +34,7 @@ public class LoginController extends HttpServlet {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            password = Encode.toSHA1(password);
             UserDAO dao = new UserDAO();
             UserDTO loginUser = dao.checkLogin(email, password);
             //validate user in here

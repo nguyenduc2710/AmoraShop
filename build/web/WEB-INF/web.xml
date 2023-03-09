@@ -152,6 +152,10 @@
         <servlet-name>OrderProcessingStaffController</servlet-name>
         <servlet-class>orderController.OrderProcessingStaffController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowAllArrivalsProduct</servlet-name>
+        <servlet-class>NewArrivals.ShowAllArrivalsProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -303,6 +307,10 @@
     <servlet-mapping>
         <servlet-name>OrderProcessingStaffController</servlet-name>
         <url-pattern>/OrderProcessingStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAllArrivalsProduct</servlet-name>
+        <url-pattern>/ShowAllArrivalsProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
