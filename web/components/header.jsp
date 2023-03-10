@@ -20,7 +20,7 @@
             </li>
             <li class="utility-item">
                 <div class="cart-position-rel">
-                    <a class="header-icon"><img src="assets/font/shopping_bag_black_24dp.svg" alt=""></a>
+                    <a href="ViewCartController" class="header-icon"><img src="assets/font/shopping_bag_black_24dp.svg" alt=""></a>
                     <a class="btn btn-outline-dark cart-quantity" href="ViewCartController">
                         ${sessionScope.CART.items.size()}    
                     </a>    
@@ -47,11 +47,12 @@
                 <!-- Brands hover select  -->
                 <div class="brand-dropdown-box">
                     <div class="cover-item-box">
-                        <a class="brand-nav-item">Chanel</a>
-                        <a class="brand-nav-item">Dior</a>
-                        <a class="brand-nav-item">Gabbana & Dolce</a>
-                        <a class="brand-nav-item">Gucci</a>
-                        <a class="brand-nav-item">Prada</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Chanel" class="brand-nav-item">Chanel</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Dior" class="brand-nav-item">Dior</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=DvG" class="brand-nav-item">Gabbana & Dolce</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Gucci" class="brand-nav-item">Gucci</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Prada" class="brand-nav-item">Prada</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=YSL" class="brand-nav-item">YSL</a>
                     </div>
                 </div>
             </div>
@@ -62,8 +63,8 @@
 
                 <div class="brand-dropdown-box">
                     <div class="cover-item-box">
-                        <a class="brand-nav-item">For Man</a>
-                        <a class="brand-nav-item">For Woman</a>                                
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByCategory?cateID=1" class="brand-nav-item">For Man</a>
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByCategory?cateID=2" class="brand-nav-item">For Woman</a>                                
                     </div>
                 </div>
             </div>

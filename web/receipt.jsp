@@ -35,6 +35,11 @@
             p{
                 font-size: 18px
             }
+            div.text-center a.btn.btn-primary {
+                padding: 10px;
+                font-size: 1.6rem;
+                margin: 2rem 0;
+            }
         </style>
     </head>
     <body>

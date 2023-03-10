@@ -45,7 +45,6 @@ public class UserDAO {
    
    private static final String UPDATE_USER_BY_EMAIL = "UPDATE [dbo].[Users]\n"
             + "   SET full_name = ?\n"
-            + "      ,[password] = ?\n"
             + "      ,gender = ?\n"
             + "      ,phone_number = ?\n"
             + "      ,address = ?\n"
@@ -147,7 +146,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("INSERT INTO dbo.Users( full_name, [password], gender, email, phone_number, [address], [status], role_id) values(?,?,?,?,?,?,?,?)");
+                ptm = conn.prepareStatement("INSERT INTO dbo.Users( full_name, [password], gender, email, phone_number, [address], [status], role_id,image) values(?,?,?,?,?,?,?,?,?)");
                 ptm.setString(1, fullName);
                 ptm.setString(2, password);
                 ptm.setString(3, gender);
@@ -156,6 +155,7 @@ public class UserDAO {
                 ptm.setString(6, address);
                 ptm.setString(7, "ACTIVE");
                 ptm.setInt(8, 2);
+                ptm.setString(9,"https://drive.google.com/uc?id=1jWw-k5u5HIlruCw_6JMceKEYh_-Z3ltu");
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
@@ -250,7 +250,7 @@ public class UserDAO {
         return user;
     }
 
-    public void updateUserByEmail(String fullName,String password ,String gender, String phoneNumber, String address, String image,String email) throws SQLException {
+    public void updateUserByEmail(String fullName,String gender, String phoneNumber, String address, String image,String email) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -258,12 +258,11 @@ public class UserDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE_USER_BY_EMAIL);
                 ptm.setString(1, fullName);
-                ptm.setString(2, password);
-                ptm.setString(3, gender);
-                ptm.setString(4, phoneNumber);
-                ptm.setString(5, address);               
-                ptm.setString(6, image);
-                ptm.setString(7, email);
+                ptm.setString(2, gender);
+                ptm.setString(3, phoneNumber);
+                ptm.setString(4, address);               
+                ptm.setString(5, image);
+                ptm.setString(6, email);
                 ptm.executeUpdate();
             }
         } catch (Exception ex) {

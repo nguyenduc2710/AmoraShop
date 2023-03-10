@@ -156,6 +156,18 @@
         <servlet-name>ShowAllArrivalsProduct</servlet-name>
         <servlet-class>NewArrivals.ShowAllArrivalsProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowProductByBrand</servlet-name>
+        <servlet-class>controller.ShowProductByBrand</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductByBrandAndCategory</servlet-name>
+        <servlet-class>controller.ShowProductByBrandAndCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductByCategory</servlet-name>
+        <servlet-class>controller.ShowProductByCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -311,6 +323,18 @@
     <servlet-mapping>
         <servlet-name>ShowAllArrivalsProduct</servlet-name>
         <url-pattern>/ShowAllArrivalsProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductByBrand</servlet-name>
+        <url-pattern>/ShowProductByBrand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductByBrandAndCategory</servlet-name>
+        <url-pattern>/ShowProductByBrandAndCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductByCategory</servlet-name>
+        <url-pattern>/ShowProductByCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

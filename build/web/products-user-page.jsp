@@ -13,6 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <<link rel="stylesheet" href="assets/css/responsive.css"/>
         <link rel="stylesheet" href="assets/css/base.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/products.css">
@@ -44,79 +45,112 @@
             <div class="products-body row">
                 <div class="left-nav-container col-2">
                     <div id="tree" class="left-nav-filter">
-                        <ul>
-                            <li>
-                                <label for="node-1">Brands</label>
-                                <input type="checkbox" id="node-1" />
-                                <ul>
-                                    <li>
-                                        <a class="category-item" for="node-1-1">Chanel</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-1-2">Dior</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-1-2">Lancôme</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-1-2">Guerlain</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-1-2">Thierry Mugler</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <label for="node-2">For Man</label>
-                                <input type="checkbox" id="node-2" />
-                                <ul>
-                                    <li>
-                                        <a class="category-item" for="node-2-1">Chanel</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-2-2">Dior</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-2-2">Lancôme</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-2-2">Guerlain</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-2-2">Thierry Mugler</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label for="node-3">For Woman</label>
-                                <input type="checkbox" id="node-3" />
-                                <ul>
-                                    <li>
-                                        <a class="category-item" for="node-3-1">Chanel</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-3-2">Dior</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-3-2">Lancôme</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-3-2">Guerlain</a>
-                                    </li>
-                                    <li>
-                                        <a class="category-item" for="node-3-2">Thierry Mugler</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <form action="ShowProductByBrand" method="POST">
+                            <ul>
+                                <li>
+                                    <label for="node-1">Brands</label>
+                                    <input type="checkbox" id="node-1" />
+                                    <ul>
+                                        <li>
+                                            <a class="category-item" for="node-1-1" href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Chanel">Chanel</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-1-2" href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Dior">Dior</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-1-2" href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Prada">Prada</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-1-2" href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=DvG">D&G</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-1-2" href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Gucci">Gucci</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-1-2" href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=YSL">YSL</a>
+                                        </li><!-- comment -->
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
+                        <form action="ShowProductByBrandAndCategory" method="POST">
+                            <ul>
+                                <li>
+                                    <label for="node-2">For Man</label>
+                                    <input type="checkbox" id="node-2" />
+
+                                    <ul>
+                                        <li>
+                                            <a class="category-item" for="node-2-1" href="http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Chanel&cateID=1">Chanel</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href="http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Dior&cateID=1">Dior</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Prada&cateID=1">Prada</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=DvG&cateID=1">D&G</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Gucci&cateID=1">Gucci</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=YSL&cateID=1">YSL</a>
+                                        </li><!-- comment -->
+                                    </ul>
+
+                                </li>
+                            </ul>
+                        </form>
+                        <form action="ShowProductByBrandAndCategory" method="POST">
+                            <ul>
+                                <li>
+                                    <label for="node-3">For Woman</label>
+                                    <input type="checkbox" id="node-3" />
+
+                                    <ul>
+                                        <li>
+                                            <a class="category-item" for="node-2-1" href="http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Chanel&cateID=2">Chanel</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href="http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Dior&cateID=2">Dior</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Prada&cateID=2">Prada</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=DvG&cateID=2">D&G</a>
+                                        </li>
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=Gucci&cateID=2">Gucci</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="category-item" for="node-2-2" href = "http://localhost:8080/AmoraShop/ShowProductByBrandAndCategory?brand=YSL&cateID=2">YSL</a>
+                                        </li><!-- comment -->
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
 
                 <div class="right-product-list col-10">
                     <div class="product-list-header">
-                        <h2 class="category-title">All products</h2>
+                        <c:if test="${empty requestScope.brand}" >
+                            <h2 class="category-title">All products</h2>
+                        </c:if>
+
+                        <c:if test="${not empty requestScope.brand}" >
+                            <h2 class="category-title">All products in ${requestScope.brand}</h2>
+                        </c:if>
+                        
+
+
                         <div class="category-sort-cotainer">
                             <select id="sort-by" class="category-sort-options">
                                 <option value="price-asc">Ascending Price</option>
@@ -133,14 +167,15 @@
 
                         <c:forEach items="${products}" var="product">
 
-                            <div class="product-items col-3">
+                            <div class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
                                 <a href="ShowProductDetailUserController?product_id=${product.productID}">
                                     <div class="product-img-wrap">
                                         <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
                                     </div>
                                 </a>
                                 <div class="product-name">
-                                    ${product.name}
+                                    <a href="ShowProductDetailUserController?product_id=${product.productID}">${product.name}</a>
+
                                 </div>
                                 <div class="product-price">
                                     ${product.price}$
@@ -148,7 +183,7 @@
                             </div>
 
                         </c:forEach>
-                        
+
                     </div>
 
                     <nav aria-label="..." class="pagination-container">

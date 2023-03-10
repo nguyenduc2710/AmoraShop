@@ -17,6 +17,9 @@
         <meta name="author" content="" />
         <title>Update User</title>
         <link href="hien-css/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/base.css">
+        <link rel="stylesheet" href="assets/css/home.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">

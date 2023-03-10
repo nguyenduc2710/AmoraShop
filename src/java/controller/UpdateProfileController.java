@@ -43,7 +43,6 @@ public class UpdateProfileController extends HttpServlet {
         String email = request.getParameter("email");
         String url = "update-information.jsp";
         String newFullName = request.getParameter("newName");
-        String newPassword = request.getParameter("newPassword");
         String newGender = request.getParameter("newGender");
         String newPhone = request.getParameter("newPhone");
         String newAddress = request.getParameter("newAddress");
@@ -75,7 +74,7 @@ public class UpdateProfileController extends HttpServlet {
         UserDAO dao = new UserDAO();
 
         if (email.equals(loginUser.getEmail())) {
-            dao.updateUserByEmail(newFullName, newPassword,newGender, newPhone, newAddress, email, path);
+            dao.updateUserByEmail(newFullName,newGender, newPhone, newAddress, path, email);
             session.setAttribute("LOGIN_USER", loginUser);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         }

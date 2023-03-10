@@ -175,12 +175,12 @@
                 <div class="top-pf-brand-container row">
 
                     <div class="top-pf-brands-block col-sm-4 col-md-4">
-                        <a href="" class="top-pf-iblock img-fluid">
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=DvG" class="top-pf-iblock img-fluid">
                             <img class="img-fluid" src="assets/images/DolceGrabrana-home-page.jpg" alt="Dolce & Gabbana">
                         </a>
                         <div class="top-pf-brand-caption">
                             <div class="top-pf-name">Dolce & Gabbana</div>
-                            <a href="#" class="button-57">
+                            <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=DvG" class="button-57">
                                 <span class="text">See More</span>
                                 <span>See More</span>
                             </a>
@@ -188,12 +188,12 @@
                     </div>
 
                     <div class="top-pf-brands-block col-sm-4 col-md-4">
-                        <a href="" class="top-pf-iblock img-fluid">
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Prada" class="top-pf-iblock img-fluid">
                             <img class="img-fluid" src="assets/images/prada-home-page.jpg" alt="Prada">
                         </a>
                         <div class="top-pf-brand-caption">
                             <div class="top-pf-name">Prada</div>
-                            <a href="#" class="button-57">
+                            <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Prada" class="button-57">
                                 <span class="text">See More</span>
                                 <span>See More</span>
                             </a>
@@ -201,19 +201,19 @@
                     </div>
 
                     <div class="top-pf-brands-block col-sm-4 col-md-4">
-                        <a href="" class="top-pf-iblock img-fluid">
+                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Chanel" class="top-pf-iblock img-fluid">
                             <img class="img-fluid" src="assets/images/chanel-home-page.jpg" alt="Chanel">
                         </a>
                         <div class="top-pf-brand-caption">
                             <div class="top-pf-name">Chanel</div>
-                            <a href="#" class="button-57">
+                            <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Chanel" class="button-57">
                                 <span class="text">See More</span>
                                 <span>See More</span>
                             </a>
                         </div>
                     </div>
-
                 </div>
+                
                 <div class="about-us processing-section">
                     <div class="processing-text">About-us section</div>
                     <img src="assets/images/working-on-it.jpg" alt="" class="processing-img">

@@ -44,9 +44,8 @@ public class AuthorizePaymentServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException, PayPalRESTException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            int orderId = (int)session.getAttribute("ORDER_ID");
-            float total = (float)session.getAttribute("TOTAL_BILL");
+            int orderId = Integer.parseInt(request.getParameter("orderID"));
+            float total = Float.parseFloat(request.getParameter("total"));
             String oId = String.valueOf(orderId);
             String totalPrice = String.valueOf(total);
             OrderDetail orderDetail = new OrderDetail(oId, oId, oId, oId, totalPrice);

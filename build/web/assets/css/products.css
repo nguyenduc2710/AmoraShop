@@ -559,7 +559,12 @@ input[type=number] {
 
 .product-name {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 600;   
+}
+
+.product-name a {
+    text-decoration: none;
+    color: var(--main-page-color);
 }
 
 .pagination {

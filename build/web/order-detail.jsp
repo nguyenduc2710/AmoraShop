@@ -61,7 +61,9 @@
                             <div class="order-id">
                                 Order ID: <b><%= request.getParameter("orderID") %></b>
                             </div>
-                            <div class="order-status">Status: <span style="color: #ee4d2d;"><%= request.getParameter("status") %></span></div>
+                            <div class="order-status">
+                                Status: <span style="color: #ee4d2d;"><%= request.getParameter("status")%></span>
+                            </div>
                         </div>
                         <div class="order-title-right">
                             <div class="order-date">
@@ -108,24 +110,29 @@
 
                         <div class="order-footer-actions">
 
-                            <div class="payment-navigations">
-                                
-                                
-                                    <div>
+                            <c:if test="${sessionScope.LOGIN_USER.roleID eq 2}">
+
+                                <div class="payment-navigations">
+                                    <c:if test="${requestScope.status eq 'PROCESSING'}">
                                         <form action="AuthorizePaymentServlet" method="POST">
-                                            <input type="hidden" value="<%= request.getParameter("orderID") %>">
-                                            <input type="hidden" value="<%= request.getParameter("totalPrice") %>">
-                                            <button type="submit" class="payment-actions">Pay with PayPal</button>
+                                            <input type="hidden" name="orderID" value="${sessionScope.orderID}">
+                                            <input type="hidden" name="total" value="${sessionScope.total}">
+                                            <button type="submit" class="payment-actions payment-paypal">
+                                                <img src="assets/font/logo-paypal.svg" class="paypal-icon" alt="Paypal icon"/>
+                                                Pay with PayPal
+                                            </button>
                                         </form>    
-                                    </div>
-                                
-                                <button class="payment-actions">
-                                    Cancel Order
-                                </button>
-                                <button class="payment-actions">
-                                    Contact Us
-                                </button>
-                            </div>
+
+
+                                        <button class="payment-actions">
+                                            Cancel Order
+                                        </button>
+                                    </c:if>
+                                    <button class="payment-actions">
+                                        Contact Us
+                                    </button>
+                                </div>
+                            </c:if>
 
                         </div>
 

@@ -10,9 +10,19 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import static java.lang.ProcessBuilder.Redirect.to;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import static jdk.nashorn.internal.objects.NativeJava.to;
 import user.UserDAO;
 import utils.Encode;
 
@@ -46,10 +56,40 @@ public class RegisterController extends HttpServlet {
 
                 if (user == false) {
                     password = Encode.toSHA1(password);
-
+                    String to = email;
                     //dang ky thanh cong
-                    dao.register(fullName, password, gender, email, mobile, address);
+                    dao.register(fullName, password, gender, email, mobile, address);                  
                     request.setAttribute("successfully", "Register Sucessfully");
+                    Properties props = new Properties();
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.socketFactory.port", "465");
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.port", "465");
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+                                @Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication("thaiquocse@gmail.com", "ypgtwiuhdtfqwtgo");// Put your email
+																									// id and
+																									// password here
+				}
+			});
+			// compose message
+			try {
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(email));// change accordingly
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+				message.setSubject("AmoraShop");
+				message.setText("<h1>Your account was created succesfully !!!</h1>");
+				// send message
+                                
+				Transport.send(message);
+				System.out.println("message sent successfully");
+			}
+
+			catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erorr", "Email was existed");

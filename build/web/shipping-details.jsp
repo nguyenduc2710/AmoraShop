@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -72,7 +73,8 @@
 
                         <form action="CheckoutController" method="POST" class="shipping-details-form">
                             <div class="field-input-wrapper">
-                                <input class="input-field" type="text"
+                                <span>Full name:</span>
+                                <input class="field-title" type="text"
                                        placeholder="Full name" name="fullName"
                                        value="${sessionScope.LOGIN_USER.getFullName()}"/>
                                 <input type="hidden" value="PROCESSING" name="status">
@@ -80,14 +82,21 @@
 
                             </div>
                             <div class="field-input-wrapper">
-                                <input class="input-field" type="text"
+                                <span>Phone number:</span>
+                                <input class="field-title" type="text"
                                        placeholder="Phone number" name="phoneNumber"
                                        value="${sessionScope.LOGIN_USER.getPhoneNumber()}"/>
                             </div>
                             <div class="field-input-wrapper">
-                                <input class="input-field" type="text"
+                                <span>Address:</span>
+                                <input class="field-title" type="text"
                                        placeholder="Address" name="address"
                                        value="${sessionScope.LOGIN_USER.getAddress()}"/>
+                            </div>
+                            <div class="field-input-wrapper">
+                                <span>Note:</span>
+                                <textarea class="input-field form-control" placeholder="Any wants about products? Special gift?"
+                                          name="note"></textarea>
                             </div>
 
                             <div class="shipping-details-action">
@@ -97,27 +106,6 @@
                                 </button>
                             </div>
                         </form>
-                        <!--                            <form action="AuthorizePaymentServlet" method="POST">
-                                                        <div class="field-input-wrapper">
-                                                        <input class="input-field" type="text"
-                                                               placeholder="Full name" name="fullName"
-                                                               value="${sessionScope.LOGIN_USER.getFullName()}"/>
-                                                        <input type="hidden" value="confirmed" name="status">
-                                                        <input value="${sessionScope.LOGIN_USER.getUserID()}" type="hidden" name="userID">
-                        
-                                                    </div>
-                                                    <div class="field-input-wrapper">
-                                                        <input class="input-field" type="text"
-                                                               placeholder="Phone number" name="phoneNumber"
-                                                               value="${sessionScope.LOGIN_USER.getPhoneNumber()}"/>
-                                                    </div>
-                                                    <div class="field-input-wrapper">
-                                                        <input class="input-field" type="text"
-                                                               placeholder="Address" name="address"
-                                                               value="${sessionScope.LOGIN_USER.getAddress()}"/>
-                                                    </div>
-                                                        <button type="submit">Pay pal</button>
-                                                    </form>-->
                     </div>
                 </div>
 
@@ -145,9 +133,8 @@
                                                             ${product.capacity} ml
                                                         </div>
                                                         <div class="order-item-price">
-                                                            ${product.price*quantity}$
+                                                            <fmt:formatNumber value="${product.price*quantity}" pattern="#.##"/>$
                                                             <c:set var="total_all" value="${total_all + product.price*quantity}" />
-
                                                         </div>
                                                     </div>
                                                 </div> 
@@ -163,7 +150,8 @@
                                     Total:
                                 </p>
                                 <div class="order-sum-cald">
-                                    <i>Dollar</i> ${total_all}$ 
+                                    <i>Dollar</i>
+                                    <fmt:formatNumber value="${total_all}" pattern="#.##"/>$
                                 </div>
                             </div>
                         </div>
