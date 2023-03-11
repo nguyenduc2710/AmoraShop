@@ -13,6 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/responsive.css">
         <link rel="stylesheet" href="assets/css/base.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/products.css">
@@ -46,14 +47,14 @@
         </style>
     </head>
     <body>
- 
+
         <jsp:include page="components/header.jsp" />
 
 
         <div class="body-container">
             <div class="bread-crumb-container">
                 <div class="bread-crumbs">
-                    <a href="home.html" class="main-page link">Home</a>
+                    <a href="homePage.jsp" class="main-page link">Home</a>
                     <div class="slash">/</div>
                     <a href="#" class="main-page link">New Arrivals</a>
                 </div>
@@ -63,7 +64,7 @@
             </div>
 
             <div class="products-body row">
-               
+
                 <div class="right-product-list col-12">
                     <div class="product-list-header">
                         <h2 style="padding-left: 5rem;" class="category-title">NEW ARRIVALS</h2>
@@ -83,14 +84,17 @@
 
                         <c:forEach items="${products}" var="product">
 
-                            <div style="display: flex; align-items: center;" class="product-items col-3">
+                            <div style="display: flex; align-items: center;" class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
                                 <a href="ShowProductDetailUserController?product_id=${product.productID}">
                                     <div class="product-img-wrap">
                                         <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
                                     </div>
                                 </a>
+
                                 <div class="product-name">
-                                    ${product.name}
+                                    <a href="ShowProductDetailUserController?product_id=${product.productID}">
+                                        ${product.name}
+                                    </a>
                                 </div>
                                 <div class="product-price">
                                     ${product.price}$

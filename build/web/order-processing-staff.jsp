@@ -140,7 +140,7 @@
 
                                                                 <select name="status" onchange="this.form.submit()">
                                                                     <option value="PROCESSING">${order.status}</option>
-                                                                    <option value="CANCEL">CANCEL</option>
+                                                                    <option value="CANCELED">CANCEL</option>
                                                                     <option value="FINISHED">FINISHED</option>
                                                                 </select>
                                                             </form>

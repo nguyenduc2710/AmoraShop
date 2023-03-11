@@ -80,7 +80,7 @@ public class RegisterController extends HttpServlet {
 				message.setFrom(new InternetAddress(email));// change accordingly
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 				message.setSubject("AmoraShop");
-				message.setText("<h1>Your account was created succesfully !!!</h1>");
+				message.setText("Your account has been successfully initialized, Amora shop hopes you will have fun buying moments");
 				// send message
                                 
 				Transport.send(message);

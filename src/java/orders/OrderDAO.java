@@ -107,7 +107,7 @@ public class OrderDAO {
         return result;
     }
 
-    public int createOrder(String fullName, String address, String status, Date date, int userID, float total) throws SQLException, ClassNotFoundException {
+    public int createOrder(String fullName, String address, String status, Date date, int userID, float total,String note) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement st = null;
         PreparedStatement st2 = null;
@@ -115,8 +115,8 @@ public class OrderDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String sql = "INSERT INTO [dbo].[Orders] ([full_name], [address], [status], [order_date], [user_id], [total_price])\n"
-                        + "VALUES (?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO [dbo].[Orders] ([full_name], [address], [status], [order_date], [user_id], [total_price],[note])\n"
+                        + "VALUES (?, ?, ?, ?, ?, ?,?)";
                 st = con.prepareStatement(sql);
                 st.setString(1, fullName);
                 st.setString(2, address);
@@ -124,6 +124,7 @@ public class OrderDAO {
                 st.setDate(4, date);
                 st.setInt(5, userID);
                 st.setFloat(6, 0);
+                st.setString(7, note);
                 //execute
                 int effectedRow = st.executeUpdate();
                 if (effectedRow > 0) {

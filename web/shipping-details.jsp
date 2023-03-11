@@ -95,8 +95,9 @@
                             </div>
                             <div class="field-input-wrapper">
                                 <span>Note:</span>
-                                <textarea class="input-field form-control" placeholder="Any wants about products? Special gift?"
-                                          name="note"></textarea>
+                                
+                                <textarea class="input-field form-control" placeholder="Any wants about products? Special gift?" 
+                                    type="text" name="note"></textarea>
                             </div>
 
                             <div class="shipping-details-action">

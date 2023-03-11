@@ -51,7 +51,7 @@ public class UpdateStatusOrderController extends HttpServlet {
             OrderDAO order = new OrderDAO();
             boolean checkCancelOrder = order.updateStatusOder(status, orderID);
             if (checkCancelOrder) {
-                if (status.equals("cancel")) {
+                if (status.equals("CANCELED")) {
                     request.setAttribute("cancel", "Cancel succsessfull");
                 } else {
                     request.setAttribute("confirmed", "Confirmed succsessfull");
@@ -59,8 +59,10 @@ public class UpdateStatusOrderController extends HttpServlet {
 
                 if (dto.getRoleID() == 2) {
                     request.getRequestDispatcher("OrderListByUserIdController").forward(request, response);
+                }else{
+                    request.getRequestDispatcher("OrderProcessingStaffController").forward(request, response);
                 }
-                request.getRequestDispatcher("OrderProcessingStaffController").forward(request, response);
+               
             }
         } catch (SQLException ex) {
             Logger.getLogger(UpdateStatusOrderController.class.getName()).log(Level.SEVERE, null, ex);

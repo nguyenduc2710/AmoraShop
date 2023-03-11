@@ -182,6 +182,7 @@ public class UserDAO {
                 ptm.setString(3, user.getEmail());
                 ptm.setString(4, "ACTIVE");
                 ptm.setInt(5, 2);
+                ptm.setString(6, user.getImage());
                 checkInsert = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

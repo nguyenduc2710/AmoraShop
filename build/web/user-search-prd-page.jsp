@@ -14,6 +14,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/responsive.css">
         <link rel="stylesheet" href="assets/css/base.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/products.css">
@@ -67,7 +68,7 @@
 
                                 <c:forEach items="${productListByName}" var="product">
 
-                                    <div style="align-items: center" class="product-items col-md-3">
+                                    <div style="align-items: center" class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
                                         <a href="ShowProductDetailUserController?product_id=${product.productID}">
                                             <div class="product-img-wrap">
                                                 <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >

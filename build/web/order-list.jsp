@@ -125,7 +125,30 @@
                                                     <c:if test="${order.status eq 'PROCESSING'}">
                                                         <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#blockBtn${order.orderID}">
                                                             Cancel Order
-                                                        </button>    
+                                                        </button>  
+                                                            
+                                                        <div class="modal fade" id="blockBtn${order.orderID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="p-4 text-center fs-3"
+                                                                         style="color: red;">
+                                                                        Are you sure you want to Cancel order "<span class="text-dark">${order.orderID}</span>" from your order list?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <form action="UpdateStatusOrderController" method="get">
+                                                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                                                            <input type="hidden" name="status" value="CANCELED">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                                                                            <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Cancel Order</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </c:if>
                                                 </td>
                                                 <td class="detail-row align-middle">
@@ -157,29 +180,13 @@
 
 
         <script>
-            function filterOrders(status) {
-                var rows = document.getElementsByTagName("tr");
-                for (var i = 0; i < rows.length; i++) {
-                    var row = rows[i];
-                    var cells = row.getElementsByTagName("th");
-                    if (cells.length > 0) {
-                        var orderStatus = cells[6].innerHTML;
-                        if (status.includes(orderStatus) || status === 'all') {
-                            row.style.display = "";
-                        }if (status.includes(orderStatus) || status === 'PROCESSING') {
-                            row.style.display = "";
-                        }if (status.includes(orderStatus) || status === 'FINISHED') {
-                            row.style.display = "";
-                        } else {
-                            row.style.display = "none";
-                        }
-                    }
-                }
-            }
+
         </script>
         <jsp:include page="components/footer.jsp" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
 

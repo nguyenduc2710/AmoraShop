@@ -146,7 +146,7 @@
                         </c:if>
 
                         <c:if test="${not empty requestScope.brand}" >
-                            <h2 class="category-title">All products in ${requestScope.brand}</h2>
+                            <h2 class="category-title">All products ${requestScope.brand}</h2>
                         </c:if>
                         
 

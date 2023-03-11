@@ -1112,10 +1112,15 @@ body {
     color: black;
 }
 
-.inner-footer-text:hover{
+.footer-inner-block:last-child .inner-footer-text:not(:last-child):hover {
     font-weight: 600;
     color: var(--main-page-color);
 }
+
+/*.inner-footer-text:hover{
+    font-weight: 600;
+    color: var(--main-page-color);
+}*/
 
 .copyright {
     background-color: #ccc;

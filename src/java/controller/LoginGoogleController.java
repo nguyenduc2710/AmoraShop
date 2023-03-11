@@ -45,8 +45,9 @@ public class LoginGoogleController extends HttpServlet {
                 loginUser.setFullName(userGoogle.getName());
                 loginUser.setStatus("ACTIVE");
                 loginUser.setRoleID(2);
+                loginUser.setImage(userGoogle.getPicture());              
                 if (userDTO_check == false) {
-                    userDAO.insert(loginUser);
+                    userDAO.insert(loginUser);                   
                     HttpSession session = request.getSession();
                     session.setAttribute("LOGIN_USER", loginUser);
                     url = USER_PAGE;
