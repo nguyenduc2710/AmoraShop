@@ -130,8 +130,11 @@
                                 Your Inventory
                             </div>
                             <div class="header-quantity-result">
-                                <c:if test="${not empty cart}">
+                                <c:if test="${sessionScope.CART.items.size() gt 1}">
                                     There are ${sessionScope.CART.items.size()} products in your cart    
+                                </c:if>
+                                <c:if test="${sessionScope.CART.items.size() eq 1}">
+                                    There are ${sessionScope.CART.items.size()} product in your cart    
                                 </c:if>
                                 <c:if test="${empty cart}">
                                     There is no product in your cart    

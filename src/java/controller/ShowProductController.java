@@ -35,9 +35,6 @@ public class ShowProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = SUCCESS_USER;
-        
-        
-
         try {
             final int PAGE_SIZE = 20;
             int page = 1;

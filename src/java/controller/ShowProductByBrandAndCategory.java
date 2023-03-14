@@ -35,7 +35,7 @@ public class ShowProductByBrandAndCategory extends HttpServlet {
             ProductDAO productDAO = new ProductDAO();
             List<ProductDTO> listProducts = productDAO.getAllProductByBrandAndCategory(brand, cateID);
             request.setAttribute("products", listProducts);
-
+             request.setAttribute("brand", brand);
         } catch (SQLException ex) {
             Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

@@ -33,7 +33,7 @@
         <div class="body-container">
             <div class="bread-crumb-container">
                 <div class="bread-crumbs">
-                    <a href="homePage.jsp" class="main-page link">Home</a>
+                    <a href="/AmoraShop" class="main-page link">Home</a>
                     <div class="slash">/</div>
                     <a href="ShowProductController" class="main-page link">Products</a>
                 </div>

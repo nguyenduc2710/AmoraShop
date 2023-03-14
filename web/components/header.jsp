@@ -32,14 +32,19 @@
     <div class="header-nav-down">
         <ul class="main-menu-list">
             <div id="underline"></div>
-            <a class="header-nav-link" href="/AmoraShop/homePage.jsp">
-                <li class="main-menu-item">Home</li>
-            </a>
+            <form action="ShowAllArrivalsProduct" method="POST">
+                <a class="header-nav-link" >
+                    <input type="submit" class="main-menu-item" value="Home">
+                    <input type="hidden" name="homePage" value="getNewArrivalAnd6Prods">
+                </a>
+            </form>
+            
             <form action="ShowProductController" method="POST">
                 <a class="header-nav-link" href="/AmoraShop/products-user-page.jsp">
                     <input type="submit" class="main-menu-item" value="Shop">
                 </a>
             </form>
+            
             <div class="dropdown-cover brand-position-rel">
                 <a class="header-nav-link" href="#">
                     <li class="main-menu-item">Brand</li>                        
@@ -70,9 +75,13 @@
             </div>
 
 
-            <a class="header-nav-link" href="ShowAllArrivalsProduct">
-                <li class="main-menu-item">New Arrivals</li>
-            </a>
+            <form action="ShowAllArrivalsProduct" method="POST">
+                <a type="submit" class="header-nav-link">
+                    <!--<li class="main-menu-item">New Arrivals</li>--> 
+                    <input type="submit" class="main-menu-item" value="New Arrivals">
+                </a>
+                <input type="hidden" name="searchNewArr" value="NewArr">
+            </form>
         </ul>
 
         <!--    <div class="search-box-container js-modal">

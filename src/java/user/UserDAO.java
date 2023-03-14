@@ -63,7 +63,51 @@ public class UserDAO {
             + "           ,[status]\n"
             + "           ,[role_id]) VALUES(?,?,?,?,?,?,?,?)";
 
+public static final String GET_USER_BY_EMAIL ="SELECT * FROM Users WHERE email = ?";
 
+public UserDTO getUserByEmail(String email) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_USER_BY_EMAIL);
+                ptm.setString(1, email);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = rs.getInt("user_id");
+                    String fullName = rs.getString("full_name");
+                    String password = rs.getString("password");
+                    String gender = rs.getString("gender");
+                    email = rs.getString("email");
+                    String phoneNumber = rs.getString("phone_number");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    int roleID = rs.getInt("role_id");
+                    String image = rs.getString("image");
+                    user = new UserDTO(userID, fullName, password, gender, email, phoneNumber, address, status, roleID, image);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return user;
+    }
     public UserDTO checkLogin(String email, String password) throws SQLException {
         UserDTO user = null;
         Connection conn = null;

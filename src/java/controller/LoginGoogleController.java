@@ -47,14 +47,16 @@ public class LoginGoogleController extends HttpServlet {
                 loginUser.setRoleID(2);
                 loginUser.setImage(userGoogle.getPicture());              
                 if (userDTO_check == false) {
-                    userDAO.insert(loginUser);                   
+                    userDAO.insert(loginUser);
+                    UserDTO usergg = userDAO.getUserByEmail(loginUser.getEmail());
                     HttpSession session = request.getSession();
-                    session.setAttribute("LOGIN_USER", loginUser);
+                    session.setAttribute("LOGIN_USER", usergg);
                     url = USER_PAGE;
                 }else if(userDTO_check == true){
                     url = USER_PAGE;
+                    UserDTO usergg = userDAO.getUserByEmail(loginUser.getEmail());
                     HttpSession session = request.getSession();
-                    session.setAttribute("LOGIN_USER", loginUser);
+                    session.setAttribute("LOGIN_USER", usergg);
                 }
             } else {
                 request.setAttribute("ERROR", "Incorrect google account");

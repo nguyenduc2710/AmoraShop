@@ -28,8 +28,10 @@ public class test {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        Test getAllUsers() function in User DAO
         UserDAO dao = new UserDAO();
-        dao.updateUserByEmail("Qshu","Male", "1", "TPHCM", "1", "Kayme@email.com");
-        System.out.println(dao.getAllUsers());
+        
+        System.out.println(dao.getUserByEmail("thaiquocse@gmail.com").toString());
+//        dao.updateUserByEmail("Qshu","Male", "1", "TPHCM", "1", "Kayme@email.com");
+//        System.out.println(dao.getAllUsers());
 //        List<UserDTO> list = dao.getAllUsers();
 //        if(list.size() > 1){
 //            for (int i = 0; i < list.size(); i++) {

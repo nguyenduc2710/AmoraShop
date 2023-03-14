@@ -15,8 +15,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
         <link rel="stylesheet" href="assets/css/base.css">
+        <link rel="stylesheet" href="assets/css/products.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/slider.css">
+        <link rel="stylesheet" href="assets/css/cart.css">        
         <link rel="icon" type="image/png" href="assets/images/LogoDoneEdited.png"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
         <script src="assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
@@ -24,6 +26,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
         <title>AmoraShop</title>
+        
+        <style>
+            a{
+                text-decoration: none;
+            }
+        </style>
     </head>
 
     <body>
@@ -46,127 +54,24 @@
                     <h2 class="new-product-title">New Products</h2>
                     <div class="owl-carou-container">
                         <div class="owl-carousel owl-theme">
+                            <c:forEach items="${products}" var="newArr">
+                                <div class="item">
+                                    <a href="ShowProductDetailUserController?product_id=${newArr.productID}">
+                                        <div class="product-img-wrap">
+                                            <img src="${newArr.image}" alt="${newArr.name}" class="product-img img-fluid" />
+                                        </div>
+                                    </a>
+                                    <a href="ShowProductDetailUserController?product_id=${newArr.productID}">
+                                        <div class="product-name">
+                                            ${newArr.name}
+                                        </div>
+                                    </a>
 
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/SensualRomance.png" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Sensual Romance
-                                </div>
-                                <div class="product-price">
-                                    $50
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/ElegantBloomGucci.png" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Elegant Bloom
-                                </div>
-                                <div class="product-price">
-                                    $60
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/FreshOcean.png" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Fresh Ocean
-                                </div>
-                                <div class="product-price">
-                                    $70
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/CitrusBliss.png" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Citrus Bliss
-                                </div>
-                                <div class="product-price">
-                                    $80
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/WoodyMystique.png" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Woody Mystique
-                                </div>
-                                <div class="product-price">
-                                    $90
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/accquaDiGio.jpg" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Acqua Di Gio Eau De Toilette
-                                </div>
-                                <div class="product-price">
-                                    $90
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/euphoriaEssenceEau.jpg" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Euphoria Essence Eau De Toilette
-                                </div>
-                                <div class="product-price">
-                                    $90
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/valentinoValentina.jpg" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Valentino Valentina Oud Assoluto Eau De Parfum
-                                </div>
-                                <div class="product-price">
-                                    $90
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/lavieEstBellePink.jpg" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    La Vie Est Belle Soleil Cristal Eau De Parfum
-                                </div>
-                                <div class="product-price">
-                                    $90
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="product-img-wrap">
-                                    <img src="assets/images/initioGreatnessParfum.jpg" alt="" class="product-img img-fluid" />
-                                </div>
-                                <div class="product-name">
-                                    Initio Oud For Greatness Eau De Parfum
-                                </div>
-                                <div class="product-price">
-                                    $90
-                                </div>
-                            </div>
-
+                                    <div class="product-price">
+                                        ${newArr.price}$
+                                    </div>
+                                </div>                               
+                            </c:forEach>                          
                         </div>
                     </div>
                 </div>
@@ -213,18 +118,92 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="about-us processing-section">
-                    <div class="processing-text">About-us section</div>
-                    <img src="assets/images/working-on-it.jpg" alt="" class="processing-img">
-                    <div class="processing-text">Working-on-it</div>
+
+                <c:if test="${not empty requestScope.favPrd}">
+                    <div class="favorite-prd-section row">
+                        <div class="quote-slider col-4">
+                            <img src="assets/images/Perfume Quote 1.2.jpg" alt="" class="img-fluid quote-item active">
+                            <img src="assets/images/Perfume Quote 2.1.jpg" alt="" class="img-fluid quote-item">
+                            <img src="assets/images/Perfume Quote 3.jpg" alt="" class="img-fluid quote-item">
+                            <img src="assets/images/Perfume Quote 4.jpg" alt="" class="img-fluid quote-item">
+                            <img src="assets/images/Perfume Quote 1.2.jpg" alt="" class="img-fluid quote-item">
+                        </div>
+
+                        <div class="home-product-container col-8">
+                            <div class="home-prd-title">
+                                <h2>Favorites</h2>
+                                <form action="ShowProductController" method="POST" class="show-all-btn">
+                                    <input type="submit" value="Show Alls" class="payment-actions ">
+                                </form>
+                            </div>
+
+                            <div class="home-prd-list row">
+                                <c:forEach items="${favPrd}" var="product">
+                                    <div class="prd-item col-5 mb-5">
+                                        <div class="prd-wrap row">
+                                            <a href="ShowProductDetailUserController?product_id=${product.productID}" class="prd-img col-6">
+                                                <img src="${product.image}" alt="${product.name}" class="prd-img-inner img-fluid">                            
+                                            </a>
+                                            <div class="prd-content col-6">
+                                                <a href="ShowProductDetailUserController?product_id=${product.productID}" class="prd-name">
+                                                    ${product.name}
+                                                </a>
+                                                <div class="prd-brand">
+                                                    ${product.brand}
+                                                </div>
+                                                <div class="prd-price">
+                                                    ${product.price}$
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+
+                <!--
+                                <div class="about-us processing-section">
+                <c:if test="${not empty requestScope.newArrivalsHome}">
+                    <c:forEach items="${newArrivalsHome}" var="product">
+
+                        <div class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
+                            <a href="ShowProductDetailUserController?product_id=${product.productID}">
+                                <div class="product-img-wrap">
+                                    <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
+                                </div>
+                            </a>
+                            <div class="product-name">
+                                <a href="ShowProductDetailUserController?product_id=${product.productID}">${product.name}</a>
+
+                            </div>
+                            <div class="product-price">
+                        ${product.price}$
+                    </div>
                 </div>
+
+                    </c:forEach>
+                </c:if>
             </div>
+        </div>-->
 
-            <jsp:include page="components/footer.jsp" />
+                <jsp:include page="components/footer.jsp" />
 
-        </div>
-        <script src="assets/js/script.js"></script>
+            </div>
+            <script src="assets/js/script.js"></script>
+            <script>
+                        let slides = document.querySelectorAll('.quote-item');
+                        let currentSlide = 0;
+
+                        function nextSlide() {
+                            slides[currentSlide].classList.remove('active');
+                            currentSlide = (currentSlide + 1) % slides.length;
+                            slides[currentSlide].classList.add('active');
+                        }
+
+                        setInterval(nextSlide, 8000);
+            </script>
     </body>
 
 </html>

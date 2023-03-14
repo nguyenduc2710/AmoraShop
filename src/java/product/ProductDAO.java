@@ -92,6 +92,61 @@ public class ProductDAO {
             = "SELECT Product.*, ProductImage.image\n"
             + "FROM Product INNER JOIN ProductImage ON Product.product_id = ProductImage.product_id\n"
             + "WHERE category_id = ?";
+    
+    
+    private static final String GET_PRODUCT_HOME_PAGE = "SELECT [Product].product_id, product_name, quantity, [Product].status, description, capacity, brand, price, category_id, [ProductImage].image \n"
+            + "FROM Product \n"
+            + "INNER JOIN ProductImage ON Product.product_id = ProductImage.product_id\n"
+            + "WHERE product_name LIKE '%Infusion%'\n"
+            + "OR product_name LIKE '%Amber intese%' \n"
+            + "OR product_name LIKE '%di Fiori%' \n"
+            + "OR product_name LIKE '%Chance Eau fr%'\n"
+            + "OR product_name LIKE '%Mademoiselle%'\n"
+            + "OR product_name LIKE '%Jasmine%'";
+
+    public List<ProductDTO> getProductHomePage() throws SQLException {
+        List<ProductDTO> list = new ArrayList<>();
+        ProductDTO product = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_PRODUCT_HOME_PAGE);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("product_id");
+                    String name = rs.getString("product_name");
+                    int quantity = rs.getInt("quantity");
+                    String status = rs.getString("status");
+                    String description = rs.getString("description");
+                    String capacity = rs.getString("capacity");
+                    String brand = rs.getString("brand");
+                    float price = rs.getFloat("price");
+                    int categoryID = rs.getInt("category_id");
+                    String image = rs.getString("image");
+                    list.add(new ProductDTO(productID, name, quantity, status, description, capacity, brand, price, categoryID, image));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    
     public List<ProductDTO> getAllProductByCategory(int cateID) throws SQLException {
         List<ProductDTO> list = new ArrayList<>();
         ProductDTO product = null;

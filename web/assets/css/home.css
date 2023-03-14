@@ -650,6 +650,7 @@ body {
 
 .header-nav-link:hover{
     color: black !important;
+    text-decoration: none;
 }
 
 .cart-position-rel {
@@ -1058,27 +1059,86 @@ body {
     transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }
 
-/* About us---------Working on it section--------- */
-.processing-section {
+/* Favorite products section */
+.favorite-prd-section {
     width: 100%;
-    height: 10rem;
     display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
     color: white;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     margin: 20px 0;
 }
 
-.processing-img {
-    width: 6rem;
+.quote-slider{
+    position: relative;
 }
 
-.processing-text {
+.quote-slider .quote-item{
+    position: absolute;
+    top: 20%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.quote-item.active {
+    opacity: 1;
+}
+
+.home-prd-title {
+    color: var(--main-page-color);
+    display: flex;
+    padding: 20px 30px 20px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home-prd-title h2 {
+    font-size: 2.8rem;
+}
+
+.home-prd-title .payment-actions:hover{
+    color: white;
+}
+
+.prd-wrap{
+    margin: 0;
+    border: 1px solid rgba(0,0,0,0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.home-prd-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.prd-img {
+    height: 150px;
+    padding: 0 10px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.prd-img-inner {
+    padding: 10px;
+    display: flex;
+    height: auto;
+}
+
+.prd-content {
+    display: flex;
     color: black;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.6rem;
+    padding: 0 0 0 5px;
 }
 
+.prd-name {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
 /* ---------------Footer section--------------- */
 .footer {
     /* margin-top: 32px; */

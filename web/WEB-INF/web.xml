@@ -342,6 +342,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>homePage.jsp</welcome-file>
+        <welcome-file>ShowAllArrivalsProduct</welcome-file>
     </welcome-file-list>
 </web-app>
