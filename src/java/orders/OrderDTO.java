@@ -165,5 +165,10 @@ public class OrderDTO {
         this.note = note;
     }
 
+    @Override
+    public String toString() {
+        return "OrderDTO{" + "orderID=" + orderID + ", fullName=" + fullName + ", address=" + address + ", status=" + status + ", orderDate=" + orderDate + ", userID=" + userID + ", totalPrice=" + totalPrice + ", note=" + note + '}';
+    }
+
     
 }

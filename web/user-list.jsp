@@ -93,7 +93,7 @@
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
-                                            <th>Password</th>
+                                            
                                             <th>gender</th>  
                                             <th>Phone number</th>  
                                             <th>Address</th>
@@ -109,7 +109,7 @@
                                                 <td>${user.userID}</td>
                                                 <td>${user.fullName}</td>
                                                 <td>${user.email}</td>
-                                                <td>${user.password}</td>
+
                                                 <td>${user.gender}</td>
                                                 <td>${user.phoneNumber}</td>
                                                 <td>${user.address}</td>

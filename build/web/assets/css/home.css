@@ -991,6 +991,14 @@ body {
     margin-bottom: 4px;
 }
 
+.top-pf-brands-block img {
+    transform: scale(1);
+    transition: 2s ease-in-out;
+}
+.top-pf-brands-block img:hover {
+    transform: scale(1.4);
+    transition: 3s ease-in-out;
+}
 
 /* CSS */
 .button-57 {

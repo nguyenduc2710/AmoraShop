@@ -59,9 +59,10 @@ public class OrderDetailController extends HttpServlet {
                 session.setAttribute("orderDt", orderDt);
                 session.setAttribute("orderID", orderID);
                 session.setAttribute("total", totalPrice);
-           //     ProductDTO dto = (ProductDTO) session.getAttribute("PRODUCT_DETAIL");
-//                OrderDTO otd = (OrderDTO) request.getAttribute("odto");
                 request.setAttribute("status", status);
+                OrderDAO dao = new OrderDAO();
+                OrderDTO userIf = dao.getOrder(orderID);
+                request.setAttribute("USER", userIf);
                 request.getRequestDispatcher("order-detail.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(OrderDetailController.class.getName()).log(Level.SEVERE, null, ex);

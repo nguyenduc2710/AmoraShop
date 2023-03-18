@@ -1,5 +1,5 @@
 .user-order-container {
-    padding: 40px 5rem;
+    padding: 40px 10rem;
 }
 
 .order-details-wrap {
@@ -171,3 +171,8 @@ button.btn.btn-outline-danger {
 }
 
 /* END of status icon css */
+.order-footer-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

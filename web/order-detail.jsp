@@ -101,12 +101,20 @@
                     </div>
 
                     <div class="order-footer">
-                        <div class="order-total-money">
-                            <i class="order-icon">
-                                <img src="assets/font/paid_black_24dp.svg" alt="Paid">
-                            </i>
-                            Total:&nbsp;<span><%= request.getParameter("totalPrice") %></span>
+                        <div class="order-footer-info">
+                            <div class="order-user-info" style="width: 50%">
+                                Customer: ${requestScope.USER.fullName}
+                                <div class="slash"></div>
+                                Address: ${requestScope.USER.address}
+                            </div>
+                            <div class="order-total-money">
+                                <i class="order-icon">
+                                    <img src="assets/font/paid_black_24dp.svg" alt="Paid">
+                                </i>
+                                Total:&nbsp;<span><%= request.getParameter("totalPrice") %></span>
+                            </div>    
                         </div>
+
 
                         <div class="order-footer-actions">
 

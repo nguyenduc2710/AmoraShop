@@ -6,6 +6,7 @@ package controller;
 
 import category.CategoryDAO;
 import category.CategoryDTO;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import orders.OrderDAO;
 import org.apache.jasper.tagplugins.jstl.core.Catch;
 import product.ProductDAO;
 import product.ProductDTO;
+import staffLogs.StaffLogDAO;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -26,10 +28,18 @@ import user.UserDTO;
 public class test {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        Test getAllUsers() function in User DAO
-        UserDAO dao = new UserDAO();
+//        Date date = new Date(System.currentTimeMillis());
+//            String dateOut = String.valueOf(date);
+        StaffLogDAO dao = new StaffLogDAO();
+//        dao.updateLog("Test", dateOut);
+        System.out.println(dao.getAllStaffLogs().toString());
         
-        System.out.println(dao.getUserByEmail("thaiquocse@gmail.com").toString());
+//        OrderDAO dao = new OrderDAO();
+//        System.out.println(dao.getOrder(131).toString());
+//        Test getAllUsers() function in User DAO
+//        UserDAO dao = new UserDAO();
+//        
+//        System.out.println(dao.getUserByEmail("thaiquocse@gmail.com").toString());
 //        dao.updateUserByEmail("Qshu","Male", "1", "TPHCM", "1", "Kayme@email.com");
 //        System.out.println(dao.getAllUsers());
 //        List<UserDTO> list = dao.getAllUsers();

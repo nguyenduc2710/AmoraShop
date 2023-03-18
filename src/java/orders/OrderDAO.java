@@ -19,7 +19,49 @@ import utils.DBUtils;
  * @author long
  */
 public class OrderDAO {
+public OrderDTO getOrder(int orderID) throws SQLException {
+        OrderDTO order = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
 
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select * from Orders where order_id = ?";
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, orderID);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    orderID = rs.getInt("order_id");
+                    String fullName = rs.getString("full_name");
+                    String address = rs.getString("address");
+                    String status = rs.getString("status");
+                    String orderDate = rs.getString("order_date");
+                    int userID = rs.getInt("user_id");
+                    float totalPrice = rs.getFloat("total_price");
+                    String note = rs.getString("note");
+
+                    order = new OrderDTO(orderID, fullName, address, status, orderDate, userID, totalPrice, note);
+                    
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return order;
+    }
 
  public void updateOrderStatus(int orderID,String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
