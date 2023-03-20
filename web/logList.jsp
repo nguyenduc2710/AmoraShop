@@ -96,52 +96,32 @@
 
                                         <ol class="breadcrumb mb-4">
                                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Order Complete</li>
+                                            <li class="breadcrumb-item active">User Action</li>
                                         </ol>
 
                                         <div class="card mb-4">
                                             <div class="card-header">
                                                 <i class="fas fa-table me-1"></i>
-                                                ORDER COMPLETE
+                                                User Action
                                             </div>
                                             <div class="card-body">
                                                 <table id="datatablesSimple">
                                                     <thead>
                                                         <tr>
-                                                            <th>orderID</th>
-                                                            <th>Address</th>
-                                                            <th>Status</th>
-                                                            <th>Order Date</th>
-                                                            <th>Total Bill</th>
-                                                            <th>Note</th>
-                                                            <th>View Details</th>
-
+                                                            <th>ID</th>
+                                                            <th>Email</th>
+                                                            <th>Time In</th>
+                                                            <th>Time Out</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        <c:forEach items="${sessionScope.orderListCpl}" var="order">
+                                                        <c:forEach items="${LOG}" var="log">
                                                             <tr>
-                                                                <td>${order.orderID}</td>
-                                                                <td>${order.address}</td>
-                                                                <td>${order.status}</td>
-                                                                <td>${order.orderDate}</td>
-                                                                <td>${order.totalPrice}</td>
-                                                                <td>${order.note}</td>
-
-                                                                <td>
-                                                                    <form action="OrderDetailController" method="POST">
-                                                                        <input type="hidden" name="orderID" value="${order.orderID}">
-                                                                        <input type="hidden" name="status" value="${order.status}">
-                                                                        <input type="hidden" name="totalPrice" value="${order.totalPrice}">
-                                                                        <input type="hidden" name="orderDate" value="${order.orderDate}">
-                                                                        <input type="submit" value="View Your Order Detail">
-                                                                    </form>
-                                                                </td>
-
-
-
-
+                                                                <td>${log.logID}</td>
+                                                                <td>${log.email}</td>
+                                                                <td>${log.timeIn}</td>
+                                                                <td>${log.timeOut}</td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -157,7 +137,6 @@
 
 
                 </c:if>
-                <c:if test="${sessionScope.orderListCpl.size() == 0}"><h1> Don't have any order complete</h1></c:if>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                 <!-- Core theme JS-->
                 <script src="js/scripts.js"></script>

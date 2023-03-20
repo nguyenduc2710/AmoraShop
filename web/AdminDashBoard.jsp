@@ -62,7 +62,7 @@
                                     
                                     <a class="nav-link" href="OrderCompleteController">Order Complete</a>
                                   
-
+                                    <a class="nav-link" href="ShowLogController">User Action</a>
                                 </nav>
                             </div>
 

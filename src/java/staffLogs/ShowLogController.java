@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package staffLogs;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,45 +10,31 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import staffLogs.StaffLogDAO;
-import user.UserDTO;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author thaiq
  */
-public class LogoutController extends HttpServlet {
-
-    private static final String ERROR = "homePage.jsp";
-    private static final String SUCCESS = "homePage.jsp";
+public class ShowLogController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            String url = ERROR;
-            try {
-                HttpSession session = request.getSession(false);
-                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                Date date = new Date(System.currentTimeMillis());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String timeOut = sdf.format(date);
-
-                if (session != null) {
-                    StaffLogDAO logDao = new StaffLogDAO();
-                    logDao.updateLog(loginUser.getEmail(), timeOut);
-                    session.invalidate();
-                    url = SUCCESS;
-                }
-            } catch (Exception e) {
-                log("Error at LogoutController: " + e.toString());
-            } finally {
-                response.sendRedirect(url);
-            }
+        try {
+            StaffLogDAO logDao = new StaffLogDAO();
+            List<StaffLogDTO> log = logDao.getAllStaffLogs();
+            request.setAttribute("LOG",log);
+            
+        } catch (Exception e) {
+            log("Error at ShowLogController: " + e.toString());
+        }finally {
+            request.getRequestDispatcher("logList.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +49,11 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowLogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -77,7 +67,11 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowLogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

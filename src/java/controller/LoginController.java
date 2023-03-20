@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import staffLogs.StaffLogDAO;
 import user.UserDAO;
 import user.UserDTO;
@@ -35,7 +36,8 @@ public class LoginController extends HttpServlet {
         String url = ERROR;
         try {
             Date date = new Date(System.currentTimeMillis());
-            String dateIn = String.valueOf(date);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timeIn = sdf.format(date);
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             password = Encode.toSHA1(password);
@@ -54,11 +56,11 @@ public class LoginController extends HttpServlet {
                         url = "/AdminDashboardController";
                     } else if (roleID == 2) {
                         StaffLogDAO logDao = new StaffLogDAO();
-                        logDao.insertLog(loginUser.getEmail(), dateIn);
+                        logDao.insertLog(loginUser.getEmail(), timeIn);
                         url = USER_PAGE;
                     } else if (roleID == 3) {
                         StaffLogDAO logDao = new StaffLogDAO();
-                        logDao.insertLog(loginUser.getEmail(), dateIn);
+                        logDao.insertLog(loginUser.getEmail(), timeIn);
                         url = "/ShowProductAdminController";
                     } else {
                         request.setAttribute("ERROR", "Your role is not support:");

@@ -59,7 +59,7 @@
                                     <a class="nav-link" href="AdminDashboardController">Dashboard</a>
                                     <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>                                  
                                     <a class="nav-link" href="OrderCompleteController">Order Complete</a>
-                                    
+                                    <a class="nav-link" href="ShowLogController">User Action</a>
                                 </nav>
                             </div>
 

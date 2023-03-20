@@ -188,6 +188,10 @@
         <servlet-name>AdminDashboardController</servlet-name>
         <servlet-class>controller.AdminDashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowLogController</servlet-name>
+        <servlet-class>staffLogs.ShowLogController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -375,6 +379,10 @@
     <servlet-mapping>
         <servlet-name>AdminDashboardController</servlet-name>
         <url-pattern>/AdminDashboardController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowLogController</servlet-name>
+        <url-pattern>/ShowLogController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
