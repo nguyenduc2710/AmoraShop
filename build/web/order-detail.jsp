@@ -136,6 +136,21 @@
                                             Cancel Order
                                         </button>
                                     </c:if>
+
+                                    <c:if test="${requestScope.status eq 'FINISHED'}">
+                                        <c:forEach items="${sessionScope.orderDt}" var="orderDt">
+                                            <form action="CheckOrderByUserController" method="POST">
+                                                <input type="hidden" value="${orderDt.productID}" name="productID"/>
+                                                <input type="hidden" value="${sessionScope.LOGIN_USER.userID}" name="userID"/>
+                                                <input type="submit" value="Review">
+                                            </form>   
+                                        </c:forEach>
+
+                                        <button class="payment-actions">
+                                            Cancel Order
+                                        </button>
+
+                                    </c:if>
                                     <button class="payment-actions">
                                         Contact Us
                                     </button>

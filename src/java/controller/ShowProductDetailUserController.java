@@ -7,6 +7,8 @@ package controller;
 
 import category.CategoryDAO;
 import category.CategoryDTO;
+import feedBack.FeedBackDAO;
+import feedBack.FeedBackDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -26,6 +28,10 @@ import product.ProductDTO;
  *
  * @author Admin
  */
+
+//Cop het trang detail bo vao
+
+
 @WebServlet(name = "ShowProductDetailUserController", urlPatterns = {"/ShowProductDetailUserController"})
 public class ShowProductDetailUserController extends HttpServlet {
 
@@ -38,26 +44,58 @@ public class ShowProductDetailUserController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String product_id = request.getParameter("product_id");
         
+        String produdctid = request.getParameter("product_id");
+        int productID = Integer.parseInt(produdctid);
+      
         try {
+             final int PAGE_SIZE = 4;
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
             ProductDAO dao = new ProductDAO();
+            
             HttpSession session = request.getSession();
-            List<ProductDTO> result = dao.getProductDetailByID(product_id);
+            List<ProductDTO> result = dao.getProductDetailByID(productID);
+           
+             FeedBackDAO da = new FeedBackDAO();
+           List<FeedBackDTO> listFeedback = da.getListFeedBackByUserId(productID, page, PAGE_SIZE);
+             
+              int total = da.getTotalFeedBackByProductID(productID);
+            int totalPage = total / PAGE_SIZE;
+            //chia lay du totalProducts neu co du thi + 1 page cho totalPage
+            if (total % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+            double avg = da.getAvgRatedStarByProductID(productID);
             if(result.isEmpty()){
                 log("No data have been retrieved!!!");
             }else{
+           
+       request.setAttribute("page", page);
+            request.setAttribute("totalPage", totalPage);
+            
+            request.setAttribute("avg", avg);
+            request.setAttribute("total", total);
+      
+          request.setAttribute("listFeedback", listFeedback);
+                  
                 session.setAttribute("PRODUCT_DETAIL", result);
                 url = SUCCESS_USER_PRODUCT_DETAIL_PAGE;
             }   
+           
+            
+           
         } catch(ClassNotFoundException ex){
             log("ShowProductDetailUserController _ Naming " + ex.getMessage());
         } catch(SQLException ex){
             log("ShowProductDetailUserController _ SQL" + ex.getMessage());
-        }
-        finally{
+        }finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -20,11 +20,14 @@ public class OrderDetailDTO {
     private String capacity;
     private String brand;
     private String image;
+    
+    //them vao status
+    private String status;
 
     public OrderDetailDTO() {
     }
 
-    public OrderDetailDTO(int orderID, int productID, float price, int quantity, float totalPrice, String name, String capacity, String brand, String image) {
+    public OrderDetailDTO(int orderID, int productID, float price, int quantity, float totalPrice, String name, String capacity, String brand, String image, String status) {
         this.orderID = orderID;
         this.productID = productID;
         this.price = price;
@@ -34,6 +37,7 @@ public class OrderDetailDTO {
         this.capacity = capacity;
         this.brand = brand;
         this.image = image;
+        this.status = status;
     }
 
     public int getOrderID() {
@@ -108,10 +112,11 @@ public class OrderDetailDTO {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "OrderDetailDTO{" + "orderID=" + orderID + ", productID=" + productID + ", price=" + price + ", quantity=" + quantity + ", totalPrice=" + totalPrice + ", name=" + name + ", capacity=" + capacity + ", brand=" + brand + ", image=" + image + '}';
+    public String getStatus() {
+        return status;
     }
 
- 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

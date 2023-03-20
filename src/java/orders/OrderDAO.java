@@ -5,6 +5,7 @@
  */
 package orders;
 
+import Chart.ChartDTO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,7 +20,8 @@ import utils.DBUtils;
  * @author long
  */
 public class OrderDAO {
-public OrderDTO getOrder(int orderID) throws SQLException {
+    private static final String CHECK_PRODUCT_ORDER_BY_USERID = "select * from Orders o join OrderDetail od on o.order_id = od.order_id where o.user_id = ? and od.product_id = ?";
+    public OrderDTO getOrder(int orderID) throws SQLException {
         OrderDTO order = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -44,7 +46,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
                     String note = rs.getString("note");
 
                     order = new OrderDTO(orderID, fullName, address, status, orderDate, userID, totalPrice, note);
-                    
+
                 }
             }
         } catch (Exception e) {
@@ -63,7 +65,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
         return order;
     }
 
- public void updateOrderStatus(int orderID,String status) throws SQLException, ClassNotFoundException {
+    public void updateOrderStatus(int orderID, String status) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement st = null;
         try {
@@ -75,7 +77,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
                 st = con.prepareStatement(sql);
                 st.setString(1, status);
                 st.setInt(2, orderID);
-                
+
                 st.executeUpdate();
             }
         } finally {
@@ -87,6 +89,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
             }
         }
     }
+
     public boolean removeOrder(int orderID) throws SQLException, ClassNotFoundException {
         boolean result = false;
         Connection con = null;
@@ -149,7 +152,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
         return result;
     }
 
-    public int createOrder(String fullName, String address, String status, Date date, int userID, float total,String note) throws SQLException, ClassNotFoundException {
+    public int createOrder(String fullName, String address, String status, Date date, int userID, float total, String note) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement st = null;
         PreparedStatement st2 = null;
@@ -194,7 +197,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
         }
         return 0;
     }
-    
+
     public List<OrderDTO> getListOrderByUserId(int userID) throws SQLException {
         List<OrderDTO> list = new ArrayList<>();
         OrderDTO order = null;
@@ -240,8 +243,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
         return list;
     }
 
-
-    public boolean updateStatusOder(String status,int orderID) throws SQLException, ClassNotFoundException {
+    public boolean updateStatusOder(String status, int orderID) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement st = null;
         boolean result = false;
@@ -270,9 +272,8 @@ public OrderDTO getOrder(int orderID) throws SQLException {
         return result;
     }
 
-
     public List<OrderDTO> getOrderProcessing() throws SQLException {
-         List<OrderDTO> list = new ArrayList<>();
+        List<OrderDTO> list = new ArrayList<>();
         OrderDTO order = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -283,7 +284,6 @@ public OrderDTO getOrder(int orderID) throws SQLException {
             if (conn != null) {
                 String sql = "select * from Orders where status = 'PROCESSING'";
                 ptm = conn.prepareStatement(sql);
-              
 
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -292,7 +292,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     String orderDate = rs.getString("order_date");
-                   int userID = rs.getInt("user_id");
+                    int userID = rs.getInt("user_id");
                     float totalPrice = rs.getFloat("total_price");
                     String note = rs.getString("note");
 
@@ -328,7 +328,6 @@ public OrderDTO getOrder(int orderID) throws SQLException {
             if (conn != null) {
                 String sql = "select * from Orders where status != 'PROCESSING'";
                 ptm = conn.prepareStatement(sql);
-              
 
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -337,7 +336,7 @@ public OrderDTO getOrder(int orderID) throws SQLException {
                     String address = rs.getString("address");
                     String status = rs.getString("status");
                     String orderDate = rs.getString("order_date");
-                   int userID = rs.getInt("user_id");
+                    int userID = rs.getInt("user_id");
                     float totalPrice = rs.getFloat("total_price");
                     String note = rs.getString("note");
 
@@ -359,5 +358,115 @@ public OrderDTO getOrder(int orderID) throws SQLException {
             }
         }
         return list;
+    }
+
+    public boolean checkOrderByUserID(int userID, int productID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_PRODUCT_ORDER_BY_USERID);
+                ptm.setInt(1, userID);
+                ptm.setInt(2, productID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+//chart
+//
+
+//    public List<ChartDTO> getChartRevenueArea(int day, String start) {
+//        List<ChartDTO> list = new ArrayList<>();
+//
+//        Connection conn = null;
+//        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+//        for (int i = 0; i < day; i++) {
+//            int value = 0;
+//            String sql = "select sum(total_price) from [Orders] where order_date <= DATEADD(DAY, ?, ?) and order_date >= ?";
+//            try {
+//                PreparedStatement st = conn.prepareStatement(sql);
+//                st.setInt(1, i);
+//                st.setString(2, start);
+//                st.setString(3, start);
+//                rs = st.executeQuery();
+//                while (rs.next()) {
+//                    value = rs.getInt(1);
+//                }
+//                sql = "select  DATEADD(DAY, ?, ?)";
+//                st = conn.prepareStatement(sql);
+//                st.setInt(1, i);
+//                st.setString(2, start);
+//                rs = st.executeQuery();
+//                while (rs.next()) {
+//                    ChartDTO chart = new ChartDTO();
+//                    chart.setDate(rs.getDate(1));
+//                    chart.setValue(value);
+//                    list.add(chart);
+//                }
+//
+//            } catch (SQLException e) {
+//                System.out.println(e);
+//            }
+//        }
+//        return list;
+//    }
+    public List<ChartDTO> getChartRevenueArea(String start, int day) throws SQLException, ClassNotFoundException {
+        List<ChartDTO> list = new ArrayList<>();
+
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try ( Connection conn = DBUtils.getConnection()) {
+            for (int i = 0; i < day; i++) {
+                int value = 0;
+                String sql = "select sum(total_price) from [Orders] where order_date <= DATEADD(DAY, ?, ?) and order_date >= ? and status = 'FINISHED'";
+                try {
+                    PreparedStatement st = conn.prepareStatement(sql);
+                    st.setInt(1, i);
+                    st.setString(2, start);
+                    st.setString(3, start);
+                    rs = st.executeQuery();
+                    while (rs.next()) {
+                        value = rs.getInt(1);
+                    }
+                    sql = "select  DATEADD(DAY, ?, ?)";
+                    st = conn.prepareStatement(sql);
+                    st.setInt(1, i);
+                    st.setString(2, start);
+                    rs = st.executeQuery();
+                    while (rs.next()) {
+                        ChartDTO chart = new ChartDTO();
+                        chart.setDate(rs.getDate(1));
+                        chart.setValue(value);
+                        list.add(chart);
+                    }
+
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            return list;
+        }
+
     }
 }

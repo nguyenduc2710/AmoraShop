@@ -71,6 +71,7 @@
                                             <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
                                             <a class="nav-link" href="OrderProcessingStaffController">Order Processing</a>
                                             <a class="nav-link" href="OrderCompleteController">Order Complete</a>
+                                            <a class="nav-link" href="FeedBackStaffController">Feed Back processing</a>
                                         </c:otherwise>
                                     </c:choose>
 

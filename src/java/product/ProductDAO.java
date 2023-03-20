@@ -552,7 +552,7 @@ public class ProductDAO {
     }
 
     //End of playground
-    public List<ProductDTO> getProductDetailByID(String product_id) throws SQLException, ClassNotFoundException {
+    public List<ProductDTO> getProductDetailByID(int product_id) throws SQLException, ClassNotFoundException {
 
         List<ProductDTO> list = new ArrayList<>();
         Connection con = null;
@@ -563,7 +563,7 @@ public class ProductDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 stm = con.prepareStatement(SEARCH_PRODUCT_BY_ID_USER);
-                stm.setString(1, product_id);
+                stm.setInt(1, product_id);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int productID = rs.getInt("product_id");

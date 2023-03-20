@@ -168,6 +168,26 @@
         <servlet-name>ShowProductByCategory</servlet-name>
         <servlet-class>controller.ShowProductByCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActionFeedBackController</servlet-name>
+        <servlet-class>feedBack.ActionFeedBackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOrderByUserController</servlet-name>
+        <servlet-class>feedBack.CheckOrderByUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedBackController</servlet-name>
+        <servlet-class>feedBack.FeedBackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedBackStaffController</servlet-name>
+        <servlet-class>feedBack.FeedBackStaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <servlet-class>controller.AdminDashboardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -335,6 +355,26 @@
     <servlet-mapping>
         <servlet-name>ShowProductByCategory</servlet-name>
         <url-pattern>/ShowProductByCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActionFeedBackController</servlet-name>
+        <url-pattern>/ActionFeedBackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOrderByUserController</servlet-name>
+        <url-pattern>/CheckOrderByUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBackController</servlet-name>
+        <url-pattern>/FeedBackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBackStaffController</servlet-name>
+        <url-pattern>/FeedBackStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <url-pattern>/AdminDashboardController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

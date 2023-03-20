@@ -803,3 +803,22 @@ input[type=number] {
     line-height: 1.8;
     color: rgb(202 29 29);
 }
+
+.reviews-rating {
+    position: absolute;
+    top: 0;
+    padding: 0px 10px;
+}
+.reviews-rating__star{
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-image: url(../..//images/star-none.svg);
+    display: inline-block;
+}
+.is-active{
+    background-image: url(../..//images/star.svg);
+}
+.is-half{
+    background-image: url(../..//images/star-half.svg);
+}

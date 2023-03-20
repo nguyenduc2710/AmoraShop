@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
                 String status = loginUser.getStatus();
                 if (status.equalsIgnoreCase("ACTIVE")) {
                     if (roleID == 1) {
-                        url = "/ShowUserController";
+                        url = "/AdminDashboardController";
                     } else if (roleID == 2) {
                         StaffLogDAO logDao = new StaffLogDAO();
                         logDao.insertLog(loginUser.getEmail(), dateIn);
