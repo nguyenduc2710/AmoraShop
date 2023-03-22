@@ -17,9 +17,6 @@
         <meta name="author" content="" />
         <title>Update User</title>
         <link href="hien-css/css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
-        <link rel="stylesheet" href="assets/css/base.css">
-        <link rel="stylesheet" href="assets/css/home.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
@@ -65,7 +62,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        Gender: <input id="inputStatus" type="radio"  name="gender" value="MALE" checked="checked"/>MALE
+                                                        Gender: <input id="inputStatus" type="radio" name="gender" value="MALE" />MALE
                                                         <input type="radio" name="gender" value="FEMALE">FEMALE
                                                     </div>
                                                 </div>
@@ -79,8 +76,8 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        Status: <input type="radio" name="status" value="ACTIVE" checked="checked">ACTIVE 
-                                                        <input type="radio" name="status" value="INACTIVE"  >INACTIVE
+                                                        Status: <input type="radio" name="status" value="ACTIVE">ACTIVE 
+                                                                <input type="radio" name="status" value="INACTIVE"  >INACTIVE
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

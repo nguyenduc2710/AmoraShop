@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="assets/css/base.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/products.css">
+        <link rel="stylesheet" href="assets/css/review.css">
         <link rel="icon" type="image/png" href="assets/images/LogoDoneEdited.png" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <style>
@@ -85,122 +86,303 @@
                 </div>
             </div>    
 
+            <!--View Review Product-->
+            <div class="product-rating-wrap">
+                <div class="review-box">
+                    <h1 class="review-class">Customer Review</h1>
+                    <!--Review HEADER-->
+                    <c:if test="${not empty listFeedback}">
+                        <div class="review-quantity-box">
+                            <p class="review-quantity">Based on ${total} reviews</p>
+                            <c:if test="${Math.round(avg * 1000) / 1000 eq 1}">
+                                <p class="star-icon">
+                                    <span>1/5</span>
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                </p>    
+                            </c:if>
+                            <c:if test="${Math.round(avg * 1000) / 1000 eq 2}">
+                                <p class="star-icon">
+                                    <span>2/5</span>
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                </p>    
+                            </c:if>
+                            <c:if test="${Math.round(avg * 1000) / 1000 eq 3}">
+                                <p class="star-icon">
+                                    <span>3/5</span>
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                </p>    
+                            </c:if>
+                            <c:if test="${Math.round(avg * 1000) / 1000 eq 4}">
+                                <p class="star-icon">
+                                    <span>4/5</span>
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                </p>    
+                            </c:if>
+                            <c:if test="${Math.round(avg * 1000) / 1000 eq 5}">
+                                <p class="star-icon">
+                                    <span>5/5</span>
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                </p>    
+                            </c:if>                        
+                        </div>
+                    </c:if>
+                </div>
 
-            <!--            hien feedback-->
 
-            <div class="container-fluid">
+                <div class="user-rating-list">
+                    <c:if test="${not empty listFeedback}">
+                        <c:forEach items="${listFeedback}" var="f">
+                            <c:if test="${f.status == 'true'}">
+                                <div class="user-items">
+                                    <div class="user-rating-title row">
+                                        <div class="user-img">
+                                            <img src="assets/images/noneUser.png" alt="User">
+                                        </div>
+                                        <div class="user-review-info col-4">
+                                            <h2 class="user-name">
+                                                ${f.fullName}
+                                            </h2>
+                                            <h3 class="day-rating">
+                                                ${f.date}
+                                            </h3>
+                                        </div>
+                                        <div class="user-rating-point col-7">
+                                            <c:if test="${Math.round(avg * 1000) / 1000 eq 1}">
+                                                <p class="star-icon">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                </p>    
+                                            </c:if>
+                                            <c:if test="${Math.round(avg * 1000) / 1000 eq 2}">
+                                                <p class="star-icon">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                </p>    
+                                            </c:if>
+                                            <c:if test="${Math.round(avg * 1000) / 1000 eq 3}">
+                                                <p class="star-icon">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                </p>    
+                                            </c:if>
+                                            <c:if test="${Math.round(avg * 1000) / 1000 eq 4}">
+                                                <p class="star-icon">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/star_outline_black_24dp.svg" alt="">
+                                                </p>    
+                                            </c:if>
+                                            <c:if test="${Math.round(avg * 1000) / 1000 eq 5}">
+                                                <p class="star-icon">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                    <img src="assets/font/grade_black_24dp.svg" alt="">
+                                                </p>    
+                                            </c:if>
 
-                <div class="row">
-                    <hr class="marketing_feedback_margin">
-                    <div class="d-flex justify-content-between mb-3">
+                                        </div>
+                                    </div>
 
-                        <h2 class="marketing_feedbac_displayinline">${total} Đánh giá</h2>
-                        <h2 class="marketing_feedbac_displayinline">${Math.round(avg * 1000) / 1000}/5 <img style="height: 40px; width: 40px" src="images/images.png"></h2>
-                    </div>
-
-                    <hr class="marketing_feedback_margin">
-                    <div class="col-md-6 mx-auto">
-
-                        <div class="rounded p-3">
-
-
-                            <div class="content" class="row">
-
-
-
-                                <c:forEach items="${listFeedback}" var="f">
-                                    <c:if test="${f.status == 'true'}">
-                                        <div class="feedback">
-
-                                            <div class="col-sm-12 mb-3">
-                                                <span>
-                                                    <h6 class="marketing_feedbac_displayinline">
-                                                        <script>
-                                                            for (var i = 0; i < 5; i++) {
-                                                                if (i < ${f.rated_star}) {
-                                                                    document.write('<div class="reviews-rating__star is-active"></div>');
-                                                                } else {
-                                                                    document.write('<div class="reviews-rating__star"></div>');
-                                                                }
-                                                            }
-                                                        </script>
-                                                        <br/>
-                                                        <b class="marketing_feedback_margin">${f.fullName}</b>
-                                                    </h6>
-                                                </span>
-
-
-
-                                                <h6 class="marketing_feedback_margin mt-2">${f.feedBack}</h6>
-
-                                                <c:if test="${not empty f.feedBackImage and not empty fn:trim(f.feedBackImage)}">
-
-
-
-                                                    <!-- Nếu feedBackImage trong database chứa URL hình ảnh, hiển thị hình ảnh tương ứng -->
-                                                    <h6 class="marketing_feedback_margin"><img style="height: 100px; width: 100px" src="${f.feedBackImage}"></h6>
-                                                    </c:if>
-
-                                                <span class="reviews-listing__date marketing_feedback_margin">${f.date}</span>
-                                                <hr class="marketing_feedback_margin">
+                                    <div class="user-rating-des">
+                                        <div class="rating-description">
+                                            ${f.feedBack}
+                                        </div>
+                                        <c:if test="${not empty f.feedBackImage}">
+                                            <div class="rating-prd-img">
+                                                <img style="margin-right: 10px;" src="${f.feedBackImage}" alt="">                                        
                                             </div>
-                                        </div> 
-                                    </c:if>
+                                        </c:if>
+
+                                    </div>
+                                </div>                                    
+                            </c:if>                        
+                        </c:forEach>
+                    </c:if>                
+                </div>
+                <c:if test="${empty listFeedback}">
+                    <div class="search-error-note">
+                        Sorry, we currently don't have enough reviews about this product!
+                    </div> 
+                </c:if>
+                <c:choose>
+                    <c:when test="${total != 0}">
+                        <c:forEach items="${productDetail}" var="productD">
+
+                            <ul class="pagination">
+
+                                <li class="page-item">
+                                    <a <c:if test="${page!=1}">
+                                            href="ShowProductDetailUserController?page=${page-1}&product_id=${productD.productID}"
+                                        </c:if> class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">«</span>
+                                    </a>
+                                </li>
+
+                                <c:forEach begin="1" end="${totalPage}" var="i">
+                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductDetailUserController?page=${i}&product_id=${productD.productID}">${i}</a></li>
+                                    </c:forEach>    
+
+                                <li class="page-item">
+                                    <a <c:if test="${page!=totalPage}">
+                                            href="ShowProductDetailUserController?page=${page+1}&product_id=${productD.productID}"
+                                        </c:if> class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">»</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </c:forEach> 
+                    </c:when>
+                    <c:otherwise>
+
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+        <!--    feedback-->
+
+        <%--<div class="container-fluid">
+
+            <div class="row">
+                <hr class="marketing_feedback_margin">
+                <div class="d-flex justify-content-between mb-3">
+
+                    <h2 class="marketing_feedbac_displayinline">${total} Đánh giá</h2>
+                    <h2 class="marketing_feedbac_displayinline">${Math.round(avg * 1000) / 1000}/5 <img style="height: 40px; width: 40px" src="images/images.png"></h2>
+                </div>
+
+                <hr class="marketing_feedback_margin">
+                <div class="col-md-6 mx-auto">
+
+                    <div class="rounded p-3">
+
+
+                        <div class="content" class="row">
 
 
 
-                                </c:forEach>
+                            <c:forEach items="${listFeedback}" var="f">
+                                <c:if test="${f.status == 'true'}">
+                                    <div class="feedback">
+
+                                        <div class="col-sm-12 mb-3">
+                                            <span>
+                                                <h6 class="marketing_feedbac_displayinline">
+                                                    <script>
+                                                        for (var i = 0; i < 5; i++) {
+                                                            if (i < ${f.rated_star}) {
+                                                                document.write('<div class="reviews-rating__star is-active"></div>');
+                                                            } else {
+                                                                document.write('<div class="reviews-rating__star"></div>');
+                                                            }
+                                                        }
+                                                    </script>
+                                                    <br/>
+                                                    <b class="marketing_feedback_margin">${f.fullName}</b>
+                                                </h6>
+                                            </span>
 
 
 
-                                <nav aria-label="..." class="pagination-container">
-                                    <c:choose>
-                                        <c:when test="${total != 0}">
-                                            <c:forEach items="${productDetail}" var="productD">
+                                            <h6 class="marketing_feedback_margin mt-2">${f.feedBack}</h6>
 
-                                                <ul class="pagination">
+                                            <c:if test="${not empty f.feedBackImage and not empty fn:trim(f.feedBackImage)}">
+                                                <!-- Nếu feedBackImage trong database chứa URL hình ảnh, hiển thị hình ảnh tương ứng -->
+                                                <h6 class="marketing_feedback_margin"><img style="height: 100px; width: 100px" src="${f.feedBackImage}"></h6>
+                                                </c:if>
 
-                                                    <li class="page-item">
-                                                        <a <c:if test="${page!=1}">
-                                                                href="ShowProductDetailUserController?page=${page-1}&product_id=${productD.productID}"
-                                                            </c:if> class="page-link" aria-label="Next">
-                                                            <span aria-hidden="true">«</span>
-                                                        </a>
-                                                    </li>
-
-                                                    <c:forEach begin="1" end="${totalPage}" var="i">
-                                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductDetailUserController?page=${i}&product_id=${productD.productID}">${i}</a></li>
-                                                        </c:forEach>    
-
-                                                    <li class="page-item">
-                                                        <a <c:if test="${page!=totalPage}">
-                                                                href="ShowProductDetailUserController?page=${page+1}&product_id=${productD.productID}"
-                                                            </c:if> class="page-link" aria-label="Next">
-                                                            <span aria-hidden="true">»</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </c:forEach> 
-                                        </c:when>
-                                        <c:otherwise>
-
-                                        </c:otherwise>
-                                    </c:choose>
+                                            <span class="reviews-listing__date marketing_feedback_margin">${f.date}</span>
+                                            <hr class="marketing_feedback_margin">
+                                        </div>
+                                    </div> 
+                                </c:if>
 
 
-                                </nav>
+
+                            </c:forEach>
 
 
-                            </div>
+
+                            <nav aria-label="..." class="pagination-container">
+                                <c:choose>
+                                    <c:when test="${total != 0}">
+                                        <c:forEach items="${productDetail}" var="productD">
+
+                                            <ul class="pagination">
+
+                                                <li class="page-item">
+                                                    <a <c:if test="${page!=1}">
+                                                            href="ShowProductDetailUserController?page=${page-1}&product_id=${productD.productID}"
+                                                        </c:if> class="page-link" aria-label="Next">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+
+                                                <c:forEach begin="1" end="${totalPage}" var="i">
+                                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductDetailUserController?page=${i}&product_id=${productD.productID}">${i}</a></li>
+                                                    </c:forEach>    
+
+                                                <li class="page-item">
+                                                    <a <c:if test="${page!=totalPage}">
+                                                            href="ShowProductDetailUserController?page=${page+1}&product_id=${productD.productID}"
+                                                        </c:if> class="page-link" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </c:forEach> 
+                                    </c:when>
+                                    <c:otherwise>
+
+                                    </c:otherwise>
+                                </c:choose>
+
+
+                            </nav>
+
 
                         </div>
 
-
-
                     </div>
+
+
+
                 </div>
             </div>
         </div>
+    </div>--%>
 
 
         <jsp:include page="components/footer.jsp" />

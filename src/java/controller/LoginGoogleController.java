@@ -39,7 +39,7 @@ public class LoginGoogleController extends HttpServlet {
             String accessToken = GoogleUtils.getToken(code);
             UserGoogleDTO userGoogle = GoogleUtils.getUserInfo(accessToken);
             if (userGoogle != null) {
-                UserDAO userDAO = new UserDAO();
+                UserDAO userDAO = new UserDAO();               
                 String email = userGoogle.getEmail();
                 boolean userDTO_check = userDAO.checkDuplicate(email);
                 UserDTO loginUser = new UserDTO();
@@ -48,14 +48,18 @@ public class LoginGoogleController extends HttpServlet {
                 loginUser.setStatus("ACTIVE");
                 loginUser.setRoleID(2);
                 loginUser.setImage(userGoogle.getPicture());
+                UserDTO usergg = userDAO.getUserByEmail(loginUser.getEmail());
                 Date date = new Date(System.currentTimeMillis());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String timeIn = sdf.format(date);
-                if (userDTO_check == false) {
+                if(usergg.getStatus().equals("INACTIVE")){
+                    request.setAttribute("ERROR", "Your account does not have access to system!!!");
+                    url ="login.jsp";
+                }
+                else if (userDTO_check == false) {
                     userDAO.insert(loginUser);
                     StaffLogDAO logDao = new StaffLogDAO();
                     logDao.insertLog(loginUser.getEmail(), timeIn);
-                    UserDTO usergg = userDAO.getUserByEmail(loginUser.getEmail());
                     HttpSession session = request.getSession();
                     session.setAttribute("LOGIN_USER", usergg);
                     url = USER_PAGE;
@@ -63,7 +67,6 @@ public class LoginGoogleController extends HttpServlet {
                     url = USER_PAGE;
                     StaffLogDAO logDao = new StaffLogDAO();
                     logDao.insertLog(loginUser.getEmail(), timeIn);
-                    UserDTO usergg = userDAO.getUserByEmail(loginUser.getEmail());
                     HttpSession session = request.getSession();
                     session.setAttribute("LOGIN_USER", usergg);
                 }

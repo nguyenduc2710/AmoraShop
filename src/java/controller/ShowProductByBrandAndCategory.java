@@ -30,10 +30,25 @@ public class ShowProductByBrandAndCategory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = SUCCESS_USER;
         try {
+              final int PAGE_SIZE = 12;
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
             String brand = request.getParameter("brand");
             int cateID = Integer.parseInt(request.getParameter("cateID"));
             ProductDAO productDAO = new ProductDAO();
-            List<ProductDTO> listProducts = productDAO.getAllProductByBrandAndCategory(brand, cateID);
+            List<ProductDTO> listProducts = productDAO.getAllProductByBrandAndCategory(brand, cateID, page, PAGE_SIZE);
+             int totalProducts = productDAO.getTotalProductsByBrandAndCategory(brand, cateID);
+            int totalPage = totalProducts / PAGE_SIZE;
+            //chia lay du totalProducts neu co du thi + 1 page cho totalPage
+            if (totalProducts % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+        
+            request.setAttribute("page", page);
+            request.setAttribute("totalPage", totalPage);
             request.setAttribute("products", listProducts);
              request.setAttribute("brand", brand);
         } catch (SQLException ex) {

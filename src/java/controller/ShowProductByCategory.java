@@ -31,10 +31,26 @@ public class ShowProductByCategory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = SUCCESS_USER;
         try {
+            final int PAGE_SIZE = 12;
+            int page = 1;
+            String pageStr = request.getParameter("page");
+            if (pageStr != null) {
+                page = Integer.parseInt(pageStr);
+            }
             int cateID = Integer.parseInt(request.getParameter("cateID"));          
             ProductDAO productDAO = new ProductDAO();
-            List<ProductDTO> listProducts = productDAO.getAllProductByCategoryId(cateID);
+            List<ProductDTO> listProducts = productDAO.getAllProductByCategoryIdWithPagging(cateID, page , PAGE_SIZE);
+            int totalProducts = productDAO.getTotalProductsByCategory(cateID);
+            int totalPage = totalProducts / PAGE_SIZE;
+            //chia lay du totalProducts neu co du thi + 1 page cho totalPage
+            if (totalProducts % PAGE_SIZE != 0) {
+                totalPage += 1;
+            }
+
+            request.setAttribute("page", page);
+            request.setAttribute("totalPage", totalPage);
             request.setAttribute("products", listProducts);
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +77,7 @@ public class ShowProductByCategory extends HttpServlet {
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+* @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
