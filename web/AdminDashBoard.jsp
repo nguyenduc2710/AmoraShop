@@ -57,7 +57,7 @@
                             </a>
                             <div class="collapse" id="collapseAuthentication" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                       <a class="nav-link" href="AdminDashboardController">Dashboard</a>
+                                       <a class="nav-link" href="#">Dashboard</a>
                                     <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
                                     
                                     <a class="nav-link" href="OrderCompleteController">Order Complete</a>
@@ -132,7 +132,7 @@
 
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="hien-css/js/scripts.js"></script>

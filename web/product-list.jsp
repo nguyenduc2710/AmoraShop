@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="create-product.jsp">Add new product</a>
+                    <a style="margin: 28px" class="btn btn-info" href="create-product.jsp">Add new product</a>
                 </main>
 
             </div>
