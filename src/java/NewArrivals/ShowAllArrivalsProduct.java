@@ -28,6 +28,9 @@ import user.UserDTO;
  */
 public class ShowAllArrivalsProduct extends HttpServlet {
 
+    private final static String HOME_PAGE = "homePage.jsp";
+    private final static String NEW_ARRIVALS = "new-arrivals.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,11 +43,15 @@ public class ShowAllArrivalsProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-              final int PAGE_SIZE = 12;
+            String isHomePage = request.getParameter("homePage");
+            String newArr = request.getParameter("searchNewArr");
+            String URL = HOME_PAGE;
+            final int PAGE_SIZE = 12;
             int page = 1;
             String pageStr = request.getParameter("page");
-            
+
             if (pageStr != null) {
                 page = Integer.parseInt(pageStr);
             }
@@ -59,8 +66,9 @@ public class ShowAllArrivalsProduct extends HttpServlet {
                 totalPage += 1;
             }
             HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-        
+            List<ProductDTO> favoritePrds = productDAO.getProductHomePage();
+            request.setAttribute("favPrd", favoritePrds);
+
             request.setAttribute("page", page);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("totalProducts", totalProducts);
@@ -69,10 +77,13 @@ public class ShowAllArrivalsProduct extends HttpServlet {
             List<CategoryDTO> ProductSearchResult = new CategoryDAO().getAllCategory();
             request.setAttribute("PRODUCT_NAME_RESULT", ProductSearchResult);
 
-            if(listProduct.isEmpty()){
+            if (listProduct.isEmpty()) {
                 request.setAttribute("SearchErrorNote", "No result!!!");
             }
-             request.getRequestDispatcher("new-arrivals.jsp").forward(request, response);
+            if (newArr != null) {
+                URL = NEW_ARRIVALS;
+            }
+            request.getRequestDispatcher(URL).forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(ShowAllArrivalsProduct.class.getName()).log(Level.SEVERE, null, ex);
         }

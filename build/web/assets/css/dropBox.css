@@ -1,0 +1,39 @@
+.main-menu-list .menu-item,
+.drop-down .drop-item {
+    width: fit-content;
+    list-style: none;
+    position: relative;
+    background-color: white;
+}
+ul li .item-link {
+    position: relative;
+    color: black;
+    text-decoration: none;
+    display: block;
+    width: 150px;
+    z-index: 5000;
+    width: fit-content;
+}
+
+ul li .drop-down {
+    position: absolute;
+    padding: 0;
+    display: none;
+    margin: 0;
+    left: 0;
+    z-index: 5;
+}
+ul li .drop-down .drop-item {
+    position: relative;
+    float: none;
+    padding: 10px 0;
+    border-top: 1px solid #f3f3f3;
+}
+ul li .drop-down .drop-item a {
+    border-top: none;
+    width: 150px;
+}
+
+ul li .drop-down li:nth-of-type(1) a {
+    border-top: none;
+}

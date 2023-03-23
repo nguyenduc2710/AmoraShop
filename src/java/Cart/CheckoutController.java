@@ -50,7 +50,7 @@ public class CheckoutController extends HttpServlet {
             request.getRequestDispatcher("viewCart.jsp").forward(request, response);
 
         }else{
-             response.sendRedirect("shipping-details.jsp");
+            response.sendRedirect("shipping-details.jsp");
         }
 
     }

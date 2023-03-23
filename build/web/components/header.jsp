@@ -32,47 +32,74 @@
     <div class="header-nav-down">
         <ul class="main-menu-list">
             <div id="underline"></div>
-            <a class="header-nav-link" href="/AmoraShop/homePage.jsp">
-                <li class="main-menu-item">Home</li>
-            </a>
+            <form action="ShowAllArrivalsProduct" method="POST">
+                <a class="header-nav-link" >
+                    <input type="submit" class="main-menu-item" value="Home">
+                    <input type="hidden" name="homePage" value="getNewArrivalAnd6Prods">
+                </a>
+            </form>
+
             <form action="ShowProductController" method="POST">
                 <a class="header-nav-link" href="/AmoraShop/products-user-page.jsp">
                     <input type="submit" class="main-menu-item" value="Shop">
                 </a>
             </form>
-            <div class="dropdown-cover brand-position-rel">
-                <a class="header-nav-link" href="#">
-                    <li class="main-menu-item">Brand</li>                        
+           
+            <li class="menu-item">
+                <a href="#" class="item-link main-menu-item">Brands</a>
+
+                <ul class="drop-down">
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Chanel">Chanel</a>
+                    </li>
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Dior">Dior</a>
+                    </li>
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=DvG">Gabbana & Dolce</a>
+                    </li>
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Gucci">Gucci</a>
+                    </li>
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Prada">Prada</a>
+                    </li>
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=YSL">YSL</a>
+                    </li>
+
+                </ul>
+            </li>
+           
+            <li class="menu-item">
+                <a href="#" class="item-link main-menu-item">Genders</a>
+
+                <ul class="drop-down">
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByCategory?cateID=1">For Man</a>
+                    </li>
+                    <li class="drop-item">
+                        <a class="item-link main-menu-item" 
+                           href="http://localhost:8080/AmoraShop/ShowProductByCategory?cateID=2">For Woman</a>
+                    </li>                  
+                </ul>
+            </li>
+
+            <form action="ShowAllArrivalsProduct" method="POST">
+                <a type="submit" class="header-nav-link">
+                    <!--<li class="main-menu-item">New Arrivals</li>--> 
+                    <input type="submit" class="main-menu-item" value="New Arrivals">
                 </a>
-                <!-- Brands hover select  -->
-                <div class="brand-dropdown-box">
-                    <div class="cover-item-box">
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Chanel" class="brand-nav-item">Chanel</a>
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Dior" class="brand-nav-item">Dior</a>
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=DvG" class="brand-nav-item">Gabbana & Dolce</a>
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Gucci" class="brand-nav-item">Gucci</a>
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=Prada" class="brand-nav-item">Prada</a>
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByBrand?brand=YSL" class="brand-nav-item">YSL</a>
-                    </div>
-                </div>
-            </div>
-            <div class="dropdown-cover gender-position-rel">
-                <a class="header-nav-link" href="#">
-                    <li class="main-menu-item">Genders</li>
-                </a>
+                <input type="hidden" name="searchNewArr" value="NewArr">
+            </form>
 
-                <div class="brand-dropdown-box">
-                    <div class="cover-item-box">
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByCategory?cateID=1" class="brand-nav-item">For Man</a>
-                        <a href="http://localhost:8080/AmoraShop/ShowProductByCategory?cateID=2" class="brand-nav-item">For Woman</a>                                
-                    </div>
-                </div>
-            </div>
-
-
-            <a class="header-nav-link" href="ShowAllArrivalsProduct">
-                <li class="main-menu-item">New Arrivals</li>
-            </a>
         </ul>
 
         <!--    <div class="search-box-container js-modal">
@@ -118,4 +145,12 @@
                     event.stopPropagation();
                 });
             </script>-->
+
+        <script>
+            $("li").mouseover(function () {
+                $(this).find('.drop-down').slideDown(400);
+            }).mouseleave(function () {
+                $(this).find(".drop-down").slideUp(300);
+            });
+        </script>
 </header>

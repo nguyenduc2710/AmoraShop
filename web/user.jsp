@@ -24,6 +24,41 @@
         <link rel="stylesheet" href="assets/css/home.css"/>
         <link rel="stylesheet" href="assets/css/base.css"/>
         <link rel="icon" type="image/png" href="assets/images/LogoDoneEdited.png"/>
+
+        <style>
+            .user-info-actions {
+                background-color: transparent;
+                border: none;
+            }
+
+            .user-info-btn {
+                text-decoration: none;
+                color: black;
+                border: 1px solid rgba(0, 0, 0, 0.5);
+                padding: 5px 1rem;
+                border-radius: 4px;
+                transition: all 0.4s;
+            }
+
+            .user-info-actions h2 a:hover,
+            .user-info-btn:hover {
+                text-decoration: none;
+                color: var(--main-page-color);
+                filter: brightness(1.2);
+                background-color: transparent;
+            }
+
+            .user-logout-btn:hover {
+                color: #D81159;
+                background-color: #EFEFEF;
+            }
+
+            .user-info-actions h2:first-child {
+                display: flex;
+                justify-content: space-between;
+                margin: 5px 0 30px;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="components/header.jsp"/>
@@ -33,7 +68,7 @@
                     <div class="col" style="font-size: 20px">
                         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="/AmoraShop/homePage.jsp">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/AmoraShop">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                             </ol>
                         </nav>
@@ -50,9 +85,20 @@
 
                             </div>
                         </div>
-                        <div class="card mb-4 mb-lg-0">
-                            <div class="card-body p-0">
+                        <div class="user-info-actions card mb-4 mb-lg-0">
+                            <div class=" card-body p-0">
+                                <h2>
+                                    <a class="user-info-btn" href="update-informaton.jsp">Update</a>
 
+                                    <form action="OrderListByUserIdController">
+                                        <input class="user-info-btn" type="submit" value="View Your Orders">
+                                    </form>
+                                </h2>
+                                <h2>
+                                    <form action="LogoutController" method="POST">
+                                        <input class="user-info-btn user-logout-btn" type="submit" name="action" value="Logout">
+                                    </form>
+                                </h2>
                             </div>
                         </div>
                     </div>
@@ -110,22 +156,8 @@
                 </div>
         </section>
 
-        <h2>
 
-            <a href="update-informaton.jsp">Update</a>
 
-        </h2>
-        <h2>
-            <form action="OrderListByUserIdController">
-                <input type="submit" value="View Your Orders">
-            </form>
-        </h2>
-        <h2>
-            <form action="LogoutController" method="POST">
-                <input type="submit" name="action" value="Logout">
-            </form>
-        </h2>
-
-<jsp:include page="components/footer.jsp" />
+        <jsp:include page="components/footer.jsp" />
     </body>
 </html>
