@@ -62,9 +62,9 @@
                             </div>
                             <form class="buy-area" action="AddToCartServlet">
                                 <div class="select-quantity-area">
-                                    <input type="button" value="-" class="quantity-btn">
+                                    <input type="button" value="-" class="quantity-btn" onclick="decrementQuantity()">
                                     <input type="text" id="quantity" name="quantity" value="1" class="quantity-selector">
-                                    <input type="button" value="+" class="quantity-btn">
+                                    <input type="button" value="+" class="quantity-btn" onclick="incrementQuantity()">
                                     <input type="hidden" value="${productDto.productID}" name="productID"/>
                                 </div>
                                 <button type="submit" class="add-to-cart-btn button-57">
@@ -156,7 +156,11 @@
                                 <div class="user-items">
                                     <div class="user-rating-title row">
                                         <div class="user-img">
-                                            <img src="assets/images/noneUser.png" alt="User">
+                                            
+                                            <img src="${f.userImage == null ? 'assets/images/noneUser.png' : f.userImage}" 
+                                                     alt="avatar.png">
+                                            
+                                            
                                         </div>
                                         <div class="user-review-info col-4">
                                             <h2 class="user-name">
@@ -166,7 +170,7 @@
                                                 ${f.date}
                                             </h3>
                                         </div>
-                                        <div class="user-rating-point col-7">
+                                        <div class="user-rating-point col-7">                                         
                                             <c:if test="${Math.round(avg * 1000) / 1000 eq 1}">
                                                 <p class="star-icon">
                                                     <img src="assets/font/grade_black_24dp.svg" alt="">
@@ -212,7 +216,6 @@
                                                     <img src="assets/font/grade_black_24dp.svg" alt="">
                                                 </p>    
                                             </c:if>
-
                                         </div>
                                     </div>
 
@@ -225,7 +228,6 @@
                                                 <img style="margin-right: 10px;" src="${f.feedBackImage}" alt="">                                        
                                             </div>
                                         </c:if>
-
                                     </div>
                                 </div>                                    
                             </c:if>                        
@@ -386,6 +388,8 @@
 
 
         <jsp:include page="components/footer.jsp" />
+        
+        <script src="assets/js/script.js"></script>
     </body>
 
 

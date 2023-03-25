@@ -20,6 +20,15 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="hien-css/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <style>
+            .user-count, .product-count {
+                text-align: center;
+                font-size: 24px;
+                margin: 0 auto;
+                padding: 20px 0;
+            }
+
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -57,11 +66,11 @@
                             </a>
                             <div class="collapse" id="collapseAuthentication" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                       <a class="nav-link" href="#">Dashboard</a>
+                                    <a class="nav-link" href="AdminDashboardController">Dashboard</a>
                                     <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
-                                    
+
                                     <a class="nav-link" href="OrderCompleteController">Order Complete</a>
-                                  
+
                                     <a class="nav-link" href="ShowLogController">User Action</a>
                                 </nav>
                             </div>
@@ -111,17 +120,42 @@
                                             <div class="card-body"><canvas id="myAreaChart-2" width="100%" height="40"></canvas></div>
                                         </div>
                                     </div>
-                                     <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-4"></i>
-                                        Rated-Star statistics
+                                    <div class="col-xl-6">
+                                        <div class="card mb-4">
+                                            <div class="card-header">
+                                                <i class="fas fa-chart-bar me-4"></i>
+                                                Rated-Star statistics
+                                            </div>
+                                            <div class="card-body"><canvas id="myAreaChart-3" width="100%" height="40"></canvas></div>
+                                        </div>
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart-3" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
 
                                 </div>
+
+                                <div class="row">
+
+                                    <div class="col-xl-6">
+                                        <div class="card mb-4">
+                                            <div class="user-count">
+                                                <span class="count-label">Total Customer:</span></br>
+                                                <span class="count-number">${totalUser}</span>
+                                            </div>
+                                            <div class="card-body" width="100%" height="20"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="card mb-4">
+                                            <div class="product-count">
+                                                <span class="count-label">Total Product:</span></br>
+                                                <span class="count-number">${totalProduct}</span>
+                                            </div>
+                                            <div class="card-body" width="100%" height="20"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
                             </div>
 
 
@@ -132,7 +166,7 @@
 
             </div>
         </div>
-        
+
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="hien-css/js/scripts.js"></script>
@@ -142,7 +176,7 @@
         <script src="hien-css/assets/demo/chart-pie-demo.js"></script>
         <script src="hien-css/assets/demo/datatables-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-       
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 
         <script >
@@ -200,54 +234,54 @@
                     }
             });
             var ctx3 = document.getElementById("myAreaChart-3");
-                var myLineChart3 = new Chart(ctx3, {
-                type: 'line',
-                        data: {
-                        labels: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.date}",</c:forEach>],
-                                datasets: [{
-                                label: "average of star",
-                                        lineTension: 0.3,
-                                        backgroundColor: "rgba(2,117,216,0.2)",
-                                        borderColor: "rgba(2,117,216,1)",
-                                        pointRadius: 5,
-                                        pointBackgroundColor: "rgba(2,117,216,1)",
-                                        pointBorderColor: "rgba(255,255,255,0.8)",
-                                        pointHoverRadius: 5,
-                                        pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                                        pointHitRadius: 50,
-                                        pointBorderWidth: 2,
-                                        data: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.value}",</c:forEach>],
-                                }],
-                        },
-                        options: {
-                        scales: {
-                        xAxes: [{
-                        time: {
-                        unit: 'date'
-                        },
-                                gridLines: {
-                                display: false
-                                },
-                                ticks: {
-                                maxTicksLimit: 7
-                                }
-                        }],
-                                yAxes: [{
-                                ticks: {
-                                min: 0,
-                                        max: 5,
-                                        maxTicksLimit: 5
-                                },
-                                        gridLines: {
-                                        color: "rgba(0, 0, 0, .125)",
-                                        }
-                                }],
-                        },
-                                legend: {
-                                display: false
-                                }
-                        }
-                });
+            var myLineChart3 = new Chart(ctx3, {
+            type: 'line',
+                    data: {
+                    labels: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.date}",</c:forEach>],
+                            datasets: [{
+                            label: "average of star",
+                                    lineTension: 0.3,
+                                    backgroundColor: "rgba(2,117,216,0.2)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    pointRadius: 5,
+                                    pointBackgroundColor: "rgba(2,117,216,1)",
+                                    pointBorderColor: "rgba(255,255,255,0.8)",
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                                    pointHitRadius: 50,
+                                    pointBorderWidth: 2,
+                                    data: [<c:forEach  items="${listChartAvgStar}" var="star" > "${star.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 7
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: 5,
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    color: "rgba(0, 0, 0, .125)",
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
 
         </script>
     </body>

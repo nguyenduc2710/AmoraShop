@@ -72,7 +72,7 @@
 
                             <div class="wrapper">
                                 <div class="master">
-                                    <h2>How was your experience about our product?</h2>
+                                    <h2 class="review-title">How was your experience about our product?</h2>
 
                                     <div class="rating-component">
                                         <div class="status-msg">

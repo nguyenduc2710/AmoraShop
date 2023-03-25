@@ -17,7 +17,7 @@
     align-items: center;
 }
 
-h1.review-class {
+.review-class {
     font-size: 3.0rem;
 }
 
@@ -152,11 +152,11 @@ h1.review-class {
 }
 
 /* Template review form */
-.wrapper {
+/*.wrapper {
     margin: 0 auto;
     max-width: 960px;
     width: 100%;
-}
+}*/
 
 .master {
     display: -webkit-box;
@@ -174,12 +174,12 @@ h1.review-class {
     align-items: center;
 }
 
-h1 {
+/*h1 {
     font-size: 20px;
     margin-bottom: 20px;
-}
+}*/
 
-h2 {
+.review-title {
     line-height: 160%;
     margin-bottom: 20px;
     text-align: center;

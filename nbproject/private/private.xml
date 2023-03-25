@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/JavaWeb/AmoraShop/web/order-list.jsp</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/feed-back.jsp</file>
+            <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/RegisterController.java</file>
             <file>file:/D:/JavaWeb/AmoraShop/src/java/product/ProductDAO.java</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/create-user.jsp</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/product-list.jsp</file>
@@ -15,6 +16,7 @@
             <file>file:/D:/JavaWeb/AmoraShop/web/components/header.jsp</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/order-detail.jsp</file>
             <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/ShowProductByBrand.java</file>
+            <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/CreateUserByAdminController.java</file>
             <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/CreateProductController.java</file>
             <file>file:/D:/JavaWeb/AmoraShop/web/update-user.jsp</file>
             <file>file:/D:/JavaWeb/AmoraShop/src/java/controller/LoginGoogleController.java</file>

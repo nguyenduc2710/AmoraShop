@@ -171,24 +171,43 @@
 
                                                 <td>
                                                     <form action="ActionFeedBackController" method="POST">
-                                                      
-                                                            <input type="hidden" value="${a.feedBackID}" name="feedBack_id"/>
 
-                                                            <input type="hidden" value="update" name="Action"/>
+                                                        <input type="hidden" value="${a.feedBackID}" name="feedBack_id"/>
 
-                                                            <input type="submit" value="Accept">
-                                                     
-                                                     </form>
-                                                            <form action="ActionFeedBackController" method="POST">
-                                                     
-                                                            <input type="hidden" value="${a.feedBackID}" name="feedBack_id"/>
+                                                        <input type="hidden" value="update" name="Action"/>
 
-                                                            <input type="hidden" value="delete" name="Action"/>
+                                                        <input type="submit" value="Accept" class="btn btn-outline-danger">
 
-                                                            <input type="submit" value="Delete">
-                                                        
+
                                                     </form>
-                                               
+                                                        
+                                                       
+                                                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#blockBtn${a.feedBackID}">
+                                                        Delete 
+                                                    </button>  
+
+                                                    <div class="modal fade" id="blockBtn${a.feedBackID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="p-4 text-center fs-3"
+                                                                     style="color: red;">
+                                                                    Are you sure you want to DELETE the User's feed back "<span class="text-dark">${a.fullName}</span>" from feed back lists?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form action="ActionFeedBackController" method="POST">
+                                                                        <input type="hidden" value="${a.feedBackID}" name="feedBack_id"/>
+                                                                        <input type="hidden" value="delete" name="Action"/>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                                                                        <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</button>
+</form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
 

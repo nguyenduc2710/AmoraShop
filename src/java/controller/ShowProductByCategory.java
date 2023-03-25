@@ -50,7 +50,7 @@ public class ShowProductByCategory extends HttpServlet {
             request.setAttribute("page", page);
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("products", listProducts);
-            
+            request.setAttribute("cateID", cateID);
 
         } catch (SQLException ex) {
             Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);

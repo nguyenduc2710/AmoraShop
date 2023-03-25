@@ -51,6 +51,8 @@ public class ShowProductByBrandAndCategory extends HttpServlet {
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("products", listProducts);
              request.setAttribute("brand", brand);
+            
+              request.setAttribute("cateID", cateID);
         } catch (SQLException ex) {
             Logger.getLogger(ShowProductController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

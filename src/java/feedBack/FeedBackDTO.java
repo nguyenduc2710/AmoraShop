@@ -22,11 +22,12 @@ public class FeedBackDTO {
     private int userID;
     private Date date;
     private String feedBackImage;
+    private String userImage;
 
     public FeedBackDTO() {
     }
 
-    public FeedBackDTO(int feedBackID, String fullName, float rated_star, String feedBack, String image, String status, int productID, int userID, Date date, String feedBackImage) {
+    public FeedBackDTO(int feedBackID, String fullName, float rated_star, String feedBack, String image, String status, int productID, int userID, Date date, String feedBackImage, String userImage) {
         this.feedBackID = feedBackID;
         this.fullName = fullName;
         this.rated_star = rated_star;
@@ -37,6 +38,7 @@ public class FeedBackDTO {
         this.userID = userID;
         this.date = date;
         this.feedBackImage = feedBackImage;
+        this.userImage = userImage;
     }
 
     public int getFeedBackID() {
@@ -119,7 +121,15 @@ public class FeedBackDTO {
         this.feedBackImage = feedBackImage;
     }
 
+    public String getUserImage() {
+        return userImage;
+    }
 
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    
     
 
 }

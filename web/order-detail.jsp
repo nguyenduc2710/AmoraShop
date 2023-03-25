@@ -4,6 +4,7 @@
     Author     : long
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -86,7 +87,8 @@
                                             ${orderDt.capacity}ml
                                         </div>
                                         <div class="order-item-price">
-                                            ${orderDt.price}$
+                                            <fmt:formatNumber value="${orderDt.totalPrice}" pattern="#.##"/>$                        
+                                            
                                             <c:if test="${requestScope.status eq 'FINISHED'}">
                                                 <form action="CheckOrderByUserController" method="POST">
                                                     <input type="hidden" value="${orderDt.productID}" name="productID"/>
