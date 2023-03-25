@@ -1,0 +1,69 @@
+YÊU CẦU: ĐÃ TẢI GIT.
+
+Xem những command cơ bản tại đây: https://www.notion.so/zarkom/Introduction-to-Git-ac396a0697704709a12b6a0e545db049#e0920693bebe4ffd94e973d60bd3f6b4
+Những dòng chứa ký tự <> không được bao gồm trong câu lệnh, chỉ chứa ý nghĩa ví dụ cụ thể.
+
+**Push code**
+LƯU Ý: SAU MỖI FUNCTION HOÀN THÀNH
+
+B1: Setup username & gihub gmail
+  git config --global user.name "<Your Name>"
+  git config --global user.email "<your@email.com>"
+ 
+B2: Trỏ đến project
+  cd <your project directory - VD: C:\Spring 2023\SWP391\AmoraShop>
+  
+B3: Dùng lệnh git init để tạo 1 file git log
+  git init
+  
+B4: Sau khi hoàn thành thêm mới, chỉnh sửa code, dùng lệnh git status. 
+Lệnh giúp ta kiểm tra những file nào đã được chỉnh sửa (modified); & những file tạo mới chưa thông báo cho git
+  git status
+    B4.1: Các mục hiện ra sẽ có chữ màu đỏ, ta cần dùng lệnh git add . (git sẽ xác nhận tất cả các sự thay đổi) 
+          hoặc dùng lệnh git add <specific file name VD: git add helloWorld.html>
+      git add .
+
+B5: Git sẽ thông báo các file màu xanh, file đã sẵn sàng commit
+**LƯU Ý: Luôn luôn commit file với mục đích gì, WHAT - đã làm cái gì || WHY - Tại sao lại commit, đã có chỉnh sửa gì?
+Ta dùng lệnh git commit -m "<Your message>", sau khi thực hiện hành động, hành động sẽ được ghi vào log của máy local. Vẫn chưa có bất kì chỉnh sửa nào trên github
+  git commit -m "<Your message>"
+
+B6: Link repository (project) URL từ github về với mã lệnh: git remote add origin https://github.com/nguyenduc2710/SWP391.git
+   git remote add origin https://github.com/nguyenduc2710/SWP391.git
+
+B7: Dùng lệnh git push -u origin master để đưa code lên github.
+  git push -u origin master
+  
+  
+
+  **GIT CLONE**
+Git clone sẽ giúp ta kéo tất cả những gì có trong repo trên github về máy
+  git clone <specific github repo link>
+  VD: git clone https://github.com/nguyenduc2710/SWP391.git
+
+**Git trong local không hiện tất cả các branch trên github**
+B1: Cập nhật thông tin mới nhất trên github, xài 1 trong 2 lệnh sau (ưu tiên lệnh đầu)
+  git fetch origin
+  git remote update
+B2: Show tất cả branch hiện có trên github
+  git branch -r
+B3: Thay đổi branch muốn sử dụng
+  git checkout <specific-branch-name>
+
+  
+  **PULL CODE**
+Sau khi có những thay đổi trên master branch, ta cần 1 lần nữa pull (kéo) project về máy local
+  git pull origin <specific-branch-name>
+
+
+------------------------------------------------------------------------------------ More info source below
+
+Learn git on youtube: https://www.youtube.com/watch?v=RGOj5yH7evk
+
+Merge conflict (Xảy ra xung đột khi merge sub-branch với master branch):
+  https://www.youtube.com/watch?v=RGOj5yH7evk (49:15)
+  ==> Pull request, team up, discuss, fix, repush.
+
+How to setup ssh key on github:
+  *Ssh-keygen: https://www.youtube.com/watch?v=RGOj5yH7evk (20:30)
+	Hướng dẫn đầy đủ về set up ssh key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh

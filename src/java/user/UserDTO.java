@@ -18,11 +18,12 @@ public class UserDTO {
     private String address;
     private String status;
     private int roleID;
+    private String image;
 
     public UserDTO() {
     }
 
-    public UserDTO(int userID, String fullName, String password, String gender, String email, String phoneNumber, String address, String status, int roleID) {
+    public UserDTO(int userID, String fullName, String password, String gender, String email, String phoneNumber, String address, String status, int roleID, String image) {
         this.userID = userID;
         this.fullName = fullName;
         this.password = password;
@@ -32,6 +33,7 @@ public class UserDTO {
         this.address = address;
         this.status = status;
         this.roleID = roleID;
+        this.image = image;
     }
 
     public int getUserID() {
@@ -106,4 +108,18 @@ public class UserDTO {
         this.roleID = roleID;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", fullName=" + fullName + ", password=" + password + ", gender=" + gender + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + ", status=" + status + ", roleID=" + roleID + ", image=" + image + '}';
+    }
+ 
+    
 }
