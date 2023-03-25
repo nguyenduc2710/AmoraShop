@@ -52,8 +52,32 @@ B3: Thay đổi branch muốn sử dụng
 
   
   **PULL CODE**
-Sau khi có những thay đổi trên master branch, ta cần 1 lần nữa pull (kéo) project về máy local
-  git pull origin <specific-branch-name>
+Sau khi có những thay đổi trên master branch, ta cần 1 lần nữa pull (kéo) project về máy local.
+Điều kiện tiên quyết: commit lại những thay đổi trên branch của mình -> <git add .> -> <git commit -m "Your commit message">
+  git checkout master
+  git fetch      --- Cập nhật những thay đổi trên remote, những branch nào đã được thay đổi, tạo mới
+  git pull
+----------> Xong, nếu có conflict cần xử lí trên VS, hoặc trực tiếp trên github web
+**Yêu cầu bắt buộc khi chuyển về nhánh làm việc của mình
+  git checkout <your branch>
+  git merge master     ---- merge nội dung branch master vào nhánh của bản thân
+
+
+
+
+
+--------------------------------------------
+***Một số lệnh git khác có thể sẽ cần
+
++) Khi có một nhánh không đồng bộ lịch sử với các nhánh khác,
+	xảy ra khi merge các nhánh với nhau (Error name: refusing to merge unrelated histories)
+
+   git checkout <branch you want to merge other branch into>       --------- Chuyển sang nhánh bạn muốn gán dữ liệu từ những branch khác
+   git merge <other-branch> --allow-unrelated-histories
+   git commit -m "Merge unrelated histories"
+   git push origin <your current branch>
+
+
 
 
 ------------------------------------------------------------------------------------ More info source below
