@@ -1,24 +1,33 @@
-# SWP391  -  AmoraShop - Shop Ban Nuoc Hoa. Sử dụng Java, JDK 1.8, Tomcat 10.
+# SWP391  -  AmoraShop - Shop Ban Nuoc Hoa.
 
-Nguyên tắc viết code: 
-  1. Tên packages viết thường, tên class chữ cái đầu viết hoa theo luật Camel
-  2. Đặt tên class, function có ý nghĩa, sắp xếp folder hợp lý để dể quản lý
-  3. ALT + SHIFT + F  phím tắt sắp xếp gọn code
+Members:	
+	Trần Thái Quốc - BackEnd - CRUD, Login Google Api, Payment using Paypal SandBox
+	Nguyễn Hồ Hồng Đức - FrontEnd - CRUD, User UI
+	Nguyễn Hải Long - BackEnd - CRUD, dashboard
+	Mai Xuân Hiền - FrontEnd - Admin, Staff UI
+
+Techs use:
+	Back-end: JavaWeb, JSP, Servlet, Login Google Api, Paypal SandBox
+	Front-end: Html, Css, JavaScript, Bootstrap 5, Jquery, Ajax, innerHtml
+	Database: SQL Server Management
+	Environment: Netbean 12.4, JDK 16, Tomcat 10
 
 
-Nguyên tắc up git:
-  1. Mỗi người sẽ có 1 branch riêng, đề xuất mọi người trong branch của mình tạo thêm 1 branch để chứa main repository khi pull từ github về.
-  
-  2. Khi bắt đầu 1 function, VD: UpdatePerfumeCost(), TA PHẢI TẠO MỚI 1 BRANCH.
-    2.1. Trong quá trình code, lưu file, cần commit code 1 trong 2 ý WHAT (Đã làm cái gì) or WHY (Tại sao lại chỉnh sửa file này).
-    2.2. Sau khi push code lên github, function ổn, được đưa vào main branch. Function branch đã làm SẼ KHÔNG CÓ BẤT KÌ CODE CỦA FUNCTION NÀO KHÁC.
-      ===> Tạo mới 1 branch khác. Function branch đã hoàn thành chỉ dùng để chỉnh sửa khi có bất kì lỗi nào liên quan đến function đó.
-      
-  3. Trong quá trình merge sub-branch với main-branch thì rất có khả năng xảy ra xung đột vì có sự chỉnh sửa khác với bản gốc main-branch.
-    3.1. Vậy phòng cháy hơn chữa cháy, hãy cố gắng đặt tên biến sát nghĩa nhất. Không nên chỉnh sửa code nào khác liên quan đến function của mình.
-    3.2. Nếu lỗi merge xảy ra, cần ngồi lại họp gấp @@.
-    
------
-Feel free to chửi ngược lại e!
-Vì chắc chắn sẽ có vấn đề trong quá trình làm app.
-**NÓI ĐỂ HIỂU NHAU HƠN**
+
+-----------------------
+Use Instructions (Netbean 12, JDK.16, Tomcat 10 required):
+	1. Clone project using <git clone https://github.com/nguyenduc2710/AmoraShop.git>
+	2. Repair libs, dependencies (if err) - 2a. Right click on project and choose Properties
+						2b. Libraries -> Add jar/Folder 
+						3c. Choose all, included activation.jar in folder jaf-1.1.1
+						3d. Last step, click in Add Library... -> add JSTL 1.2.1
+	3. Run file database.sql in SQL Server
+	=========----Environment Ready!!!----=========
+	4. Start TomCat 10 and Deploy the project.
+
+-----------------------
+If you want to contact us or giving any advices. We would love to hear, please contact us below:
+	Trần Thái Quốc - thaiquoc8125@gmail.com
+	Nguyễn Hồ Hồng Đức - ducnhhse161458@fpt.edu.vn
+	Nguyễn Hải Long - longnh55555@gmail.com
+	Mai Xuân Hiền - hienmxse150606@fpt.edu.vn
