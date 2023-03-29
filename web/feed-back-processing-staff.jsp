@@ -176,7 +176,7 @@
 
                                                         <input type="hidden" value="update" name="Action"/>
 
-                                                        <input type="submit" value="Accept" class="btn btn-outline-danger">
+                                                        <input type="submit" value="Accept" class="btn btn-outline-dark">
 
 
                                                     </form>

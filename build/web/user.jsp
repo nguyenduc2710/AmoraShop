@@ -102,6 +102,7 @@
                             </div>
                         </div>
                     </div>
+                                
                     <div class="col-lg-8">
                         <div class="card mb-4">
                             <div class="card-body">
@@ -149,6 +150,7 @@
                                         <p class="text-muted mb-0">${sessionScope.LOGIN_USER.address}</p>
                                     </div>
                                 </div>
+                                    <h3 style="color: red">${ERROR}</h3>
                             </div>
                         </div>
 

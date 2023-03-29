@@ -26,6 +26,26 @@
         <title>AmoraShop</title>
 
         <style>
+            .product-img-wrap {
+                position: relative;
+            }
+            .out-of-stock-label {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                background-color: rgba(0, 0, 0, 0.8);
+                padding: 10px 20px;
+                text-align: center;
+                border-radius: 5px;
+            }
+            .out-of-stock img {
+                filter: brightness(50%);
+            }
+
             /* Define the animation keyframes */
             @keyframes fire {
                 0% {
@@ -86,8 +106,9 @@
 
                             <div style="display: flex; align-items: center;" class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
                                 <a href="ShowProductDetailUserController?product_id=${product.productID}">
-                                    <div class="product-img-wrap">
+                                    <div class="product-img-wrap ${product.quantity == 0 ? 'out-of-stock' : ''}">
                                         <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
+                                        <div class="out-of-stock-label" ${product.quantity == 0 ? '' : 'style="display: none;"'}>Out of stock</div>
                                     </div>
                                 </a>
 
@@ -101,7 +122,7 @@
                                 </div>
                             </div>
 
-                        </c:forEach>
+                        </c:forEach>                      
 
                     </div>
 

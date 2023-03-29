@@ -57,8 +57,8 @@
                                                     <!--                    ROLE load tu database kh dc fix cung-->   
                                                     <c:choose>
                                                         <c:when test="${sessionScope.LOGIN_USER.roleID == 1}">
-                                                            <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>
-                                                            <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowProductAdminController">Product Manager</a>
+                                                            <a class="nav-link" href="AdminDashboardController">Dashboard</a>
+                                                            <a class="nav-link" href="http://localhost:8080/AmoraShop/ShowUserController">User Manager</a>                                                            
                                                             <a class="nav-link" href="OrderCompleteController">Order Complete</a>
                                                             <a class="nav-link" href="ShowLogController">User Action</a>
                                                         </c:when>

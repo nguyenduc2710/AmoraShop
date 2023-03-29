@@ -22,7 +22,27 @@
         <script src="assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+        <style>
+            .product-img-wrap {
+                position: relative;
+            }
+            .out-of-stock-label {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                background-color: rgba(0, 0, 0, 0.8);
+                padding: 10px 20px;
+                text-align: center;
+                border-radius: 5px;
+            }
+            .out-of-stock img {
+                filter: brightness(50%);
+            }
+        </style>
         <title>AmoraShop</title>
     </head>
     <body>
@@ -169,13 +189,13 @@
 
                             <div class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
                                 <a href="ShowProductDetailUserController?product_id=${product.productID}">
-                                    <div class="product-img-wrap">
-                                        <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
+                                    <div class="product-img-wrap ${product.quantity == 0 ? 'out-of-stock' : ''}">
+                                        <img class="product-img img-fluid" src="${product.image}" alt="${product.name}">
+                                        <div class="out-of-stock-label" ${product.quantity == 0 ? '' : 'style="display: none;"'}>Out of stock</div>
                                     </div>
                                 </a>
                                 <div class="product-name">
                                     <a href="ShowProductDetailUserController?product_id=${product.productID}">${product.name}</a>
-
                                 </div>
                                 <div class="product-price">
                                     ${product.price}$
@@ -186,142 +206,142 @@
 
                     </div>
 
-     
-                        <c:if test="${cateID != null && brand == null}">
-                             <c:choose>
-                                
-                                <c:when test="${totalPage <= 1}">
 
-                                </c:when>
-                                <c:otherwise>
-                                    <nav aria-label="..." class="pagination-container">
-                                       
-                                             <ul class="pagination">
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=1}">
-                                                        href="ShowProductByCategory?page=${page-1}&cateID=${cateID}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">«</span>
-                                                </a>
-                                            </li>
+                    <c:if test="${cateID != null && brand == null}">
+                        <c:choose>
 
-                                            <c:forEach begin="1" end="${totalPage}" var="i">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductByCategory?page=${i}&cateID=${cateID}">${i}</a></li>
-                                                </c:forEach>    
+                            <c:when test="${totalPage <= 1}">
 
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=totalPage}">
-                                                        href="ShowProductByCategory?page=${page+1}&cateID=${cateID}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">»</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                       
-                                       
-                                    </nav>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:if> 
-                           
+                            </c:when>
+                            <c:otherwise>
+                                <nav aria-label="..." class="pagination-container">
+
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=1}">
+                                                    href="ShowProductByCategory?page=${page-1}&cateID=${cateID}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
+
+                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductByCategory?page=${i}&cateID=${cateID}">${i}</a></li>
+                                            </c:forEach>    
+
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=totalPage}">
+                                                    href="ShowProductByCategory?page=${page+1}&cateID=${cateID}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+
+                                </nav>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if> 
+
 
                     <c:if test="${cateID == null && brand == null}">
-                         <c:choose>
-                                <c:when test="${totalPage <= 1}">
+                        <c:choose>
+                            <c:when test="${totalPage <= 1}">
 
-                                </c:when>
-                                <c:otherwise>
-                                    <nav aria-label="..." class="pagination-container">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=1}">
-                                                        href="ShowProductController?page=${page-1}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">«</span>
-                                                </a>
-                                            </li>
+                            </c:when>
+                            <c:otherwise>
+                                <nav aria-label="..." class="pagination-container">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=1}">
+                                                    href="ShowProductController?page=${page-1}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
 
-                                            <c:forEach begin="1" end="${totalPage}" var="i">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductController?page=${i}">${i}</a></li>
-                                                </c:forEach>    
+                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductController?page=${i}">${i}</a></li>
+                                            </c:forEach>    
 
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=totalPage}">
-                                                        href="ShowProductController?page=${page+1}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">»</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </c:otherwise>
-                            </c:choose>
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=totalPage}">
+                                                    href="ShowProductController?page=${page+1}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </c:otherwise>
+                        </c:choose>
                     </c:if>
-                           
-                        
+
+
                     <c:if test="${cateID != null && brand != null}">
-                         <c:choose>
-                                <c:when test="${totalPage <= 1}">
+                        <c:choose>
+                            <c:when test="${totalPage <= 1}">
 
-                                </c:when>
-                                <c:otherwise>
-                                    <nav aria-label="..." class="pagination-container">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=1}">
-                                                        href="ShowProductByBrandAndCategory?page=${page-1}&cateID=${cateID}&brand=${brand}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">«</span>
-                                                </a>
-                                            </li>
+                            </c:when>
+                            <c:otherwise>
+                                <nav aria-label="..." class="pagination-container">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=1}">
+                                                    href="ShowProductByBrandAndCategory?page=${page-1}&cateID=${cateID}&brand=${brand}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
 
-                                            <c:forEach begin="1" end="${totalPage}" var="i">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductByBrandAndCategory?page=${i}&cateID=${cateID}&brand=${brand}">${i}</a></li>
-                                                </c:forEach>    
+                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductByBrandAndCategory?page=${i}&cateID=${cateID}&brand=${brand}">${i}</a></li>
+                                            </c:forEach>    
 
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=totalPage}">
-                                                        href="ShowProductByBrandAndCategory?page=${page+1}&cateID=${cateID}&brand=${brand}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">»</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </c:otherwise>
-                            </c:choose>
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=totalPage}">
+                                                    href="ShowProductByBrandAndCategory?page=${page+1}&cateID=${cateID}&brand=${brand}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </c:otherwise>
+                        </c:choose>
                     </c:if>
                     <c:if test="${cateID == null && brand != null}">
                         <c:choose>
-                                <c:when test="${totalPage <= 1}">
+                            <c:when test="${totalPage <= 1}">
 
-                                </c:when>
-                                <c:otherwise>
-                                    <nav aria-label="..." class="pagination-container">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=1}">
-                                                        href="ShowProductByBrand?page=${page-1}&brand=${brand}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">«</span>
-                                                </a>
-                                            </li>
+                            </c:when>
+                            <c:otherwise>
+                                <nav aria-label="..." class="pagination-container">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=1}">
+                                                    href="ShowProductByBrand?page=${page-1}&brand=${brand}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
 
-                                            <c:forEach begin="1" end="${totalPage}" var="i">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductByBrand?page=${i}&brand=${brand}">${i}</a></li>
-                                                </c:forEach>    
+                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductByBrand?page=${i}&brand=${brand}">${i}</a></li>
+                                            </c:forEach>    
 
-                                            <li class="page-item">
-                                                <a <c:if test="${page!=totalPage}">
-                                                        href="ShowProductByBrand?page=${page+1}&brand=${brand}"
-                                                    </c:if> class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">»</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </c:otherwise>
-                            </c:choose>
+                                        <li class="page-item">
+                                            <a <c:if test="${page!=totalPage}">
+                                                    href="ShowProductByBrand?page=${page+1}&brand=${brand}"
+                                                </c:if> class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </c:otherwise>
+                        </c:choose>
                     </c:if>
 
 

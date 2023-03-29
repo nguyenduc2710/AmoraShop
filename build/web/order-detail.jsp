@@ -89,7 +89,7 @@
                                         <div class="order-item-price">
                                             <fmt:formatNumber value="${orderDt.totalPrice}" pattern="#.##"/>$                        
                                             
-                                            <c:if test="${requestScope.status eq 'FINISHED'}">
+                                            <c:if test="${requestScope.status eq 'FINISHED' && sessionScope.LOGIN_USER.roleID eq 2}">
                                                 <form action="CheckOrderByUserController" method="POST">
                                                     <input type="hidden" value="${orderDt.productID}" name="productID"/>
                                                     <input type="hidden" value="${sessionScope.LOGIN_USER.userID}" name="userID"/>

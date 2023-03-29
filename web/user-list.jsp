@@ -143,7 +143,7 @@
 
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="UserDetailController?userID=${user.userID}">Update</a>
+                                                        <a class="btn btn-outline-info" href="UserDetailController?userID=${user.userID}">Update</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 </td>

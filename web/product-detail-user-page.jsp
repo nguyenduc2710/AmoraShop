@@ -22,9 +22,29 @@
         <link rel="stylesheet" href="assets/css/review.css">
         <link rel="icon" type="image/png" href="assets/images/LogoDoneEdited.png" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <style>
 
+        <style>
+            .product-img-wrap {
+                position: relative;
+            }
+            .out-of-stock-label {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                background-color: rgba(0, 0, 0, 0.8);
+                padding: 10px 20px;
+                border-radius: 5px;
+                text-align: center;
+            }
+            .out-of-stock img {
+                filter: brightness(50%);
+            }
         </style>
+
         <title>AmoraShop</title>
 
     </head>
@@ -47,8 +67,9 @@
                 <div class="product-detail-container row">
                     <c:forEach items="${productDetail}" var="productDto">
                         <div class="product-wrap col-5">
-                            <div class="product-img-wrap product-detail-wrap fix-height">
+                            <div class="product-img-wrap product-detail-wrap fix-height ${productDto.quantity == 0 ? 'out-of-stock' : ''}">
                                 <img src="${productDto.image}" alt="${productDto.name}" class="product-img img-fluid">
+                                <div class="out-of-stock-label" ${productDto.quantity == 0 ? '' : 'style="display: none;"'}>Out of stock</div>
                             </div>
                         </div>
 
@@ -59,6 +80,12 @@
                             </div>
                             <div class="product-detail-price">
                                 ${productDto.price}$
+                                <c:if test="${not empty requestScope.ERROR_QUANTITY_DB}">
+                                    <br>${requestScope.ERROR_QUANTITY_DB}
+                                </c:if>
+                                <c:if test="${not empty requestScope.ERROR_QUANTITY_INPUT}">
+                                    <br>${requestScope.ERROR_QUANTITY_INPUT}
+                                </c:if>
                             </div>
                             <form class="buy-area" action="AddToCartServlet">
                                 <div class="select-quantity-area">
@@ -156,11 +183,11 @@
                                 <div class="user-items">
                                     <div class="user-rating-title row">
                                         <div class="user-img">
-                                            
+
                                             <img src="${f.userImage == null ? 'assets/images/noneUser.png' : f.userImage}" 
-                                                     alt="avatar.png">
-                                            
-                                            
+                                                 alt="avatar.png">
+
+
                                         </div>
                                         <div class="user-review-info col-4">
                                             <h2 class="user-name">
@@ -273,122 +300,11 @@
                 </c:choose>
             </div>
         </div>
-        <!--    feedback-->
 
-        <%--<div class="container-fluid">
-
-            <div class="row">
-                <hr class="marketing_feedback_margin">
-                <div class="d-flex justify-content-between mb-3">
-
-                    <h2 class="marketing_feedbac_displayinline">${total} Đánh giá</h2>
-                    <h2 class="marketing_feedbac_displayinline">${Math.round(avg * 1000) / 1000}/5 <img style="height: 40px; width: 40px" src="images/images.png"></h2>
-                </div>
-
-                <hr class="marketing_feedback_margin">
-                <div class="col-md-6 mx-auto">
-
-                    <div class="rounded p-3">
-
-
-                        <div class="content" class="row">
-
-
-
-                            <c:forEach items="${listFeedback}" var="f">
-                                <c:if test="${f.status == 'true'}">
-                                    <div class="feedback">
-
-                                        <div class="col-sm-12 mb-3">
-                                            <span>
-                                                <h6 class="marketing_feedbac_displayinline">
-                                                    <script>
-                                                        for (var i = 0; i < 5; i++) {
-                                                            if (i < ${f.rated_star}) {
-                                                                document.write('<div class="reviews-rating__star is-active"></div>');
-                                                            } else {
-                                                                document.write('<div class="reviews-rating__star"></div>');
-                                                            }
-                                                        }
-                                                    </script>
-                                                    <br/>
-                                                    <b class="marketing_feedback_margin">${f.fullName}</b>
-                                                </h6>
-                                            </span>
-
-
-
-                                            <h6 class="marketing_feedback_margin mt-2">${f.feedBack}</h6>
-
-                                            <c:if test="${not empty f.feedBackImage and not empty fn:trim(f.feedBackImage)}">
-                                                <!-- Nếu feedBackImage trong database chứa URL hình ảnh, hiển thị hình ảnh tương ứng -->
-                                                <h6 class="marketing_feedback_margin"><img style="height: 100px; width: 100px" src="${f.feedBackImage}"></h6>
-                                                </c:if>
-
-                                            <span class="reviews-listing__date marketing_feedback_margin">${f.date}</span>
-                                            <hr class="marketing_feedback_margin">
-                                        </div>
-                                    </div> 
-                                </c:if>
-
-
-
-                            </c:forEach>
-
-
-
-                            <nav aria-label="..." class="pagination-container">
-                                <c:choose>
-                                    <c:when test="${total != 0}">
-                                        <c:forEach items="${productDetail}" var="productD">
-
-                                            <ul class="pagination">
-
-                                                <li class="page-item">
-                                                    <a <c:if test="${page!=1}">
-                                                            href="ShowProductDetailUserController?page=${page-1}&product_id=${productD.productID}"
-                                                        </c:if> class="page-link" aria-label="Next">
-                                                        <span aria-hidden="true">«</span>
-                                                    </a>
-                                                </li>
-
-                                                <c:forEach begin="1" end="${totalPage}" var="i">
-                                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="ShowProductDetailUserController?page=${i}&product_id=${productD.productID}">${i}</a></li>
-                                                    </c:forEach>    
-
-                                                <li class="page-item">
-                                                    <a <c:if test="${page!=totalPage}">
-                                                            href="ShowProductDetailUserController?page=${page+1}&product_id=${productD.productID}"
-                                                        </c:if> class="page-link" aria-label="Next">
-                                                        <span aria-hidden="true">»</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </c:forEach> 
-                                    </c:when>
-                                    <c:otherwise>
-
-                                    </c:otherwise>
-                                </c:choose>
-
-
-                            </nav>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>--%>
 
 
         <jsp:include page="components/footer.jsp" />
-        
+
         <script src="assets/js/script.js"></script>
     </body>
 
