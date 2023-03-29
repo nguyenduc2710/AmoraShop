@@ -14,6 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="node_modules/bootstrap/dist/js/bootstrap.bundle.js">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="assets/css/base.css">
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/products.css">
@@ -88,7 +90,7 @@
                                         </div>
                                         <div class="order-item-price">
                                             <fmt:formatNumber value="${orderDt.totalPrice}" pattern="#.##"/>$                        
-                                            
+
                                             <c:if test="${requestScope.status eq 'FINISHED' && sessionScope.LOGIN_USER.roleID eq 2}">
                                                 <form action="CheckOrderByUserController" method="POST">
                                                     <input type="hidden" value="${orderDt.productID}" name="productID"/>
@@ -144,18 +146,36 @@
                                         </button>
                                     </c:if>
 
-                                    <%--<c:if test="${requestScope.status eq 'FINISHED'}">
-                                        <c:forEach items="${sessionScope.orderDt}" var="orderDt">
-                                            <form action="CheckOrderByUserController" method="POST">
-                                                <input type="hidden" value="${orderDt.productID}" name="productID"/>
-                                                <input type="hidden" value="${sessionScope.LOGIN_USER.userID}" name="userID"/>
-                                                <input type="submit" value="Review">
-                                            </form>   
-                                        </c:forEach>
-                                    </c:if>--%>
-                                    <button class="payment-actions">
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="payment-actions" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Contact Us
                                     </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title fs-2" id="exampleModalLabel">Contact us</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Thank you for choosing us, if you have any question!? Contact us below!
+                                                    <br>
+                                                    <a href="tel:0836935789" class="inner-footer-text">   
+                                                        Phone: 0836935789
+                                                    </a> <br>
+                                                    <a href="mailto:hongducnguyenho0@gmail.com" class="inner-footer-text">
+                                                        Gmail: hongducnguyenho0@gmail.com
+                                                    </a>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary fs-4" data-bs-dismiss="modal">Close</button>                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </c:if>
 
@@ -165,5 +185,7 @@
                 </div>
             </div>
             <jsp:include page="components/footer.jsp" />
+            <script src="assets/js/script.js"></script>
+
     </body>
 </html>
