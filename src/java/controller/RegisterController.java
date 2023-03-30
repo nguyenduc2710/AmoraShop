@@ -56,40 +56,9 @@ public class RegisterController extends HttpServlet {
 
                 if (user == false) {
                     password = Encode.toSHA1(password);
-                    String to = email;
                     //dang ky thanh cong
-                    dao.register(fullName, password, gender, email, mobile, address);                  
-                    request.setAttribute("successfully", "Register Sucessfully");
-                    Properties props = new Properties();
-			props.put("mail.smtp.host", "smtp.gmail.com");
-			props.put("mail.smtp.socketFactory.port", "465");
-			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.port", "465");
-			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                                @Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("thaiquocse@gmail.com", "ypgtwiuhdtfqwtgo");// Put your email
-																									// id and
-																									// password here
-				}
-			});
-			// compose message
-			try {
-				MimeMessage message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(email));// change accordingly
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-				message.setSubject("AmoraShop");
-				message.setText("Your account has been successfully initialized, Amora shop hopes you will have fun buying moments");
-				// send message
-                                
-				Transport.send(message);
-				System.out.println("message sent successfully");
-			}
-
-			catch (MessagingException e) {
-				throw new RuntimeException(e);
-			}
+                    dao.register(fullName, password, gender, email, mobile, address); 
+                    request.setAttribute("successfully", "Register successfully");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 } else {
                     request.setAttribute("erorr", "Email was existed");

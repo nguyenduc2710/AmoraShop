@@ -13,6 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./assets/bootstrap-5.0.2-dist/css/bootstrap.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -37,44 +38,19 @@
             .invalid {
                 border: 2px solid red;
             }
+            .update-img-container{
+                display: flex;
+                width: 100%;
+                align-items: center;
+            }
+            .form-group div input{
+                font-size: 1.4rem;
+            }
         </style>
     </head>
 
     <body>
-        <header class="header">
-            <div class="header-nav-up">
-                <div class="ivisible-bar"></div>
-                <div class="wrap-logo">
-                    <img class="header-logo" src="assets/images/HomeLogo.png" alt="AmoraShop">
-                </div>
-                <ul class="utility-list">
-                    <li class="utility-item">
-                        <a href="login.jsp" class="header-icon"><img src="assets/font/account_circle_black_24dp.svg"
-                                                                     alt=""></a>
-                    </li>
-                    <li class="utility-item">
-                        <a class="header-icon"><img src="assets/font/search_black_24dp.svg" alt=""></a>
-                    </li>
-                    <li class="utility-item">
-                        <a class="header-icon"><img src="assets/font/shopping_bag_black_24dp.svg" alt=""></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="header-nav-down">
-                <ul class="main-menu-list">
-                    <li class="main-menu-item">Home</li>
-                    <form action="ShowProductController" method="POST">
-                        <!--<a class="main-menu-item">Shop</a>-->
-                        <input class="main-menu-item" type="submit" value="Shop"
-                               style="background-color: white; border:none; font-size: 1.6rem">
-                    </form>
-
-                    <li class="main-menu-item">Brand</li>
-                    <li class="main-menu-item">New Arrivals</li>
-                    <li class="main-menu-item">Sale</li>
-                </ul>
-            </div>
-        </header>
+        <jsp:include page="components/header.jsp" />
 
 
         <div class="container bootstrap snippet user-update-info-container">
@@ -87,9 +63,9 @@
 
             <div class="row user-update-info-form">
 
-                <div class="col-sm-3 update-img-container"><!--left col-->
-                    <div class="text-center">
-                        <img src="${sessionScope.LOGIN_USER.image}" class="avatar img-circle img-thumbnail"
+                <div class="col-sm-3 update-img-container" style="dis"><!--left col-->
+                    <div style="width: 100%" class="text-center">
+                        <img style="width: 100%" src="${sessionScope.LOGIN_USER.image}" class="avatar img-circle img-thumbnail"
                              alt="avatar">
 
                     </div>
@@ -181,6 +157,9 @@
                 </div>
             </div>
         </div>
+
+
+        <jsp:include page="components/footer.jsp" />
 
         <script src="assets/js/validation.js"></script>
         <script src="assets/js/updateAvata.js"></script>

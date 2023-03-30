@@ -65,6 +65,8 @@ public class UserDAO {
 
 public static final String GET_USER_BY_EMAIL ="SELECT * FROM Users WHERE email = ?";
 
+public static final String COUNT_USERS ="select count([user_id]) from [Users] where role_id = 2";
+
 public UserDTO getUserByEmail(String email) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -527,4 +529,39 @@ public UserDTO getUserByEmail(String email) throws SQLException {
         }
         return null;
     }
+      //count total user role = 2 
+        public int getTotalUsers() throws SQLException {
+
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_USERS);
+
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
+
+      
 }

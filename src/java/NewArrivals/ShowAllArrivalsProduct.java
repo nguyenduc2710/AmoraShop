@@ -67,18 +67,18 @@ public class ShowAllArrivalsProduct extends HttpServlet {
             }
             HttpSession session = request.getSession();
             List<ProductDTO> favoritePrds = productDAO.getProductHomePage();
-            request.setAttribute("favPrd", favoritePrds);
+            session.setAttribute("favPrd", favoritePrds);
 
-            request.setAttribute("page", page);
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("totalProducts", totalProducts);
-            request.setAttribute("products", listProduct);
+            session.setAttribute("page", page);
+            session.setAttribute("totalPage", totalPage);
+            session.setAttribute("totalProducts", totalProducts);
+            session.setAttribute("products", listProduct);
 
             List<CategoryDTO> ProductSearchResult = new CategoryDAO().getAllCategory();
-            request.setAttribute("PRODUCT_NAME_RESULT", ProductSearchResult);
+            session.setAttribute("PRODUCT_NAME_RESULT", ProductSearchResult);
 
             if (listProduct.isEmpty()) {
-                request.setAttribute("SearchErrorNote", "No result!!!");
+                session.setAttribute("SearchErrorNote", "No result!!!");
             }
             if (newArr != null) {
                 URL = NEW_ARRIVALS;

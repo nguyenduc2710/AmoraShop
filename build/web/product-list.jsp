@@ -151,7 +151,7 @@
                                                         <c:param name="productID" value="${product.productID}"></c:param>
 
                                                     </c:url>
-                                                    <a href="${update}">Update</a> 
+                                                    <a class="btn btn-outline-dark" href="${update}">Update</a> 
 
                                                     <!--delete-->
                                                     <c:url var="delete" value="MainController">
@@ -159,7 +159,7 @@
                                                         <c:param name="productID" value="${product.productID}"></c:param>
 
                                                     </c:url>
-                                                    <a href="${delete}" onclick="return confirm('Are you sure you want to delete?')">delete</a>
+                                                    <a href="${delete}" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                                                 </td>
 
 
@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="create-product.jsp">Add new product</a>
+                    <a style="margin: 28px" class="btn btn-info" href="create-product.jsp">Add new product</a>
                 </main>
 
             </div>
