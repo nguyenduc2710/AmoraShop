@@ -119,7 +119,7 @@
                     </div>
                 </div>
 
-                <c:if test="${not empty requestScope.favPrd}">
+                <c:if test="${not empty sessionScope.favPrd}">
                     <div class="favorite-prd-section row">
                         <div class="quote-slider col-4">
                             <img src="assets/images/Perfume Quote 1.2.jpg" alt="" class="img-fluid quote-item active">
@@ -162,32 +162,7 @@
                         </div>
                     </div>
                 </c:if>
-
-                <!--
-                                <div class="about-us processing-section">
-                <c:if test="${not empty requestScope.newArrivalsHome}">
-                    <c:forEach items="${newArrivalsHome}" var="product">
-
-                        <div class="product-items col-12 col-sm-6 col-md-6 col-xl-3">
-                            <a href="ShowProductDetailUserController?product_id=${product.productID}">
-                                <div class="product-img-wrap">
-                                    <img class="product-img img-fluid" src="${product.image}" alt="${product.name}" >
-                                </div>
-                            </a>
-                            <div class="product-name">
-                                <a href="ShowProductDetailUserController?product_id=${product.productID}">${product.name}</a>
-
-                            </div>
-                            <div class="product-price">
-                        ${product.price}$
-                    </div>
-                </div>
-
-                    </c:forEach>
-                </c:if>
-            </div>
-        </div>-->
-
+              
                 <jsp:include page="components/footer.jsp" />
 
             </div>

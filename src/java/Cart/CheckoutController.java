@@ -45,10 +45,14 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
+      
+         CartObj cart = (CartObj) session.getAttribute("CART");
         if (session.getAttribute("LOGIN_USER") == null) {
             request.setAttribute("error", "Pls login to continue");
             request.getRequestDispatcher("viewCart.jsp").forward(request, response);
-
+        }else if (cart == null){
+           
+            response.sendRedirect("viewCart.jsp");
         }else{
              response.sendRedirect("shipping-details.jsp");
         }
@@ -107,7 +111,7 @@ public class CheckoutController extends HttpServlet {
                                 int ProductQuantity = product.getProductByIdTypeString(productID).getQuantity();
                                 int userQuantity = items.get(productID);
                                 //Check if enough product in storage
-                                if (ProductQuantity > userQuantity) {
+                                if (ProductQuantity >= userQuantity) {
                                     OrderDetailDAO orderDetail = new OrderDetailDAO();
                                     finalTotal += orderDetail.createOrderDetail(orderId, productID, price, userQuantity);
                                     product.updateQuantity(productID, ProductQuantity, userQuantity);

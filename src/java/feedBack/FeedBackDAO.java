@@ -65,11 +65,12 @@ public class FeedBackDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "SELECT f.feedBack_id, f.feed_back, f.full_name, f.rated_star, f.status, f.user_id, f.product_id, f.image, f.date, i.feedBack_image \n"
-                        + "  FROM Feedback f \n"
-                        + "  LEFT JOIN FeedBackImage i ON f.feedBack_id = i.feedBack_id \n"
-                        + "  WHERE f.product_id = ? AND f.status = 'true'\n"
-                        + "  ORDER BY f.date DESC offset (?-1)*? row fetch next ? rows only";
+                String sql = "SELECT f.feedBack_id, f.feed_back, f.full_name, f.rated_star, f.status, f.user_id, f.product_id, f.image, f.date, i.feedBack_image, u.image AS user_image \n"
+                        + "FROM Feedback f \n"
+                        + "LEFT JOIN FeedBackImage i ON f.feedBack_id = i.feedBack_id \n"
+                        + "LEFT JOIN Users u ON f.user_id = u.user_id\n"
+                        + "WHERE f.product_id = ? AND f.status = 'true'\n"
+                        + "ORDER BY f.date DESC offset (?-1)*? row fetch next ? rows only";
                 ptm = conn.prepareStatement(sql);
                 ptm.setInt(1, productID);
                 ptm.setInt(2, page);
@@ -88,8 +89,10 @@ public class FeedBackDAO {
                     String image = rs.getString("image");
                     Date date = rs.getDate("date");
                     String feedBackImage = rs.getString("feedBack_image");
+                    String userImage = rs.getString("user_image");
 
-                    feedback = new FeedBackDTO(feedBackID, fullName, rated_star, feedBack, image, status, productID, userID, date, feedBackImage);
+                    feedback = new FeedBackDTO(feedBackID, fullName, rated_star, feedBack, image, status, productID, userID, date, feedBackImage, userImage);
+
                     list.add(feedback);
                 }
             }
@@ -432,7 +435,7 @@ public class FeedBackDAO {
                     Date date = rs.getDate("date");
                     String feedBackImage = rs.getString("feedBack_image");
 
-                    feedback = new FeedBackDTO(feedBackID, fullName, rated_star, feedBack, image, status, productID, userID, date, feedBackImage);
+                    feedback = new FeedBackDTO(feedBackID, fullName, rated_star, feedBack, image, status, productID, userID, date, feedBackImage, image);
                     list.add(feedback);
                 }
             }
@@ -513,14 +516,13 @@ public class FeedBackDAO {
             }
         }
     }
-
-    public List<ChartDTO> getChartAvgStar(String start, int day) throws SQLException, ClassNotFoundException {
+public List<ChartDTO> getChartAvgStar(String start, int day) throws SQLException, ClassNotFoundException {
         List<ChartDTO> list = new ArrayList<>();
 
-        String sql = "select CAST(AVG(rated_star) AS DECIMAL(10,1)) from FeedBack where date < DATEADD(DAY, ?, ?) and status = 'true'";
+        String sql = "select CAST(AVG(rated_star) AS DECIMAL(10,1)) from FeedBack where date < DATEADD(DAY, ?, ?)";
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement st = conn.prepareStatement(sql)) {
-            for (int i = 1; i <= day; i++) {
+            for (int i = 0; i < day; i++) {
                 float value = 0;
                 st.setInt(1, i);
                 st.setString(2, start);

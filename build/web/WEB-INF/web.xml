@@ -192,6 +192,18 @@
         <servlet-name>ShowLogController</servlet-name>
         <servlet-class>staffLogs.ShowLogController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAuthorization</servlet-name>
+        <servlet-class>authorization.AdminAuthorization</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffAuthorization</servlet-name>
+        <servlet-class>authorization.StaffAuthorization</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerAuthorization</servlet-name>
+        <servlet-class>authorization.CustomerAuthorization</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -383,6 +395,18 @@
     <servlet-mapping>
         <servlet-name>ShowLogController</servlet-name>
         <url-pattern>/ShowLogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAuthorization</servlet-name>
+        <url-pattern>/AdminAuthorization</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffAuthorization</servlet-name>
+        <url-pattern>/StaffAuthorization</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerAuthorization</servlet-name>
+        <url-pattern>/CustomerAuthorization</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

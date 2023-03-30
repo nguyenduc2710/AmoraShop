@@ -77,7 +77,7 @@
                     <div class="container-fluid px-4">
 
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="admin.jsp">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                             <li class="breadcrumb-item active">User Manager</li>
                         </ol>
 
@@ -143,7 +143,7 @@
 
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="UserDetailController?userID=${user.userID}">Update</a>
+                                                        <a class="btn btn-outline-info" href="UserDetailController?userID=${user.userID}">Update</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 </td>
@@ -154,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="create-user.jsp">Create new user</a>
+                    <a style="margin-left: 28px" class="btn btn-info" href="create-user.jsp">Create new user</a>
                 </main>
 
             </div>

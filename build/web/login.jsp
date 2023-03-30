@@ -71,11 +71,7 @@
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
 
-                        <!--                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #4585f4"
-                                                   href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
-                                                   role="button">
-                                                    <i class="fab fa-facebook-f me-2"></i>Continue with Google
-                                                </a>-->
+                        
                         <a class="btn btn-primary btn-lg btn-block" style="background-color: #4285f4" 
                            href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/AmoraShop/LoginGoogleController&response_type=code&client_id=591003804845-5tufd24ql7v462gen0vp1n0lhov8v369.apps.googleusercontent.com&approval_prompt=force"
                            role="button">

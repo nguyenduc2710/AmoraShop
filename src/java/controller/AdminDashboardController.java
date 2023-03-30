@@ -89,12 +89,20 @@ public class AdminDashboardController extends HttpServlet {
             maxListChartRevenueArea = (maxListChartRevenueArea / 100 + 1) * 100;
 
             List<ChartDTO> listChartAvgStar = fd.getChartAvgStar(start, day);
-
+            
+            //count total user
+            int totalUser = ud.getTotalUsers();
+            
+            //count total product 
+            int totalProduct = pd.getTotalProducts();
+           
             request.setAttribute("listChartAvgStar", listChartAvgStar);
             request.setAttribute("listChartRevenueArea", listChartRevenueArea);
             request.setAttribute("maxListChartRevenueArea", maxListChartRevenueArea);
             request.setAttribute("start", start);
             request.setAttribute("end", end);
+            request.setAttribute("totalUser", totalUser);
+            request.setAttribute("totalProduct", totalProduct);
             request.getRequestDispatcher("AdminDashBoard.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);

@@ -28,7 +28,6 @@ import java.util.logging.Logger;
  *
  * @author long
  */
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10,
         maxFileSize = 1024 * 1024 * 1000,
         maxRequestSize = 1024 * 1024 * 1000)
@@ -46,17 +45,17 @@ public class FeedBackController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-HttpSession session = request.getSession();
+        try ( PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
             String fullName = request.getParameter("fullName");
             int rated_star = Integer.parseInt(request.getParameter("rated_star"));
 
-              String feedBack = request.getParameter("feedBack");
+            String feedBack = request.getParameter("feedBack");
             String image = request.getParameter("image");
             String status = request.getParameter("status");
             int productID = Integer.parseInt(request.getParameter("productID"));
             int userID = Integer.parseInt(request.getParameter("userID"));
-             String folderName = "images";
+            String folderName = "images";
             Part filePart = request.getPart("pImage");
             String fileName = filePart.getSubmittedFileName();
             String path = "";
@@ -70,12 +69,12 @@ HttpSession session = request.getSession();
                 InputStream is = filePart.getInputStream();
                 Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
             }
-          FeedBackImageDTO fbImage = new FeedBackImageDTO(0, path, 0);
+            FeedBackImageDTO fbImage = new FeedBackImageDTO(0, path, 0);
             FeedBackDAO dao = new FeedBackDAO();
-           int checkInsert = dao.insertNewFeedBackAndGetID(feedBack, fullName, rated_star, status, userID, productID, image, fbImage);
-            if(checkInsert > 0){
+            int checkInsert = dao.insertNewFeedBackAndGetID(feedBack, fullName, rated_star, status, userID, productID, image, fbImage);
+            if (checkInsert > 0) {
 
-            request.getRequestDispatcher("/ShowProductDetailUserController?product_id=" + productID).forward(request, response);
+                request.getRequestDispatcher("/ShowProductDetailUserController?product_id=" + productID).forward(request, response);
 
             }
 

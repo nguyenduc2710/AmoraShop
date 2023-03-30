@@ -59,16 +59,6 @@
                                                         <option value="price-des">Finished Order</option>                        
                                                     </select>
                                                 </div>-->
-                            <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Filter Orders
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" onclick="filterOrders('all')">All Orders</a>
-                                    <a class="dropdown-item" href="#" onclick="filterOrders('PROCESSING')">Order Processing</a>
-                                    <a class="dropdown-item" href="#" onclick="filterOrders('FINISHED')">Order Completed</a>
-                                </div>
-                            </div>
 
                             <div class="order-list-content">
                                 <table class="table order-table">
