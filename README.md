@@ -1,16 +1,10 @@
-# SWP391  -  AmoraShop - Shop Ban Nuoc Hoa.<br>
+# AmoraShop - Shop Ban Nuoc Hoa.<br>
 <br>
-Members:<br>
-<pre>
-	Trần Thái Quốc - BackEnd - CRUD, Login Google Api, Payment using Paypal SandBox<br>
-	Nguyễn Hồ Hồng Đức - FrontEnd - CRUD, User UI<br>
-	Nguyễn Hải Long - BackEnd - CRUD, dashboard<br>
-	Mai Xuân Hiền - FrontEnd - Admin, Staff UI<br>
-</pre>
+Brief: A small shop selling, ordering perfume. Managing products, orders, user accounts.
 <br>
 Techs use:<br>
 <pre>
-	Back-end: JavaWeb, JSP, Servlet, Login Google Api, Paypal SandBox<br>
+	Back-end: JavaWeb, JSP, Servlet, API Login Google, Paypal SandBox<br>
 	Front-end: Html, Css, JavaScript, Bootstrap 5, Jquery, Ajax, innerHtml<br>
 	Database: SQL Server Management<br>
 	Environment: Netbean 12.4, JDK 16, Tomcat 10<br>
@@ -33,9 +27,11 @@ Use Instructions (Netbean 12, JDK.16, Tomcat 10 required):<br>
 <br>
 -----------------------<br>
 If you want to contact us or giving any advices. We would love to hear, please contact us below:<br>
+Members:<br>
 <pre>
-	Trần Thái Quốc - thaiquoc8125@gmail.com<br>
-	Nguyễn Hồ Hồng Đức - ducnhhse161458@fpt.edu.vn<br>
-	Nguyễn Hải Long - longnh55555@gmail.com<br>
-	Mai Xuân Hiền - hienmxse150606@fpt.edu.vn<br>
+	Trần Thái Quốc - BackEnd - CRUD, Login Google Api, Payment using Paypal SandBox - thaiquoc8125@gmail.com<br>
+	Nguyễn Hồ Hồng Đức - FrontEnd - CRUD, User UI - ducnhhse161458@fpt.edu.vn<br>
+	Nguyễn Hải Long - BackEnd - CRUD, Admin dashboard - longnh55555@gmail.com<br>
+	Mai Xuân Hiền - FrontEnd - Admin, Staff UI - hienmxse150606@fpt.edu.vn<br>
 </pre>
+
