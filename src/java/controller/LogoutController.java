@@ -4,6 +4,7 @@
  */
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -46,7 +47,9 @@ public class LogoutController extends HttpServlet {
             } catch (Exception e) {
                 log("Error at LogoutController: " + e.toString());
             } finally {
-                response.sendRedirect(url);
+//                response.sendRedirect(url);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/ShowAllArrivalsProduct");
+                rd.forward(request, response);
             }
         }
     }
